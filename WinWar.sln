@@ -1,8 +1,47 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinWar.Core", "WinWar.Core", "{38FECA31-FC84-484C-9E65-BD495B856FC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinWar.Web", "WinWar.Web", "{8FD41C9B-712F-4EA9-930B-59E8BCDEEAE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinWar.Tool", "WinWar.Tool", "{3218982E-F7FE-4173-82ED-BFA8185A7A20}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WinWar.Database", "WinWar.Database", "{93A51901-EC96-48D6-A6F9-54A01F5194B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinWarWeb", "WinWarWeb\WinWarWeb.csproj", "{A670565E-D1A1-45A0-823B-470D89015498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeiXin.Sdk", "WeiXin.Sdk\WeiXin.Sdk.csproj", "{A01E43B8-FABF-4601-8894-4374026AA08C}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "WinWarDatabase", "WinWarDatabase\WinWarDatabase.sqlproj", "{A90B9D85-29BE-4170-9EE7-32889F773D0A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A670565E-D1A1-45A0-823B-470D89015498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A670565E-D1A1-45A0-823B-470D89015498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A670565E-D1A1-45A0-823B-470D89015498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A670565E-D1A1-45A0-823B-470D89015498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A01E43B8-FABF-4601-8894-4374026AA08C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A01E43B8-FABF-4601-8894-4374026AA08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A01E43B8-FABF-4601-8894-4374026AA08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A01E43B8-FABF-4601-8894-4374026AA08C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A670565E-D1A1-45A0-823B-470D89015498} = {8FD41C9B-712F-4EA9-930B-59E8BCDEEAE2}
+		{A01E43B8-FABF-4601-8894-4374026AA08C} = {3218982E-F7FE-4173-82ED-BFA8185A7A20}
+		{A90B9D85-29BE-4170-9EE7-32889F773D0A} = {93A51901-EC96-48D6-A6F9-54A01F5194B3}
 	EndGlobalSection
 EndGlobal

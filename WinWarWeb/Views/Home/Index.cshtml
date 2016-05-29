@@ -1,5 +1,277 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "赢 VAR";
+}
+@section css{
+    <link href="/modules/css/home/index.css" rel="stylesheet" />
 }
 
-<h2>Index</h2>
+@section scripts{
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/plug/touchSwipe/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript">
+        seajs.use(["scripts/home/index"], function (obj) {
+            obj.bindEvent();
+        });
+
+        $(function () {
+            n = $('.nav-list li').size();
+            var wh = 100 * n + "%";
+            $('.nav-list').width(wh);
+            var lt = (100 / n / 3);
+            var lt_li = lt + "%";
+            $('.nav-list li').width(lt_li);
+            var y = 0;
+            var w = n / 3;
+            $(".nav-list").swipe({
+                swipeLeft: function () {
+                    if (y == -lt * w) {
+                        //alert('已经到最后页');
+                    } else {
+                        y = y - lt;
+                        var t = y + "%";
+                        $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                    }
+                },
+                swipeRight: function () {
+                    if (y != 0) {
+                        y = y + lt;
+                        var t = y + "%";
+                        $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                    }
+
+                }
+            });
+        });
+    </script>
+}
+<div class="nav">
+    <ul class="nav-list">
+        <li><div class="nav-item nav-item-active">头条</div></li>
+        <li><div class="nav-item">专题</div></li>
+        <li><div class="nav-item">研报</div></li>
+         <li><div class="nav-item">头条2</div></li>
+        <li><div class="nav-item">专题2</div></li>
+        <li><div class="nav-item">研报2</div></li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+<div class="content">
+    <ul>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+         <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li class="news">
+            <table width="100%"   style ="border-collapse: collapse; ">
+                <tr>
+                    <td class="news-img">
+                        <div class=""><img src="/modules/images/news.jpg" /></div>
+                    </td>
+                    <td valign="top" class="news-content">
+                        <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                        <div class="news-time">2015.12.1</div>
+                        <div class="clear"></div>
+
+                        <div class="right ">
+                            <span class="iconfont">&#xe648;</span>
+                            <span>12</span>
+                        </div>
+                        <div class="right mRight15">
+                            <span class="iconfont">&#xe610;</span>
+                            <span>13</span>
+                        </div>
+                        <div class="clear"></div>
+                    </td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+<div class="menu">
+    <ul class="menu-list">
+        <li class="menu-active"> 
+            <div class="iconfont blue">&#xe600;</div>
+            首席资讯
+        </li>
+        <li>
+            <div class="iconfont">&#xe63b;</div>
+            产业链
+        </li>
+        <li>
+            <div class="iconfont">&#xe633;</div>
+            极客秀
+        </li>
+        <li>
+            <div class="iconfont">&#xe601;</div>
+            我的
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>

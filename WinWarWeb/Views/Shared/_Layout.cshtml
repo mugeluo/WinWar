@@ -4,13 +4,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <link href="/modules/css/base.css" rel="stylesheet" />
+    <link href="/modules/css/layout.css" rel="stylesheet" />
+    <link href="/modules/css/iconfont/iconfont.css" rel="stylesheet" />
+    @RenderSection("css", false)
 </head>
 <body>
     @RenderBody()
 
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+   <script type="text/javascript" src="/Scripts/sea.js"></script>
+    <script type="text/javascript" src="/Scripts/sea-config.js?v=20160525"></script>
+    @RenderSection("scripts", false)
 </body>
 </html>

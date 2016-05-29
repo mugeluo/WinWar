@@ -1,6 +1,6 @@
 ﻿define(function (require, exports, module) {
-    var Global = {},
-        jQuery = require("jquery");
+    var Global = {};
+        //jQuery = require("jquery");
 
     Global.againSubmitText = "数据处理中，请勿重复操作";
 

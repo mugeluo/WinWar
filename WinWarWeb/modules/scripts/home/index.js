@@ -1,8 +1,13 @@
 ﻿define(function (require, exports, module) {
+    var Global = require("global");
+    var DoT = require("dot");
+
     var ObjectJS = {};
 
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
+
+        ObjectJS.getList();
     };
 
     ObjectJS.bindEvent = function () {
@@ -43,13 +48,30 @@
                 }
             },
             swipeRight: function () {
-                if (y != 0) {
+                if (y == 0) { }
+                else
+                {
                     y = y + lt;
                     var t = y + "%";
                     $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
                 }
 
             }
+        });
+    }
+
+    ObjectJS.getList = function () {
+        var items = [];
+        for (var i = 0; i < 10; i++) {
+            items.push(new Object());
+        }
+        DoT.exec("template/home/news-list.html", function (template) {
+            var innerhtml = template(items);
+            innerhtml = $(innerhtml);
+
+            $(".content ul").append(innerhtml);
+            innerhtml.fadeIn(400);
+            
         });
     }
     module.exports = ObjectJS;

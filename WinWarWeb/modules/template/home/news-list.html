@@ -1,0 +1,41 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+ <li class="news">
+    <table width="100%"   style ="border-collapse: collapse; ">
+        <tr>
+            <td class="news-img">
+                <div class=""><img src="/modules/images/news.jpg" /></div>
+            </td>
+            <td valign="top" class="news-content">
+                <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
+                <div class="news-time">
+                    <div class="left">
+                                
+                        <span>作者:</span>
+                        <span>天蚕土豆</span>
+                    </div>
+                    <div class="right">2015.12.1</div>
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="left">
+                   <span>来源:</span>
+                    <span class="">来源百度</span> 
+                </div>
+                <div class="right">
+                       
+                  <!--  <span class="iconfont" title="浏览数">&#xe633;</span>
+                    <span class="mRight10">13</span>-->
+                    <span class="iconfont" title="讨论数">&#xe610;</span>
+                    <span class="mRight10">13</span>
+                    <span class="iconfont" title="点赞数">&#xe648;</span>
+                    <span>12</span>
+                </div>
+                <div class="clear"></div>
+            </td>
+        </tr>
+    </table>
+</li>
+{% } %}

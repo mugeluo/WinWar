@@ -6,41 +6,10 @@
 }
 
 @section scripts{
-    <script src="/Scripts/jquery-1.11.1.js"></script>
     <script src="/modules/plug/touchSwipe/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/home/index"], function (obj) {
             obj.bindEvent();
-        });
-
-        $(function () {
-            n = $('.nav-list li').size();
-            var wh = 100 * n + "%";
-            $('.nav-list').width(wh);
-            var lt = (100 / n / 3);
-            var lt_li = lt + "%";
-            $('.nav-list li').width(lt_li);
-            var y = 0;
-            var w = n / 3;
-            $(".nav-list").swipe({
-                swipeLeft: function () {
-                    if (y == -lt * w) {
-                        //alert('已经到最后页');
-                    } else {
-                        y = y - lt;
-                        var t = y + "%";
-                        $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                    }
-                },
-                swipeRight: function () {
-                    if (y != 0) {
-                        y = y + lt;
-                        var t = y + "%";
-                        $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                    }
-
-                }
-            });
         });
     </script>
 }
@@ -56,6 +25,11 @@
     <div class="clear"></div>
 </div>
 
+<div class="search">
+    <span class="iconfont">&#xe605;</span>
+    <input type="text" id="keywords" placeholder="搜索" />
+</div>
+
 <div class="content">
     <ul>
         <li class="news">
@@ -66,16 +40,27 @@
                     </td>
                     <td valign="top" class="news-content">
                         <div class="mTop10 news-title">美战斗机坠落纽约哈德逊河 飞行员丧生</div>
-                        <div class="news-time">2015.12.1</div>
-                        <div class="clear"></div>
-
-                        <div class="right ">
-                            <span class="iconfont">&#xe648;</span>
-                            <span>12</span>
+                     @*   <div class="mTop5 news-brief">活动提到丈夫周杰伦被骂，昆凌微笑表示不理会昆凌
+                             周杰伦新浪娱乐讯 据台湾媒体报道，昆凌近日推出宠物书，28日出席签书会，书店涌入许多粉丝
+                        </div>*@
+                        <div class="news-time">
+                            <div class="left">
+                                <span>来源:</span>
+                                <span class="mRight10">来源</span>
+                                <span>作者:</span>
+                                <span>天蚕土豆</span>
+                            </div>
+                            <div class="right">2015.12.1</div>
+                            <div class="clear"></div>
                         </div>
-                        <div class="right mRight15">
-                            <span class="iconfont">&#xe610;</span>
-                            <span>13</span>
+                        <div class="clear"></div>
+                        <div class="right">
+                            <span class="iconfont" title="浏览数">&#xe633;</span>
+                            <span class="mRight15">13</span>
+                            <span class="iconfont" title="讨论数">&#xe610;</span>
+                            <span class="mRight15">13</span>
+                            <span class="iconfont" title="点赞数">&#xe648;</span>
+                            <span>12</span>
                         </div>
                         <div class="clear"></div>
                     </td>

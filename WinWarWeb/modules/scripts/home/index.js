@@ -1,5 +1,5 @@
 ﻿define(function (require, exports, module) {
-    var ObjectJS={};
+    var ObjectJS = {};
 
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
@@ -19,7 +19,38 @@
                 $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
             }
         });
+
+        ObjectJS.bindNav();
     };
 
-    module.exports= ObjectJS;
+    ObjectJS.bindNav = function () {
+        n = $('.nav-list li').size();
+        var wh = 100 * n + "%";
+        $('.nav-list').width(wh);
+        var lt = (100 / n / 3);
+        var lt_li = lt + "%";
+        $('.nav-list li').width(lt_li);
+        var y = 0;
+        var w = n / 3;
+        $(".nav-list").swipe({
+            swipeLeft: function () {
+                if (y == -lt * w) {
+                    //alert('已经到最后页');
+                } else {
+                    y = y - lt;
+                    var t = y + "%";
+                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                }
+            },
+            swipeRight: function () {
+                if (y != 0) {
+                    y = y + lt;
+                    var t = y + "%";
+                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                }
+
+            }
+        });
+    }
+    module.exports = ObjectJS;
 });

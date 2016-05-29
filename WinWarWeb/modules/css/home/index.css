@@ -27,7 +27,7 @@
     color:#87D0F9;
     font-size:16px;
 }
-    .nav-list .nav-item-active{
+    .nav-list .active{
         color:#fff;
         /*margin:0 15px;*/
     border-bottom:2px solid #fff;
@@ -93,7 +93,7 @@ padding-bottom:10px;
     font-size:12px;
     color:#666;
     text-align:center;
-
+    cursor:pointer;
     }
 
     .menu-list .iconfont {
@@ -102,6 +102,6 @@ padding-bottom:10px;
     padding-bottom:5px;
     }
 
-.menu-active {
+.menu-list .active {
 color:#4A98E7!important;
 }

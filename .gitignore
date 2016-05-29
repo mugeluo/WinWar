@@ -10,7 +10,6 @@ Thumbs.db
 *_p.c
 *.ncb
 *.suo
-*.sqlproj
 *.tlb
 *.tlh
 *.bak
@@ -30,3 +29,7 @@ tempfile
 UploadFiles
 *.dbmdl
 upload/
+
+#ignore thumbnails created by windows
+#Ignore files build by Visual Studio
+[Tt]est[Rr]esult*

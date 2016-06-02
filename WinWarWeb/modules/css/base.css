@@ -9,6 +9,7 @@
 .center { text-align:center; }
 .tRight { text-align:right !important;}
 .hide { display:none; }
+.inline-block { display:inline-block!important; }
 .nolimits { display: none !important; }
 .relative {position:relative;}
 .bold {font-weight:bold}

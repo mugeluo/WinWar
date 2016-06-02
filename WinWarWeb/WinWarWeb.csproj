@@ -143,6 +143,7 @@
     <Content Include="modules\scripts\home\index.js" />
     <Content Include="modules\plug\doT.js" />
     <Content Include="modules\plug\verify.js" />
+    <Content Include="modules\template\home\news-list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

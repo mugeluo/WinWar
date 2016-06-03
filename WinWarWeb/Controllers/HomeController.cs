@@ -16,5 +16,9 @@ namespace WinWarWeb.Controllers
             return View();
         }
 
+        public ActionResult Detail()
+        {
+            return View();
+        }
     }
 }

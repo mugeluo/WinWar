@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="modules\css\base.css" />
+    <Content Include="modules\css\home\detail.css" />
     <Content Include="modules\css\home\index.css" />
     <Content Include="modules\css\iconfont\demo.css" />
     <Content Include="modules\css\iconfont\demo.html" />

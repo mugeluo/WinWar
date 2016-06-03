@@ -1,0 +1,155 @@
+﻿body {
+    
+}
+.iconfont {
+font-size:16px;
+color:#aaa;
+}
+.detail-header {
+    width:100%;
+    position:relative;
+}
+.header-back {
+    position:absolute;
+    top:10px;
+    left:10px;
+    cursor:pointer;
+}
+.header-back .iconfont {
+    color:#fff;
+    font-size:30px;
+    font-weight:bold;
+}
+.header-content {
+    position:absolute;
+    bottom:30px;
+    left:30px;
+    
+}
+.header-content div {
+    color:#fff;
+}
+.header-newsimg {
+    width:100%;
+}
+.header-newsimg img{
+    width:100%;
+}
+.header-content .source {
+    text-align:center;
+    border:1px solid #fff;
+    border-radius:3px;
+    width:60px;
+    line-height:20px;
+}
+
+.header-content .title {
+    margin-top:10px;
+    font-size:24px;
+}
+
+.detail-content {
+    margin:15px;
+}
+.news-author .author-img img {
+    width:36px;
+    height:36px;
+    border-radius:18px;
+}
+
+.news-author .author-detail {
+    margin-left:10px;
+}
+.news-author .author-name {
+    color:#444;
+    font-size:16px;
+}
+.news-author .author-time {
+    margin-top:5px;
+    color:#bbb;
+    font-size:12px;
+}
+.author-read .read {
+    color:#aaa;
+    font-size:14px;
+}
+.detail-box {
+    margin-top:10px;
+}
+.detail-box p{
+    /*text-indent:24px;*/
+line-height:30px;
+font-size:16px;
+}
+.detail-box span {
+    float: left;
+    width: 50px;
+    height: 40px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 42px;
+}
+
+.detail-reply {
+    padding:10px;
+    background-color:#f2f4f8;
+    margin-bottom:50px;
+}
+
+.reply-header {
+    margin-top:5px;
+    
+    border-bottom:1px solid #ddd;
+}
+.reply-header .reply-title {
+    color:#333;
+    font-size:14px;
+    padding-bottom:5px;
+    width:33px;
+    text-align:center;
+    border-bottom:3px solid #4A98E7;
+}
+.reply-item {
+    margin-top:10px;
+    border-bottom:1px solid #eee;
+}
+.reply-item .reply-author .reply-img img {
+    width:30px;
+    height:30px;
+    border-radius:15px;
+}
+
+.reply-item .reply-author .reply-detail {
+    margin-left:10px;
+}
+.reply-item .reply-author .reply-name {
+    color:#444;
+    font-size:16px;
+}
+.reply-item .reply-author .reply-time {
+    margin-top:5px;
+    color:#bbb;
+    font-size:12px;
+}
+.reply-item .reply-content{
+    margin:10px 0;
+    color:#333;
+    font-size:14px;
+}
+
+.detail-reply-add {
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    z-index:1000;
+    line-height:50px;
+    height:50px;
+    background-color:#fff;
+    border-top:1px solid #eee!important;
+}
+.reply-box-content {
+    border:1px solid #eee!important;
+    width:200px;
+    
+}

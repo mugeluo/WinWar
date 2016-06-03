@@ -25,7 +25,7 @@
             }
         });
 
-        ObjectJS.bindNav();
+        //ObjectJS.bindNav();
     };
 
     ObjectJS.bindNav = function () {
@@ -37,8 +37,10 @@
         $('.nav-list li').width(lt_li);
         var y = 0;
         var w = n / 2;
+
         $(".nav-list").swipe({
             swipeLeft: function () {
+                alert(111);
                 if (y == -lt * w) {
                     alert('已经到最后页');
                 } else {

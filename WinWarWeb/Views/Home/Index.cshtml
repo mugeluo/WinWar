@@ -29,8 +29,10 @@
 </div>
 
 <div class="search">
-    <span class="iconfont">&#xe605;</span>
-    <input type="text" id="keywords" placeholder="搜索" />
+    <div class="search-box">
+        <span class="iconfont">&#xe605;</span>
+        <span class="search-name">搜索</span>
+    </div>
 </div>
 
 <div class="content">
@@ -41,7 +43,7 @@
 <div class="menu">
     <ul class="menu-list">
         <li class="active"> 
-            <div class="iconfont" style="color:#4A98E7">&#xe600;</div>
+            <div class="iconfont" style="color:#4A98E7" onclick="location.href='/home/index'">&#xe600;</div>
             首席资讯
         </li>
         <li>
@@ -53,9 +55,17 @@
             极客秀
         </li>
         <li>
-            <div class="iconfont">&#xe601;</div>
+            <div class="iconfont" onclick="location.href='/user/index'">&#xe601;</div>
             我的
         </li>
     </ul>
     <div class="clear"></div>
+</div>
+
+<div class="overlay">
+    <div class="overlay-search">
+        <span class="iconfont">&#xe605;</span>
+        <input type="text" id="keywords" placeholder="搜索" />
+    </div>
+    <div class="overlay-cancel">取消</div>
 </div>

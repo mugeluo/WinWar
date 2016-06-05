@@ -7,29 +7,26 @@
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
 
-        ObjectJS.getList();
+        //ObjectJS.getList();
     };
 
     ObjectJS.bindEvent = function () {
-        $(".nav li .nav-item").click(function () {
-            if (!$(this).hasClass("active")) {
-                $(this).parent().siblings().find(".nav-item").removeClass("active").next().removeClass("inline-block");
-                $(this).addClass("active").next().addClass("inline-block");
-            }
-        });
+        //$(".nav li .nav-item").click(function () {
+        //    if (!$(this).hasClass("active")) {
+        //        $(this).parent().siblings().find(".nav-item").removeClass("active").next().removeClass("inline-block");
+        //        $(this).addClass("active").next().addClass("inline-block");
+        //    }
+        //});
 
-        $(".menu li").click(function () {
-            if (!$(this).hasClass("active")) {
-                $(this).siblings().removeClass("active").find(".iconfont").css("color", "#666");
-                $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
-            }
-        });
+        //$(".menu li").click(function () {
+        //    if (!$(this).hasClass("active")) {
+        //        $(this).siblings().removeClass("active").find(".iconfont").css("color", "#666");
+        //        $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
+        //    }
+        //});
 
-        $(".search").click(function () {
+        $("#btn-add-reply").click(function () {
             $('.overlay').show();
-//            $('.overlay').css("height", document.body.scrollTop
-//+ document.body.clientHeight + "px").show();
-
         });
 
         $(".overlay-cancel").click(function () {

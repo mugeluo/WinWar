@@ -21,6 +21,15 @@ namespace WinWarEntity
         public int News_Type_3 { get; set; }
 
         public string News_Type_Name3 { get; set; }
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
     }
 
     /// <summary>

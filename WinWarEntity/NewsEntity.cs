@@ -38,18 +38,52 @@ namespace WinWarEntity
 
         public string Real_Source_Name { get; set; }
 
+        /// <summary>
+        /// 图片
+        /// </summary>
         public string Pic_URL { get; set; }
 
+        /// <summary>
+        /// 浏览数
+        /// </summary>
         public int View_Count { get; set; }
 
+        /// <summary>
+        /// 评论数
+        /// </summary>
         public int Comment_Count { get; set; }
 
+        /// <summary>
+        /// 点赞数
+        /// </summary>
         public int Praise_Count { get; set; }
 
+        /// <summary>
+        /// 收藏数
+        /// </summary>
         public int Collect_Count { get; set; }
 
         public string Txt_Content { get; set; }
 
         public string Html_Txt { get; set; }
+
+        /// <summary>
+        /// 是否点赞
+        /// </summary>
+        public int Is_Praise { get; set; }
+
+        /// <summary>
+        /// 是否收藏
+        /// </summary>
+        public int Is_Collect { get; set; }
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
     }
 }

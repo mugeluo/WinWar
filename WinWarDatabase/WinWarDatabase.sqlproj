@@ -8,7 +8,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
     <ProjectGuid>{a90b9d85-29be-4170-9ee7-32889f773d0a}</ProjectGuid>
-    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
@@ -53,5 +53,18 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Procedures" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\P_GetPagerData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Procedures\P_GetNews_Mains.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Procedures\Alter.sql" />
+    <None Include="Procedures\P_AddNewsPraiseCount.sql" />
+    <None Include="Procedures\P_AddNewsCollectCount.sql" />
+    <None Include="Procedures\P_AddNewsComment.sql" />
   </ItemGroup>
 </Project>

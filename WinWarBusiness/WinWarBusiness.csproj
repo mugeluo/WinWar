@@ -42,6 +42,16 @@
     <Compile Include="NewsBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinWarDAL\WinWarDAL.csproj">
+      <Project>{d455f5bf-984a-4be2-ad1e-691ae2679e19}</Project>
+      <Name>WinWarDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinWarEntity\WinWarEntity.csproj">
+      <Project>{2acdc731-d10d-412a-aa62-13fce97485ac}</Project>
+      <Name>WinWarEntity</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

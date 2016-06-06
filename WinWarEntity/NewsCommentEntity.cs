@@ -31,5 +31,15 @@ namespace WinWarEntity
         public string Reply_User_Name { get; set; }
 
         public DateTime Create_Date { get; set; }
+
+        /// <summary>
+        /// 填充数据
+        /// </summary>
+        /// <param name="dr"></param>
+        public void FillData(System.Data.DataRow dr)
+        {
+            dr.FillData(this);
+        }
     }
+
 }

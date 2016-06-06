@@ -67,7 +67,7 @@ namespace WinWarBusiness
         /// <param name="pageSize">每页新闻数</param>
         /// <param name="newsCode">最大新闻Code,第一页传 0</param>
         /// <returns></returns>
-        public List<NewsEntity> GetNews(string keyWords, int typeid, int pageSize, int userid, ref int newsCode)
+        public List<NewsEntity> GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)
         {
             List<NewsEntity> list = new List<NewsEntity>();
 
@@ -78,6 +78,26 @@ namespace WinWarBusiness
                 model.FillData(dr);
             }
 
+            return list;
+        }
+
+        /// <summary>
+        /// 获取新闻评论
+        /// </summary>
+        /// <param name="newsCode"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public List<NewsCommentEntity> GetNewsComments(int newsCode, int pageSize, int userid, ref long id)
+        {
+            List<NewsCommentEntity> list = new List<NewsCommentEntity>();
+            DataTable dt = NewsDAL.BaseDAL.GetNewsComments(newsCode, pageSize, userid, ref id);
+            foreach (DataRow dr in dt.Rows)
+            {
+                NewsCommentEntity model = new NewsCommentEntity();
+                model.FillData(dr);
+            }
             return list;
         }
 
@@ -119,6 +139,17 @@ namespace WinWarBusiness
             return NewsDAL.BaseDAL.AddNewsCollectCount(newsCode, isAdd, userid);
         }
 
+        /// <summary>
+        /// 评论或回复
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="newsCode"></param>
+        /// <param name="userid"></param>
+        /// <param name="userName"></param>
+        /// <param name="replyid"></param>
+        /// <param name="replyUserID"></param>
+        /// <param name="replyUserName"></param>
+        /// <returns></returns>
         public bool AddNewsComment(string content, int newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
         {
             return NewsDAL.BaseDAL.AddNewsCollectCount(newsCode, isAdd, userid);

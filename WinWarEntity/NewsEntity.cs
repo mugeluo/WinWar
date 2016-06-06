@@ -8,7 +8,7 @@ namespace WinWarEntity
 {
     public class NewsEntity
     {
-        public int News_Uni_Code { get; set; }
+        public long News_Uni_Code { get; set; }
 
         public DateTime Pub_Time { get; set; }
 
@@ -46,22 +46,22 @@ namespace WinWarEntity
         /// <summary>
         /// 浏览数
         /// </summary>
-        public int View_Count { get; set; }
+        public long View_Count { get; set; }
 
         /// <summary>
         /// 评论数
         /// </summary>
-        public int Comment_Count { get; set; }
+        public long Comment_Count { get; set; }
 
         /// <summary>
         /// 点赞数
         /// </summary>
-        public int Praise_Count { get; set; }
+        public long Praise_Count { get; set; }
 
         /// <summary>
         /// 收藏数
         /// </summary>
-        public int Collect_Count { get; set; }
+        public long Collect_Count { get; set; }
 
         public string Txt_Content { get; set; }
 

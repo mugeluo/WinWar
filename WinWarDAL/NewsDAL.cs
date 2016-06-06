@@ -27,7 +27,7 @@ namespace WinWarDAL
             return GetDataTable("Select * from NEWS_TYPE where ID=@ID", paras, CommandType.Text);
         }
 
-        public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref int newsCode)
+        public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@NewsCode",SqlDbType.Int),
@@ -40,11 +40,25 @@ namespace WinWarDAL
             paras[0].Value = newsCode;
             paras[0].Direction = ParameterDirection.InputOutput;
             DataTable dt = GetDataTable("P_GetNews_Mains", paras, CommandType.StoredProcedure);
-            newsCode = Convert.ToInt32(paras[0].Value);
+            newsCode = Convert.ToInt64(paras[0].Value);
             return dt;
 
         }
 
+        public DataTable GetNewsComments(int newsCode, int pageSize, int userid, ref long id)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@ID",SqlDbType.Int),
+                                       new SqlParameter("@NewsCode",newsCode),
+                                       new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@UserID",userid)
+                                   };
+            paras[0].Value = id;
+            paras[0].Direction = ParameterDirection.InputOutput;
+            DataTable dt = GetDataTable("P_GetNewsComments", paras, CommandType.StoredProcedure);
+            id = Convert.ToInt64(paras[0].Value);
+            return dt;
+        }
         #endregion
 
         #region 查询

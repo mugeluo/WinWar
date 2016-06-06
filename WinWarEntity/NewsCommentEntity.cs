@@ -8,30 +8,34 @@ namespace WinWarEntity
 {
     public class NewsCommentEntity
     {
-        public int ID { get; set; }
+        public long ID { get; set; }
 
-        public int User_ID { get; set; }
+        public long User_ID { get; set; }
 
         public string User_Name { get; set; }
 
-        public int News_Uni_Code { get; set; }
+        public long News_Uni_Code { get; set; }
 
         public int Type { get; set; }
 
         public string Content { get; set; }
 
-        public int Praise_Count { get; set; }
+        public long Praise_Count { get; set; }
 
-        public int Reply_Count { get; set; }
+        public long Reply_Count { get; set; }
 
-        public int Reply_ID { get; set; }
+        public long Reply_ID { get; set; }
 
-        public int Reply_User_ID { get; set; }
+        public long Reply_User_ID { get; set; }
 
         public string Reply_User_Name { get; set; }
 
         public DateTime Create_Date { get; set; }
 
+        /// <summary>
+        /// 大于0都等于点赞
+        /// </summary>
+        public long Is_Praise { get; set; }
         /// <summary>
         /// 填充数据
         /// </summary>

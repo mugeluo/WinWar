@@ -66,5 +66,6 @@
     <None Include="Procedures\P_AddNewsPraiseCount.sql" />
     <None Include="Procedures\P_AddNewsCollectCount.sql" />
     <None Include="Procedures\P_AddNewsComment.sql" />
+    <None Include="Procedures\P_GetNewsComments.sql" />
   </ItemGroup>
 </Project>

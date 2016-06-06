@@ -39,6 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpandFillData.cs" />
+    <Compile Include="NewsCommentEntity.cs" />
+    <Compile Include="NewsEntity.cs" />
+    <Compile Include="NewsTypeEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -24,6 +24,9 @@
         //        $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
         //    }
         //});
+        $(".overlay").click(function (e) {
+            
+        });
 
         $("#btn-add-reply").click(function () {
             $('.overlay').show();

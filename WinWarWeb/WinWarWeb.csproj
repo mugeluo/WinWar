@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +184,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\User\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WinWarBusiness\WinWarBusiness.csproj">
+      <Project>{ce9d2362-dbd2-49a8-84f1-d64a9ef9c803}</Project>
+      <Name>WinWarBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinWarDAL\WinWarDAL.csproj">
+      <Project>{d455f5bf-984a-4be2-ad1e-691ae2679e19}</Project>
+      <Name>WinWarDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinWarEntity\WinWarEntity.csproj">
+      <Project>{2acdc731-d10d-412a-aa62-13fce97485ac}</Project>
+      <Name>WinWarEntity</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

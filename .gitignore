@@ -33,3 +33,5 @@ upload/
 #ignore thumbnails created by windows
 #Ignore files build by Visual Studio
 [Tt]est[Rr]esult*
+WinWarWeb/Web.config
+WinWarWeb/Web.config

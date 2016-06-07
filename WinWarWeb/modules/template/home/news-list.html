@@ -6,15 +6,19 @@
     <table width="100%"   style ="border-collapse: collapse; ">
         <tr>
             <td valign="top">
-                <a class="news-title" href="/home/detail">美战斗机坠落纽约哈德逊河 飞行员丧生
-                    <span class="author">by 牧歌</span>
+                <a class="news-title" href="/home/detail">
+                    {%=item.Title_Main%}
+                    {%
+                        if(item.News_Author!=''){%}
+                            <span class="author">by {%=item.News_Author%}</span>
+                    {% } %}
                 </a>
                 
             </td>
             {%
-            if(i%2==0){%}
+            if(item.Pic_URL!=''){%}
              <td width="140">
-                <div class="news-img"><a href="/home/detail"><img src="/modules/images/news.jpg" /></a></div>
+                <div class="news-img"><a href="/home/detail"><img src="{%=item.Pic_URL%}" /></a></div>
             </td>
            {% } %}
         </tr>
@@ -22,14 +26,14 @@
             <td colspan="2">
                 <div class="mTop15">
                    <div class="left">
-                        <span>天蚕土豆</span>
-                        <span class="mLeft10">2015.12.1</span>
+                        <span>{%=item.Real_Source_Name%}</span>
+                        <span class="mLeft10">{%=item.Pub_Time.toDate("MM-dd hh:mm")%}</span>
                     </div>
                     <div class="right">
                         <span class="iconfont" title="讨论数">&#xe610;</span>
-                        <span class="mRight15">13</span>
+                        <span class="mRight15">{%=item.Comment_Count%}</span>
                         <span class="iconfont" title="点赞数">&#xe648;</span>
-                        <span>12</span>
+                        <span>{%=item.Praise_Count%}</span>
                     </div>
                     <div class="clear"></div>
                 </div>

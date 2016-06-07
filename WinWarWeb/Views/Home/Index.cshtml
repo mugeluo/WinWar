@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "赢 VAR";
+    var NewsTypes = (List<WinWarEntity.NewsTypeEntity>)ViewBag.NewsTypes;
 }
 @section css{
     <link href="/modules/css/home/index.css" rel="stylesheet" />
@@ -15,7 +16,7 @@
 }
 <div class="nav">
     <ul class="nav-list">
-        <li><div class="nav-item active">头条</div>
+       @* <li><div class="nav-item active">头条</div>
             <span class="select inline-block"></span>
         </li>
         <li><div class="nav-item">专题</div>
@@ -23,7 +24,23 @@
         </li>
         <li><div class="nav-item">研报</div>
             <span class="select"></span>
-        </li>
+        </li>*@
+       @* @{
+            for (var i = 0; i < NewsTypes.Count;i++ )
+            {
+                var type = NewsTypes[i];
+                <li><div class="nav-item active">@type.News_Type_Name2</div>
+                @{
+                    if(i==0){
+                    <span class="select inline-block"></span>
+                    }
+                    else{
+                      <span class="inline-block"></span>
+                    }
+                }
+                </li>
+            }
+          }*@
     </ul>
     <div class="clear"></div>
 </div>
@@ -42,15 +59,15 @@
 
 <div class="menu">
     <ul class="menu-list">
-        <li class="active" data-id="16"> 
+        <li class="active item" data-id="16"> 
             <div class="iconfont" style="color:#4A98E7">&#xe600;</div>
             首席资讯
         </li>
-        <li data-id="6">
+        <li class="item" data-id="6">
             <div class="iconfont">&#xe63b;</div>
             产业链
         </li>
-        <li data-id="17">
+        <li class="item" data-id="17">
             <div class="iconfont">&#xe633;</div>
             极客秀
         </li>

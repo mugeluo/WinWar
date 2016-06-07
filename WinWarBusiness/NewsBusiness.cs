@@ -11,6 +11,7 @@ namespace WinWarBusiness
 {
     public class NewsBusiness
     {
+        public static NewsBusiness BaseBusiness = new NewsBusiness();
         #region Cache
 
         private static List<NewsTypeEntity> _types { get; set; }
@@ -59,6 +60,10 @@ namespace WinWarBusiness
             return model;
         }
 
+        public List<NewsTypeEntity> GetNewsTypeByParentCode(int id)
+        {
+            return CacheNewsType.FindAll(m => m.News_Type_1 == id && m.News_Type_2 != -1);
+        }
         /// <summary>
         /// 获取新闻
         /// </summary>
@@ -76,6 +81,8 @@ namespace WinWarBusiness
             {
                 NewsEntity model = new NewsEntity();
                 model.FillData(dr);
+
+                list.Add(model);
             }
 
             return list;
@@ -152,7 +159,7 @@ namespace WinWarBusiness
         /// <returns></returns>
         public bool AddNewsComment(string content, int newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
         {
-            return NewsDAL.BaseDAL.AddNewsCollectCount(newsCode, isAdd, userid);
+            return NewsDAL.BaseDAL.AddNewsComment(content, newsCode, userid,userName,replyid,replyUserID,replyUserName);
         }
 
         #endregion

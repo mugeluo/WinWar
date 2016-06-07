@@ -2,12 +2,18 @@
     var Global = require("global");
     var DoT = require("dot");
 
+    var Paras = {
+        code:16
+    };
     var ObjectJS = {};
+
 
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
 
-        ObjectJS.getList();
+        ObjectJS.getNewsTypeByParentCode();
+
+        ObjectJS.getNews();
     };
 
     ObjectJS.bindEvent = function () {
@@ -18,10 +24,14 @@
             }
         });
 
-        $(".menu li").click(function () {
-            if (!$(this).hasClass("active")) {
-                $(this).siblings().removeClass("active").find(".iconfont").css("color", "#666");
-                $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
+        $(".menu-list .item").click(function () {
+            var _this=$(this);
+            if (!_this.hasClass("active")) {
+                _this.siblings().removeClass("active").find(".iconfont").css("color", "#666");
+                _this.addClass("active").find(".iconfont").css("color", "#4A98E7");
+
+                Paras.code = _this.data("id");
+                ObjectJS.getNewsTypeByParentCode();
             }
         });
 
@@ -73,19 +83,39 @@
         });
     }
 
-    ObjectJS.getList = function () {
-        var items = [];
-        for (var i = 0; i < 10; i++) {
-            items.push(new Object());
-        }
-        DoT.exec("template/home/news-list.html", function (template) {
-            var innerhtml = template(items);
-            innerhtml = $(innerhtml);
+    ObjectJS.getNews = function () {
+        Global.post("/Home/GetNews", {paras:JSON.stringify(Paras)}, function (data) {
+            var items = data.items;
+            DoT.exec("template/home/news-list.html", function (template) {
+                var innerhtml = template(items);
+                innerhtml = $(innerhtml);
 
-            $(".content ul").append(innerhtml);
-            innerhtml.fadeIn(400);
-            
+                $(".content ul").append(innerhtml);
+                innerhtml.fadeIn(400);
+
+            });
         });
     }
+
+    ObjectJS.getNewsTypeByParentCode = function () {
+        Global.post("/Home/GetNewsTypeByParentCode", { code: Paras.code }, function (data) {
+            $(".nav-list").html('');
+
+            for (var i = 0,len = data.items.length; i < len; i++) {
+                var item = data.items[i];
+                var html = '';
+                html += '<li><div class="nav-item active">' + item.News_Type_Name2 + '</div>';
+                if (i ==0) {
+                    html += '<span class="select inline-block"></span>';
+                }
+                else {
+                    html += '<span class="inline-block"></span>';
+                }
+                html += '</li>';
+                $(".nav-list").append(html);
+            }
+        });
+    };
+
     module.exports = ObjectJS;
 });

@@ -6,3 +6,6 @@ update NEWS_MAIN set IS_ISSUE='1'
 
 
 alter table NEWS_MAIN add NEWS_TYPE int 
+
+
+update NEWS_MAIN set NEWS_TYPE=16

@@ -51,6 +51,11 @@ color:#aaa;
 .detail-content {
     margin:15px;
 }
+.detail-content .icon {
+    max-width:16px;
+    max-height:16px;
+}
+
 .news-author .author-img img {
     width:36px;
     height:36px;

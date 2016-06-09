@@ -88,6 +88,19 @@ namespace WinWarBusiness
             return list;
         }
 
+        public NewsEntity GetNewsDetail(long newsCode, long userid)
+        {
+            NewsEntity item =null;
+
+            DataTable dt = NewsDAL.BaseDAL.GetNewsDetail(newsCode, userid);
+            if(dt.Rows.Count>0)
+            {
+                item = new NewsEntity();
+                item.FillData(dt.Rows[0]);
+            }
+
+            return item;
+        }
         /// <summary>
         /// 获取新闻评论
         /// </summary>

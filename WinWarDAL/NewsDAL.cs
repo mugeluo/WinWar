@@ -45,6 +45,19 @@ namespace WinWarDAL
 
         }
 
+        public DataTable GetNewsDetail(long newsCode, long userid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@NewsCode",newsCode),
+                                       new SqlParameter("@UserID",userid)
+                                   };
+
+            DataTable dt = GetDataTable("P_GetNewsDetail", paras, CommandType.StoredProcedure);
+
+            return dt;
+
+        }
+
         public DataTable GetNewsComments(int newsCode, int pageSize, int userid, ref long id)
         {
             SqlParameter[] paras = { 

@@ -4,7 +4,9 @@
 
     var ObjectJS = {};
 
-    ObjectJS.init = function () {
+    ObjectJS.init = function (newsMain) {
+        newsMain=newsMain.replace(/&quot;/g, '"');
+        $("#newsMain").html( newsMain );
         ObjectJS.bindEvent();
 
         //ObjectJS.getList();

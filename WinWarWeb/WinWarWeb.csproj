@@ -141,6 +141,7 @@
     <Content Include="modules\css\iconfont\iconfont.svg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\user\index.css" />
+    <Content Include="modules\images\browse.png" />
     <Content Include="modules\images\ico-loading.gif" />
     <Content Include="modules\images\information.png" />
     <Content Include="modules\images\information_color.png" />

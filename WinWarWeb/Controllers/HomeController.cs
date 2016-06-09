@@ -18,8 +18,16 @@ namespace WinWarWeb.Controllers
             return View();
         }
 
-        public ActionResult Detail()
+        public ActionResult Detail(long id=0)
         {
+            if (id == 0)
+            {
+               return Redirect("/Home/Index");
+            }
+
+            var item = NewsBusiness.BaseBusiness.GetNewsDetail(id,0);
+            ViewBag.Item = item;
+
             return View();
         }
 

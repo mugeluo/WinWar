@@ -60,7 +60,7 @@ namespace WinWarBusiness
             return model;
         }
 
-        public List<NewsTypeEntity> GetNewsTypeByParentCode(int id)
+        public List<NewsTypeEntity> GetNewsTypeByParentID(int id)
         {
             return CacheNewsType.FindAll(m => m.News_Type_1 == id && m.News_Type_2 != -1);
         }

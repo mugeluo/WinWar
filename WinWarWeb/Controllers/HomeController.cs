@@ -14,7 +14,7 @@ namespace WinWarWeb.Controllers
 
         public ActionResult Index()
         {
-            var NewsTypes = NewsBusiness.BaseBusiness.GetNewsTypeByParentCode(16);
+            var NewsTypes = NewsBusiness.BaseBusiness.GetNewsTypeByParentID(16);
             ViewBag.NewsTypes = NewsTypes;
 
             return View();
@@ -27,8 +27,8 @@ namespace WinWarWeb.Controllers
 
 
         #region ajax
-        public JsonResult GetNewsTypeByParentCode(int code) {
-            var items = NewsBusiness.BaseBusiness.GetNewsTypeByParentCode(code);
+        public JsonResult GetNewsTypeByParentID(int id) {
+            var items = NewsBusiness.BaseBusiness.GetNewsTypeByParentID(id);
             jsonResult.Add("items", items);
 
             return new JsonResult() { 
@@ -37,11 +37,11 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult GetNews()
+        public JsonResult GetNews(long lastCode)
         {
-            long code=0;
-            var items = NewsBusiness.BaseBusiness.GetNews(string.Empty, 0, pageSize, 0, ref code);
+            var items = NewsBusiness.BaseBusiness.GetNews(string.Empty, 0, pageSize, 0, ref lastCode);
             jsonResult.Add("items", items);
+            jsonResult.Add("lastCode", lastCode);
 
             return new JsonResult()
             {

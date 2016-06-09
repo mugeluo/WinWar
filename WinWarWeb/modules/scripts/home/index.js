@@ -3,35 +3,48 @@
     var DoT = require("dot");
 
     var Paras = {
-        code:16
+        pageIndex:1,
+        parentTypeID: 16,
+        lastCode:0
     };
+    var NavsCache = [];
     var ObjectJS = {};
-
 
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
 
-        ObjectJS.getNewsTypeByParentCode();
+        ObjectJS.getNewsTypeByParentID();
 
         ObjectJS.getNews();
     };
 
     ObjectJS.bindEvent = function () {
-        $(".nav li .nav-item").click(function () {
-            if (!$(this).hasClass("active")) {
-                $(this).parent().siblings().find(".nav-item").removeClass("active").next().removeClass("inline-block");
-                $(this).addClass("active").next().addClass("inline-block");
+        $(window).bind("scroll", function () {
+            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+            if (bottom <= 50) {
+                setTimeout(function () {
+                    Paras.pageIndex++;
+                    ObjectJS.getNews();
+                }, 500);
+
             }
         });
 
         $(".menu-list .item").click(function () {
             var _this=$(this);
             if (!_this.hasClass("active")) {
-                _this.siblings().removeClass("active").find(".iconfont").css("color", "#666");
-                _this.addClass("active").find(".iconfont").css("color", "#4A98E7");
+                var $imgs = _this.siblings().removeClass("active").find("img");
+                $imgs.each(function () {
+                    $(this).attr("src", "/modules/images/" + $(this).data("icon") + ".png");
+                });
+                
+                var $img = _this.addClass("active").find("img");
+                $img.each(function () {
+                    $(this).attr("src", "/modules/images/" + $(this).data("icon") + "_color.png");
+                });
 
-                Paras.code = _this.data("id");
-                ObjectJS.getNewsTypeByParentCode();
+                Paras.parentTypeID = _this.data("id");
+                ObjectJS.getNewsTypeByParentID();
             }
         });
 
@@ -48,6 +61,17 @@
 
         //ObjectJS.bindNav();
     };
+
+    ObjectJS.bindNavClick = function () {
+        $(".nav li .nav-item").click(function () {
+            if (!$(this).hasClass("active")) {
+                $(this).parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");
+                $(this).addClass("active").next().addClass("select");
+
+
+            }
+        });
+    }
 
     ObjectJS.bindNav = function () {
         var n = $('.nav-list li').size();
@@ -83,9 +107,61 @@
         });
     }
 
+    ObjectJS.getNewsTypeByParentID = function () {
+        var data = NavsCache[Paras.typeParentID];
+        if (data == null) {
+            Global.post("/Home/GetNewsTypeByParentID", { id: Paras.parentTypeID }, function (data) {
+                NavsCache[Paras.typeParentID] = data;
+                $(".nav-list").html('');
+
+                for (var i = 0, len = data.items.length; i < len; i++) {
+                    var item = data.items[i];
+                    var html = '';
+                    if (i == 0) {
+                        html += '<li><div class="nav-item active">' + item.News_Type_Name2 + '</div>';
+                        html += '<span class="select inline-block"></span>';
+                    }
+                    else {
+                        html += '<li><div class="nav-item">' + item.News_Type_Name2 + '</div>';
+                        html += '<span class="inline-block"></span>';
+                    }
+                    html += '</li>';
+                    $(".nav-list").append(html);
+                }
+
+                ObjectJS.bindNavClick();
+            });
+        }
+        else {
+            $(".nav-list").html('');
+
+            for (var i = 0, len = data.items.length; i < len; i++) {
+                var item = data.items[i];
+                var html = '';
+                if (i == 0) {
+                    html += '<li><div class="nav-item active">' + item.News_Type_Name2 + '</div>';
+                    html += '<span class="select inline-block"></span>';
+                }
+                else {
+                    html += '<li><div class="nav-item">' + item.News_Type_Name2 + '</div>';
+                    html += '<span class="inline-block"></span>';
+                }
+                html += '</li>';
+                $(".nav-list").append(html);
+            }
+
+            ObjectJS.bindNavClick();
+        }
+    };
+
     ObjectJS.getNews = function () {
-        Global.post("/Home/GetNews", {paras:JSON.stringify(Paras)}, function (data) {
+        $(".data-loading").show();
+        Global.post("/Home/GetNews", Paras, function (data) {
+            $(".data-loading").hide();
+
             var items = data.items;
+            Paras.lastCode = data.lastCode;
+
             DoT.exec("template/home/news-list.html", function (template) {
                 var innerhtml = template(items);
                 innerhtml = $(innerhtml);
@@ -97,25 +173,7 @@
         });
     }
 
-    ObjectJS.getNewsTypeByParentCode = function () {
-        Global.post("/Home/GetNewsTypeByParentCode", { code: Paras.code }, function (data) {
-            $(".nav-list").html('');
-
-            for (var i = 0,len = data.items.length; i < len; i++) {
-                var item = data.items[i];
-                var html = '';
-                html += '<li><div class="nav-item active">' + item.News_Type_Name2 + '</div>';
-                if (i ==0) {
-                    html += '<span class="select inline-block"></span>';
-                }
-                else {
-                    html += '<span class="inline-block"></span>';
-                }
-                html += '</li>';
-                $(".nav-list").append(html);
-            }
-        });
-    };
+    
 
     module.exports = ObjectJS;
 });

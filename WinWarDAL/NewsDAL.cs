@@ -30,7 +30,7 @@ namespace WinWarDAL
         public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)
         {
             SqlParameter[] paras = { 
-                                       new SqlParameter("@NewsCode",SqlDbType.Int),
+                                       new SqlParameter("@NewsCode",SqlDbType.BigInt),
                                        new SqlParameter("@KeyWords",keyWords),
                                        new SqlParameter("@PageSize",pageSize),
                                        new SqlParameter("@TypeID",typeid),

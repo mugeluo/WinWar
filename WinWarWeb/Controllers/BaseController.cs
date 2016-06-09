@@ -11,7 +11,7 @@ namespace WinWarWeb.Controllers
         //
         // GET: /Base/
 
-        public int pageSize = 10;
+        public int pageSize = 15;
 
         public Dictionary<string, Object> jsonResult = new Dictionary<string, object>();
 

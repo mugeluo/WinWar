@@ -58,7 +58,7 @@
 }
 
 .content {
-    margin:0px 24px 50px 24px;
+    margin:0px 24px 120px 24px;
 }
 
 .content .news{
@@ -74,6 +74,7 @@
 }
 .news  div, .news  span {
     color:#c9cdd1;
+    vertical-align:top;
 }
 .news .news-title {
     color:#333!important;
@@ -92,6 +93,10 @@
     margin-bottom:5px;
     padding-bottom:5px;
     border-bottom:1px solid #eee; 
+}
+.news .icon {
+    max-width:16px;
+    max-height:16px;
 }
 
 .menu {
@@ -113,9 +118,12 @@
     cursor:pointer;
 }
 .menu-list .iconfont {
-    font-size:22px;
-    color:#666;
     padding-bottom:5px;
+}
+.menu-list .icon{
+    max-width:26px;
+    max-height:26px;
+
 }
 .menu-list .active {
     color:#4A98E7!important;
@@ -146,7 +154,7 @@
     margin-left:10px;
 }
 .overlay-search input {
-    width:200px;
+    width:70%;
     border:none;
     padding:2px 0;
     color:#9d9d9d;

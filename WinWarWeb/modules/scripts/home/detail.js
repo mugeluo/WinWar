@@ -2,35 +2,35 @@
     var Global = require("global");
     var DoT = require("dot");
 
+    var Paras = {
+        id: 0,
+        isAdd: 1,
+        isCollect: 0,
+        isPraise:0,
+        content:''
+    };
+
     var ObjectJS = {};
 
-    ObjectJS.init = function (newsMain) {
+    ObjectJS.init = function (id, newsMain, isCollect, isPraise) {
+        Paras.id = id;
+        Paras.isCollect = isCollect;
+        Paras.isPraise = isPraise;
         newsMain=newsMain.replace(/&quot;/g, '"');
-        $("#newsMain").html( newsMain );
+        $("#newsMain").html(newsMain);
+
         ObjectJS.bindEvent();
 
-        //ObjectJS.getList();
+        ObjectJS.getNewsComments();
     };
 
     ObjectJS.bindEvent = function () {
-        //$(".nav li .nav-item").click(function () {
-        //    if (!$(this).hasClass("active")) {
-        //        $(this).parent().siblings().find(".nav-item").removeClass("active").next().removeClass("inline-block");
-        //        $(this).addClass("active").next().addClass("inline-block");
-        //    }
-        //});
 
-        //$(".menu li").click(function () {
-        //    if (!$(this).hasClass("active")) {
-        //        $(this).siblings().removeClass("active").find(".iconfont").css("color", "#666");
-        //        $(this).addClass("active").find(".iconfont").css("color", "#4A98E7");
-        //    }
-        //});
         $(".overlay").click(function (e) {
             
         });
 
-        $("#btn-add-reply").click(function () {
+        $("#li-addComment").click(function () {
             $('.overlay').show();
         });
 
@@ -38,6 +38,24 @@
             $('.overlay').hide();
         });
 
+        $("#btn-addComment").click(function () {
+            Paras.content = $("#comment-msg").val();
+            if (Paras.content == '') {
+                return false;
+            }
+
+            ObjectJS.addNewsComment();
+        });
+
+        $("#addNewsCollectCount").click(function () {
+            Paras.isAdd = Paras.isCollect == 1 ? 0 : 1;
+            ObjectJS.addNewsCollectCount();
+        });
+
+        $("#addNewsPraiseCount").click(function () {
+            Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
+            ObjectJS.addNewsPraiseCount();
+        });
         //ObjectJS.bindNav();
     };
 
@@ -75,18 +93,73 @@
         });
     }
 
-    ObjectJS.getList = function () {
-        var items = [];
-        for (var i = 0; i < 10; i++) {
-            items.push(new Object());
-        }
-        DoT.exec("template/home/news-list.html", function (template) {
-            var innerhtml = template(items);
-            innerhtml = $(innerhtml);
+    ObjectJS.getNewsComments = function () {
+        
+        Global.post("/Home/GetNewsComments", Paras, function (data) {
+            var items = data.items;
 
-            $(".content ul").append(innerhtml);
-            innerhtml.fadeIn(400);
-            
+            DoT.exec("template/home/reply-list.html", function (template) {
+                var innerhtml = template(items);
+                innerhtml = $(innerhtml);
+
+                $(".reply-list ul").append(innerhtml);
+                innerhtml.fadeIn(400);
+
+            });
+        });
+    }
+
+    ObjectJS.addNewsComment = function () {
+        Global.post("/Home/AddNewsComment", Paras, function (data) {
+            if (data.result > 0) {
+                alert("评论成功");
+
+                $("#comment-msg").val('');
+                $('.overlay').hide();
+
+            }
+        });
+    }
+
+    ObjectJS.addNewsCollectCount = function () {
+        Global.post("/Home/AddNewsCollectCount", Paras, function (data) {
+            if (data.result > 0) {
+                if (Paras.isAdd == 1) {
+                    alert("收藏成功");
+                    Paras.isCollect = 1;
+
+                    $("#addNewsCollectCount").find("img").attr("src", "/modules/images/collect_color.png");
+                    $("#addNewsCollectCount").find("span").html("取消收藏");
+                }
+                else {
+                    alert("取消收藏");
+                    Paras.isCollect = 0;
+
+                    $("#addNewsCollectCount").find("img").attr("src", "/modules/images/collect.png");
+                    $("#addNewsCollectCount").find("span").html("收藏");
+                }
+            }
+        });
+    }
+
+    ObjectJS.addNewsPraiseCount = function () {
+        Global.post("/Home/AddNewsPraiseCount", Paras, function (data) {
+            if (data.result > 0) {
+                if (Paras.isAdd) {
+                    alert("点赞成功");
+                    Paras.isPraise = 1;
+
+                    $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like_color.png");
+                    $("#addNewsPraiseCount").find(".praise-title").html("取消赞");
+                }
+                else {
+                    alert("取消点赞");
+                    Paras.isPraise = 0;
+
+                    $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like.png");
+                    $("#addNewsPraiseCount").find(".praise-title").html("赞");
+                }
+            }
         });
     }
     module.exports = ObjectJS;

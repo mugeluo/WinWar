@@ -142,6 +142,9 @@
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\user\index.css" />
     <Content Include="modules\images\browse.png" />
+    <Content Include="modules\images\collect.png" />
+    <Content Include="modules\images\collect_color.png" />
+    <Content Include="modules\images\comment.png" />
     <Content Include="modules\images\ico-loading.gif" />
     <Content Include="modules\images\information.png" />
     <Content Include="modules\images\information_color.png" />
@@ -167,6 +170,7 @@
     <Content Include="modules\plug\verify.js" />
     <Content Include="modules\scripts\home\detail.js" />
     <Content Include="modules\template\home\news-list.html" />
+    <Content Include="modules\template\home\reply-list.html" />
     <Content Include="Scripts\jquery-1.11.1.js" />
     <Content Include="Scripts\sea-config.js" />
     <Content Include="Scripts\sea.js" />

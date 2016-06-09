@@ -109,7 +109,7 @@ namespace WinWarBusiness
         /// <param name="pageIndex"></param>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public List<NewsCommentEntity> GetNewsComments(int newsCode, int pageSize, int userid, ref long id)
+        public List<NewsCommentEntity> GetNewsComments(long newsCode, int pageSize, int userid, ref long id)
         {
             List<NewsCommentEntity> list = new List<NewsCommentEntity>();
             DataTable dt = NewsDAL.BaseDAL.GetNewsComments(newsCode, pageSize, userid, ref id);
@@ -117,6 +117,8 @@ namespace WinWarBusiness
             {
                 NewsCommentEntity model = new NewsCommentEntity();
                 model.FillData(dr);
+
+                list.Add(model);
             }
             return list;
         }
@@ -142,7 +144,7 @@ namespace WinWarBusiness
         /// <param name="isAdd">true 点赞；false 取消点赞</param>
         /// <param name="userid">用户ID</param>
         /// <returns></returns>
-        public bool AddNewsPraiseCount(int newsCode, bool isAdd, int userid)
+        public bool AddNewsPraiseCount(long newsCode, bool isAdd, int userid)
         {
             return NewsDAL.BaseDAL.AddNewsPraiseCount(newsCode, isAdd, userid);
         }
@@ -154,7 +156,7 @@ namespace WinWarBusiness
         /// <param name="isAdd">true 点赞；false 取消点赞</param>
         /// <param name="userid">用户ID</param>
         /// <returns></returns>
-        public bool AddNewsCollectCount(int newsCode, bool isAdd, int userid)
+        public bool AddNewsCollectCount(long newsCode, bool isAdd, int userid)
         {
             return NewsDAL.BaseDAL.AddNewsCollectCount(newsCode, isAdd, userid);
         }
@@ -170,7 +172,7 @@ namespace WinWarBusiness
         /// <param name="replyUserID"></param>
         /// <param name="replyUserName"></param>
         /// <returns></returns>
-        public bool AddNewsComment(string content, int newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
+        public bool AddNewsComment(string content, long newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
         {
             return NewsDAL.BaseDAL.AddNewsComment(content, newsCode, userid,userName,replyid,replyUserID,replyUserName);
         }

@@ -58,10 +58,10 @@ namespace WinWarDAL
 
         }
 
-        public DataTable GetNewsComments(int newsCode, int pageSize, int userid, ref long id)
+        public DataTable GetNewsComments(long newsCode, int pageSize, int userid, ref long id)
         {
             SqlParameter[] paras = { 
-                                       new SqlParameter("@ID",SqlDbType.Int),
+                                       new SqlParameter("@ID",SqlDbType.BigInt),
                                        new SqlParameter("@NewsCode",newsCode),
                                        new SqlParameter("@PageSize",pageSize),
                                        new SqlParameter("@UserID",userid)
@@ -84,27 +84,27 @@ namespace WinWarDAL
             return ExecuteNonQuery("update NEWS_MAIN set View_Count=View_Count+1 where NEWS_UNI_CODE=@NEWS_UNI_CODE", paras, CommandType.Text) > 0;
         }
 
-        public bool AddNewsPraiseCount(int newsCode, bool isAdd, int userid)
+        public bool AddNewsPraiseCount(long newsCode, bool isAdd, int userid)
         {
             SqlParameter[] paras = { 
-                                     new SqlParameter("@NEWS_UNI_CODE",newsCode),
+                                     new SqlParameter("@NewsCode",newsCode),
                                      new SqlParameter("@IsAdd",isAdd ? 1 : 0),
                                      new SqlParameter("@UserID",userid)
                                    };
             return ExecuteNonQuery("P_AddNewsPraiseCount", paras, CommandType.StoredProcedure) > 0;
         }
 
-        public bool AddNewsCollectCount(int newsCode, bool isAdd, int userid)
+        public bool AddNewsCollectCount(long newsCode, bool isAdd, int userid)
         {
             SqlParameter[] paras = { 
-                                     new SqlParameter("@NEWS_UNI_CODE",newsCode),
+                                     new SqlParameter("@NewsCode",newsCode),
                                      new SqlParameter("@IsAdd",isAdd ? 1 : 0),
                                      new SqlParameter("@UserID",userid)
                                    };
             return ExecuteNonQuery("P_AddNewsCollectCount", paras, CommandType.StoredProcedure) > 0;
         }
 
-        public bool AddNewsComment(string content, int newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
+        public bool AddNewsComment(string content, long newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@NewsCode",newsCode),

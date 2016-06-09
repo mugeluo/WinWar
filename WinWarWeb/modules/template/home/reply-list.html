@@ -1,0 +1,22 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<li class="reply-item">
+    <div class="reply-author">
+        <div class="reply-img left">
+                <img src="/modules/images/news.jpg" />
+        </div>
+        <div class="reply-detail left">
+            <div class="reply-name">作者</div>
+            <div class="reply-time">{%=item.Create_Date.toDate("MM-dd hh:mm")%}</div>
+        </div>
+        <div class="reply-add right">
+            <span class="iconfont" title="讨论数"><img class="icon" src="/modules/images/reply_min.png" /></span>
+            <span class="mLeft5 reply-count">{%=item.Reply_Count%}</span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="reply-content">{%=item.Content%}</div>
+</li>
+{% } %}

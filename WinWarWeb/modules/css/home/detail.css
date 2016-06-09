@@ -95,12 +95,11 @@ font-size:16px;
     font-size: 42px;
 }
 
-.detail-reply {
+.detail-replys {
     padding:10px;
     background-color:#f2f4f8;
-    margin-bottom:50px;
+    margin-bottom:70px;
 }
-
 .reply-header {
     margin-top:5px;
     
@@ -117,6 +116,10 @@ font-size:16px;
 .reply-item {
     margin-top:10px;
     border-bottom:1px solid #eee;
+}
+.reply-item .icon {
+     max-width:16px;
+    max-height:16px;
 }
 .reply-item .reply-author .reply-img img {
     width:30px;
@@ -141,6 +144,7 @@ font-size:16px;
 }
 .reply-item .reply-author .reply-count {
      color:#aaa;
+     vertical-align:top;
 }
 .reply-item .reply-content{
     margin:10px 0;
@@ -180,16 +184,20 @@ font-size:16px;
     position:fixed;
     bottom:0px;
     width:100%;
-    padding:20px 0;
+    
     background-color:#fff;
 }
 .detail-reply-msg {
     margin:0 20px;
     margin-right:50px;
+    padding-top:20px;
 }
 .reply-msg {
+    width:100%;
+    border:none;
     margin-right:50px;
     line-height:20px;
+    height:auto;
     outline:none;
     color:#666;
     font-size:16px;

@@ -13,7 +13,7 @@
     <script type="text/javascript">
         $(function () {
             seajs.use(["scripts/home/detail"], function (obj) {
-                obj.init('@NewsMain');
+                obj.init('@Item.News_Uni_Code','@NewsMain','@Item.Is_Collect','@Item.Is_Praise');
             });
         });
     </script>
@@ -42,92 +42,67 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="detail-box" id="newsMain">
-      @*  @{
-        <script type="text/javascript">
-            document.getElementById("newsMain").innerHTML = decodeURI('@(Item.Html_Txt)');
-        </script>      
-     }*@
-    </div>
+    <div class="detail-box" id="newsMain"></div>
    
 </div>
 
-<div class="detail-reply">
+<div class="detail-replys">
     <div class="reply-header">
         <div class="reply-title">评论</div>
     </div>
     <div class="reply-list">
-        <ul>
-            <li class="reply-item">
-                <div class="reply-author">
-                    <div class="reply-img left">
-                         <img src="/modules/images/news.jpg" />
-                    </div>
-                    <div class="reply-detail left">
-                        <div class="reply-name">作者</div>
-                        <div class="reply-time">2015-1-1</div>
-                    </div>
-                    <div class="reply-add right">
-                        <span class="iconfont">&#xe610;</span>
-                        <span class="mLeft5 reply-count">111</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="reply-content">上去大约30岁，个头1米65左右，棕色长发，身穿无袖紧身上衣和黑色牛仔裤，还穿了一双多在冬天穿着的高跟短皮靴。康诺丽提</div>
-            </li>
-            <li class="reply-item">
-                <div class="reply-author">
-                    <div class="reply-img left">
-                         <img src="/modules/images/news.jpg" />
-                    </div>
-                    <div class="reply-detail left">
-                        <div class="reply-name">作者</div>
-                        <div class="reply-time">2015-1-1</div>
-                    </div>
-                    <div class="reply-add right">
-                        <span class="iconfont">&#xe610;</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="reply-content">上去大约30岁，个头1米65左右，棕色长发，身穿无袖紧身上衣和黑色牛仔裤，还穿了一双多在冬天穿着的高跟短皮靴。康诺丽提</div>
-            </li>
-            <li class="reply-item">
-                <div class="reply-author">
-                    <div class="reply-img left">
-                         <img src="/modules/images/news.jpg" />
-                    </div>
-                    <div class="reply-detail left">
-                        <div class="reply-name">作者</div>
-                        <div class="reply-time">2015-1-1</div>
-                    </div>
-                    <div class="reply-add right">
-                        <span class="iconfont">&#xe610;</span>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <div class="reply-content">上去大约30岁，个头1米65左右，棕色长发，身穿无袖紧身上衣和黑色牛仔裤，还穿了一双多在冬天穿着的高跟短皮靴。康诺丽提</div>
-            </li>
-        </ul>
+        <ul></ul>
+        <div class="clear"></div>
     </div>
 </div>
 
 <div class="menu">
     <ul class="menu-list">
-        <li id="btn-add-reply"> 
-            <div class="iconfont" >&#xe600;</div>
+        <li id="li-addComment"> 
+             <div class="iconfont">
+                <img class="icon" data-icon="comment" src="/modules/images/comment.png" />
+            </div>
             写评论
         </li>
-        <li>
-            <div class="iconfont">&#xe63b;</div>
-            收藏
+        <li id="addNewsCollectCount">
+            @{
+                if(Item.Is_Collect==0){
+                 <div class="iconfont">
+                    <img class="icon" data-icon="collect" src="/modules/images/collect.png" />
+                </div>
+                <span>收藏</span>
+                }
+                else
+                {
+                    <div class="iconfont">
+                        <img class="icon" data-icon="collect" src="/modules/images/collect_color.png" />
+                    </div>
+                    <span>取消收藏</span>
+                }
+            }
+        </li>
+        <li id="addNewsPraiseCount">
+             @{
+                if(Item.Is_Praise==0){
+                    <div class="iconfont">
+                    <img class="icon" data-icon="like" src="/modules/images/like.png" />
+                    </div>
+                    <span>@Item.Praise_Count</span><span class="mLeft5 praise-title">赞</span>
+                    }
+                    else
+                    {
+                     <div class="iconfont">
+                    <img class="icon" data-icon="like" src="/modules/images/like_color.png" />
+                    </div>
+                    <span>@Item.Praise_Count</span><span class="mLeft5 praise-title">取消赞</span>
+                    }
+                }                            
         </li>
         <li>
-            <div class="iconfont">&#xe633;</div>
-            <span>12</span>赞
-        </li>
-        <li>
-            <div class="iconfont" >&#xe601;</div>
-            <span>12</span>评论
+             <div class="iconfont">
+                <img class="icon" data-icon="reply" src="/modules/images/reply.png" />
+            </div>
+            <span>@Item.Comment_Count</span>评论
         </li>
     </ul>
     <div class="clear"></div>
@@ -135,10 +110,10 @@
 
 <div class="overlay">
     <div class="detail-reply-box">
-        <div class="detail-reply-msg" contenteditable="true" placeholder="发表评论">
-            <div class="reply-msg">发表评论</div>
+        <div class="detail-reply-msg">
+            <textarea class="reply-msg" placeholder="发表评论" id="comment-msg" onpropertychange="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';" oninput="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';"></textarea>
         </div>
-         <div class="detail-reply-btn">
+         <div class="detail-reply-btn" id="btn-addComment">
              发送
         </div>
     </div>

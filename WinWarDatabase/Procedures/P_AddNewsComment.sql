@@ -28,12 +28,12 @@ AS
 if(@ReplyID=0)
 begin
 	insert into NEWS_Comment([User_ID],[User_Name],NEWS_UNI_CODE,[Type],Content,Praise_Count,Reply_Count,Reply_ID,Reply_User_ID,Reply_User_Name,Create_Date)
-	values(@UserID,@UserName,@NewsCode,@Content,1,0,0,0,0,'',getdate())
+	values(@UserID,@UserName,@NewsCode,1,@Content,0,0,0,0,'',getdate())
 end
 else
 begin
 	insert into NEWS_Comment([User_ID],[User_Name],NEWS_UNI_CODE,[Type],Content,Praise_Count,Reply_Count,Reply_ID,Reply_User_ID,Reply_User_Name,Create_Date)
-	select @UserID,@UserName,@NewsCode,@Content,2,0,0,@ReplyID,@ReplyUserID,@ReplyUserName,getdate() from NEWS_Comment where ID=@ReplyID
+	select @UserID,@UserName,@NewsCode,2,@Content,0,0,@ReplyID,@ReplyUserID,@ReplyUserName,getdate() from NEWS_Comment where ID=@ReplyID
 
 	Update NEWS_Comment set Reply_Count=Reply_Count+1 where ID=@ReplyID
 end

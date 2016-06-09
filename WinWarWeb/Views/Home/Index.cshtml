@@ -1,6 +1,5 @@
 ﻿@{
     ViewBag.Title = "赢 VAR";
-    var NewsTypes = (List<WinWarEntity.NewsTypeEntity>)ViewBag.NewsTypes;
 }
 @section css{
     <link href="/modules/css/home/index.css" rel="stylesheet" />
@@ -10,38 +9,12 @@
     <script src="/modules/plug/touchSwipe/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/home/index"], function (obj) {
-            obj.init();
+            obj.init('@ViewBag.ID');
         });
     </script>
 }
 <div class="nav">
-    <ul class="nav-list">
-       @* <li><div class="nav-item active">头条</div>
-            <span class="select inline-block"></span>
-        </li>
-        <li><div class="nav-item">专题</div>
-            <span class="select"></span>
-        </li>
-        <li><div class="nav-item">研报</div>
-            <span class="select"></span>
-        </li>*@
-       @* @{
-            for (var i = 0; i < NewsTypes.Count;i++ )
-            {
-                var type = NewsTypes[i];
-                <li><div class="nav-item active">@type.News_Type_Name2</div>
-                @{
-                    if(i==0){
-                    <span class="select inline-block"></span>
-                    }
-                    else{
-                      <span class="inline-block"></span>
-                    }
-                }
-                </li>
-            }
-          }*@
-    </ul>
+    <ul class="nav-list"></ul>
     <div class="clear"></div>
 </div>
 

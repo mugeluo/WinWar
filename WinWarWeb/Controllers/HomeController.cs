@@ -12,11 +12,9 @@ namespace WinWarWeb.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index()
+        public ActionResult Index(string  id)
         {
-            var NewsTypes = NewsBusiness.BaseBusiness.GetNewsTypeByParentID(16);
-            ViewBag.NewsTypes = NewsTypes;
-
+            ViewBag.ID = id ?? "16";
             return View();
         }
 
@@ -37,11 +35,11 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult GetNews(long lastCode)
+        public JsonResult GetNews(string keywords, int typeID, long lastNewsCode)
         {
-            var items = NewsBusiness.BaseBusiness.GetNews(string.Empty, 0, pageSize, 0, ref lastCode);
+            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, 0, ref lastNewsCode);
             jsonResult.Add("items", items);
-            jsonResult.Add("lastCode", lastCode);
+            jsonResult.Add("lastNewsCode", lastNewsCode);
 
             return new JsonResult()
             {
@@ -49,6 +47,8 @@ namespace WinWarWeb.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+
+
         #endregion
     }
 }

@@ -10,88 +10,72 @@
         content:''
     };
 
+    var Comment = {
+        News_Uni_Code: 0,
+        Content: '',
+        Reply_ID:0,
+        Reply_User_ID: 0,
+        Reply_User_Name: ''
+    };
+
     var ObjectJS = {};
 
     ObjectJS.init = function (id, newsMain, isCollect, isPraise) {
         Paras.id = id;
+        Comment.News_Uni_Code = id;
         Paras.isCollect = isCollect;
         Paras.isPraise = isPraise;
-        newsMain=newsMain.replace(/&quot;/g, '"');
-        $("#newsMain").html(newsMain);
+        //newsMain = newsMain.replace(/&quot;/g, '"');
+        //$("#newsMain").append(newsMain);
 
+        var $newsimg = $(".header-newsimg img");
+        if ($newsimg.length == 1) {
+            if ($newsimg.width() > $newsimg.height()) {
+                $newsimg.css("height", $(window).width());
+            }
+            else {
+                $newsimg.css("width", $(window).width());
+            }
+        }
         ObjectJS.bindEvent();
 
         ObjectJS.getNewsComments();
     };
 
     ObjectJS.bindEvent = function () {
-
         $(".overlay").click(function (e) {
-            
+            if (!$(e.target).parents().hasClass("detail-reply-msg") && !$(e.target).hasClass("detail-reply-msg")) {
+                $(".overlay").hide();
+            }
         });
 
         $("#li-addComment").click(function () {
             $('.overlay').show();
         });
 
-        $(".overlay-cancel").click(function () {
-            $('.overlay').hide();
-        });
-
+        //添加评论
         $("#btn-addComment").click(function () {
-            Paras.content = $("#comment-msg").val();
-            if (Paras.content == '') {
+            Comment.Content = $("#comment-msg").val();
+            if (Comment.Content == '') {
                 return false;
             }
 
             ObjectJS.addNewsComment();
         });
 
+        //收藏
         $("#addNewsCollectCount").click(function () {
             Paras.isAdd = Paras.isCollect == 1 ? 0 : 1;
             ObjectJS.addNewsCollectCount();
         });
 
+        //喜欢
         $("#addNewsPraiseCount").click(function () {
             Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
             ObjectJS.addNewsPraiseCount();
         });
-        //ObjectJS.bindNav();
     };
 
-    ObjectJS.bindNav = function () {
-        var n = $('.nav-list li').size();
-        var wh = 100 * n + "%";
-        $('.nav-list').width(wh);
-        var lt = (100 / n / 3);
-        var lt_li = lt + "%";
-        $('.nav-list li').width(lt_li);
-        var y = 0;
-        var w = n / 2;
-
-        $(".nav-list").swipe({
-            swipeLeft: function () {
-                alert(111);
-                if (y == -lt * w) {
-                    alert('已经到最后页');
-                } else {
-                    y = y - lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-            },
-            swipeRight: function () {
-                if (y == 0) {
-                    alert('已经到第一页')
-                } else {
-                    y = y + lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-
-            }
-        });
-    }
 
     ObjectJS.getNewsComments = function () {
         
@@ -110,11 +94,22 @@
     }
 
     ObjectJS.addNewsComment = function () {
-        Global.post("/Home/AddNewsComment", Paras, function (data) {
+        Global.post("/Home/AddNewsComment",{comment:JSON.stringify(Comment)}, function (data) {
             if (data.result > 0) {
                 alert("评论成功");
+                var items = data.items;
+                DoT.exec("template/home/reply-list.html", function (template) {
+                    var innerhtml = template(items);
+                    innerhtml = $(innerhtml);
+
+                    $(".reply-list ul").prepend(innerhtml);
+                    innerhtml.fadeIn(400);
+
+                });
 
                 $("#comment-msg").val('');
+                Comment.Content = '';
+                $("#Comment_Count").html(parseInt( $("#Comment_Count").html())+1 );
                 $('.overlay').hide();
 
             }

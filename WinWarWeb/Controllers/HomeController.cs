@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using System.Web.Script.Serialization;
 using WinWarBusiness;
+using WinWarEntity;
 namespace WinWarWeb.Controllers
 {
     public class HomeController : BaseController
@@ -71,11 +72,22 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult AddNewsComment(long id, string content)
+        public JsonResult AddNewsComment(string comment)
         {
-            bool flag = NewsBusiness.BaseBusiness.AddNewsComment(content, id, userid, "", 0, 0, "");
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            NewsCommentEntity model = serializer.Deserialize<NewsCommentEntity>(comment);
+
+            bool flag = NewsBusiness.BaseBusiness.AddNewsComment(model.Content, model.News_Uni_Code, userid,model.User_Name,
+                model.Reply_ID, model.Reply_User_ID, model.Reply_User_Name);
             jsonResult.Add("result", flag?1:0);
 
+            if (flag) {
+                List<NewsCommentEntity> items = new List<NewsCommentEntity>();
+                model.Create_Date = DateTime.Now;
+                model.Reply_Count = 1;
+                items.Add(model);
+                jsonResult.Add("items",items);
+            }
             return new JsonResult()
             {
                 Data = jsonResult,

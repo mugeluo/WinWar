@@ -21,12 +21,14 @@ CREATE PROCEDURE [dbo].[P_GetNewsDetail]
 AS
 
 if(@UserID<>0)
-	select ｎ.*,isnull(f.Is_Praise,0) Is_Praise,isnull(Is_Collect,0) Is_Collect from NEWS_MAIN ｎ left join  NEWS_CONTENT c on ｎ.News_Uni_Code=c.News_Uni_Code 
+	select ｎ.*,isnull(f.Is_Praise,0) Is_Praise,isnull(Is_Collect,0) Is_Collect,c.HTML_TXT from NEWS_MAIN ｎ left join  NEWS_CONTENT c on ｎ.News_Uni_Code=c.News_Uni_Code 
 	left join  NEWS_Favorite f on ｎ.News_Uni_Code=f.News_Uni_Code and f.[User_ID]=@UserID
 	where ｎ.News_Uni_Code=@NewsCode and n.IS_ISSUE='1'
 else
 	select ｎ.*,c.HTML_TXT from NEWS_MAIN ｎ left join  NEWS_CONTENT c on ｎ.News_Uni_Code=c.News_Uni_Code
 	where ｎ.News_Uni_Code=@NewsCode and n.IS_ISSUE='1'
+
+update NEWS_MAIN set View_Count=View_Count+1 where News_Uni_Code=@NewsCode
  
 
 

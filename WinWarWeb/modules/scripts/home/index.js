@@ -36,6 +36,12 @@
             }
         });
 
+        $(".overlay").click(function (e) {
+            if (!$(e.target).parents().hasClass("overlay-search") && !$(e.target).hasClass("overlay-search")) {
+                $(".overlay").hide();
+            }
+        });
+
         //菜单切换
         $(".menu-list .item").click(function () {
             var _this=$(this);
@@ -55,8 +61,7 @@
             }
         });
 
-        
-
+        //弹出 输入关键字层
         $(".search").click(function () {
             $('.overlay').show();
 //            $('.overlay').css("height", document.body.scrollTop
@@ -64,12 +69,30 @@
 
         });
 
-        $(".overlay-cancel").click(function () {
+        //关键字查询
+        $("#btn-search").click(function () {
             $('.overlay').hide();
-        });
 
+            Paras.keywords = $("#keywords").val();
+            if (Paras.keywords != '') {
+                $("#keywords").val('');
+                $(".overlay-keywords").show();
+                $("#keywords-show").val(Paras.keywords);
+
+                ObjectJS.getNews();
+            }
+        });
+        //取消关键字查询
+        $("#btn-cancel").click(function () {
+            $('.overlay-keywords').hide();
+            $("#keywords-show").val('');
+
+            Paras.keywords = '';
+            ObjectJS.getNews();
+        });
         //ObjectJS.bindNav();
 
+        //初始化
         if (Paras.parentTypeID != 16) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
@@ -163,7 +186,6 @@
             }
         });
     }
-
 
     ObjectJS.getNews = function () {
         $(".data-loading").show();

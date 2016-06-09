@@ -172,7 +172,7 @@ namespace WinWarBusiness
         /// <param name="replyUserID"></param>
         /// <param name="replyUserName"></param>
         /// <returns></returns>
-        public bool AddNewsComment(string content, long newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
+        public bool AddNewsComment(string content, long newsCode, int userid, string userName, long replyid, long replyUserID, string replyUserName)
         {
             return NewsDAL.BaseDAL.AddNewsComment(content, newsCode, userid,userName,replyid,replyUserID,replyUserName);
         }

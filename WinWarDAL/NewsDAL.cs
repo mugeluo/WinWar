@@ -104,7 +104,7 @@ namespace WinWarDAL
             return ExecuteNonQuery("P_AddNewsCollectCount", paras, CommandType.StoredProcedure) > 0;
         }
 
-        public bool AddNewsComment(string content, long newsCode, int userid, string userName, int replyid, int replyUserID, string replyUserName)
+        public bool AddNewsComment(string content, long newsCode, int userid, string userName, long replyid, long replyUserID, string replyUserName)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@NewsCode",newsCode),

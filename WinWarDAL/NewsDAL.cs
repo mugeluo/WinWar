@@ -69,7 +69,10 @@ namespace WinWarDAL
             paras[0].Value = id;
             paras[0].Direction = ParameterDirection.InputOutput;
             DataTable dt = GetDataTable("P_GetNewsComments", paras, CommandType.StoredProcedure);
-            id = Convert.ToInt64(paras[0].Value);
+            if (paras[0].Value != DBNull.Value)
+            {
+                id = Convert.ToInt64(paras[0].Value);
+            }
             return dt;
         }
         #endregion

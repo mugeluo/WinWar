@@ -23,20 +23,19 @@ CREATE PROCEDURE [dbo].[P_GetNewsComments]
 AS
 
 declare @CommandSQL nvarchar(4000)
---declare @Temp table(ID bigint,[User_ID] bigint,[User_Name] nvarchar(200),Content nvarchar(4000),Reply_Count int,Praise_Count int,Create_Date datetime)  	
+declare @Temp table(ID bigint,[User_ID] bigint,[User_Name] nvarchar(200),Content nvarchar(4000),Reply_Count int,Praise_Count int,Create_Date datetime)  	
  if(@ID=0)
  begin
 	set @CommandSQL='select top '+str(@PageSize)+' ID,[User_ID],[User_Name],Content,Reply_Count,Praise_Count,Create_Date from  NEWS_Comment where [Type]=1 and  News_Uni_Code='+str(@NewsCode)+' order by ID desc ' 
  end
  else
  begin
-	set @CommandSQL='select top '+str(@PageSize)+' ID,[User_ID],[User_Name],Content,Reply_Count,Praise_Count,Create_Datefrom  NEWS_Comment where [Type]=1 News_Uni_Code='+str(@NewsCode)+' and ID<'+str(@ID)+' order by ID desc '
+	set @CommandSQL='select top '+str(@PageSize)+' ID,[User_ID],[User_Name],Content,Reply_Count,Praise_Count,Create_Date from  NEWS_Comment where [Type]=1 and News_Uni_Code='+str(@NewsCode)+' and ID<'+str(@ID)+' order by ID desc '
  end
 
- exec (@CommandSQL)
--- insert into @Temp exec (@CommandSQL)
+ insert into @Temp exec (@CommandSQL)
 
 --select t.*,isnull(f.ID,0) Is_Praise from @Temp t left join  Comment_Favorite f on t.ID=f.Comment_ID and f.[User_ID]=@UserID
- 
-select @NewsCode=min(ID) from @Temp
+ select * from @Temp
+select @ID=min(ID) from @Temp
 

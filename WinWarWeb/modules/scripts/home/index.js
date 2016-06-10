@@ -27,7 +27,7 @@
         //滚动加载 新闻列表
         $(window).bind("scroll", function () {
             var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-            if (bottom <= 50) {
+            if (bottom <= 20) {
                 setTimeout(function () {
                     Paras.pageIndex++;
                     ObjectJS.getNews();
@@ -204,7 +204,7 @@
     }
 
     ObjectJS.bindNews = function (data) {
-        $(".data-loading").hide();
+        
         if (Paras.pageIndex == 1) {
             $(".content ul").html('');
         }
@@ -212,12 +212,13 @@
         Paras.lastNewsCode = data.lastNewsCode;
 
         DoT.exec("template/home/news-list.html", function (template) {
+            $(".data-loading").hide();
+
             var innerhtml = template(items);
             innerhtml = $(innerhtml);
 
             $(".content ul").append(innerhtml);
             innerhtml.fadeIn(400);
-
         });
     }
 

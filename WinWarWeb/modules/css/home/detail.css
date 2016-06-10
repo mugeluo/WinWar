@@ -206,3 +206,14 @@ font-size:16px;
     font-size:18px;
     cursor:pointer;
 }
+.load-more {
+    line-height:40px;
+    text-align:center;
+    font-size:14px;
+    cursor:pointer;
+}
+.no-data {
+    line-height:60px;
+    text-align:center;
+    font-size:14px;
+}

@@ -4,10 +4,11 @@
 
     var Paras = {
         id: 0,
+        lastCommentID: 0,
+        pageSize:5,
         isAdd: 1,
         isCollect: 0,
-        isPraise:0,
-        content:''
+        isPraise:0
     };
 
     var Comment = {
@@ -53,6 +54,11 @@
             $('.overlay').show();
         });
 
+        //加载更多新闻讨论
+        $(".load-more").click(function () {
+            ObjectJS.getNewsComments();
+        });
+
         //添加评论
         $("#btn-addComment").click(function () {
             Comment.Content = $("#comment-msg").val();
@@ -78,18 +84,32 @@
 
 
     ObjectJS.getNewsComments = function () {
-        
+        $(".data-loading").show();
         Global.post("/Home/GetNewsComments", Paras, function (data) {
+            $(".data-loading").hide();
+
+            Paras.lastCommentID = data.lastCommentID;
             var items = data.items;
+            var len=items.length;
+            if (len > 0) {
+                $(".reply-list ul li.no-data").remove();
+                DoT.exec("template/home/reply-list.html", function (template) {
+                    var innerhtml = template(items);
+                    innerhtml = $(innerhtml);
 
-            DoT.exec("template/home/reply-list.html", function (template) {
-                var innerhtml = template(items);
-                innerhtml = $(innerhtml);
+                    $(".reply-list ul").append(innerhtml);
+                    innerhtml.fadeIn(400);
 
-                $(".reply-list ul").append(innerhtml);
-                innerhtml.fadeIn(400);
+                });
+            }
 
-            });
+            if (len == Paras.pageSize) {
+                $(".load-more").show();
+            }
+            else {
+                $(".load-more").hide();
+            }
+
         });
     }
 
@@ -157,5 +177,6 @@
             }
         });
     }
+
     module.exports = ObjectJS;
 });

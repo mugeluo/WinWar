@@ -58,9 +58,8 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult GetNewsComments(long id)
+        public JsonResult GetNewsComments(long id,long lastCommentID,int pageSize)
         {
-            long lastCommentID = 0;
             var items = NewsBusiness.BaseBusiness.GetNewsComments(id, pageSize, userid, ref lastCommentID);
             jsonResult.Add("items", items);
             jsonResult.Add("lastCommentID", lastCommentID);

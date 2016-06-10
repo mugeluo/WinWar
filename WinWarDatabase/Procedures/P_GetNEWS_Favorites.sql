@@ -27,7 +27,7 @@ declare @Temp table(News_Uni_Code bigint,Pub_Time datetime,News_Author nvarchar(
 set @CommandSQL='select top '+str(@PageSize)+' n.News_Uni_Code,Pub_Time,News_Author,TITLE_MAIN,Pic_URL,View_Count,Comment_Count,Praise_Count,Collect_Count,
 				 REAL_SOURCE_NAME,NEWS_TYPE,TITLE_SUB,f.ID  FavoriteID from  
 				NEWS_Favorite as f join  NEWS_MAIN as n on f.NEWS_UNI_CODE=n.NEWS_UNI_CODE 
-				where n.IS_ISSUE=''1'' and f.USER_ID='+str(@UserID)
+				where n.IS_ISSUE=''1'' and f.Is_Collect=1 and f.USER_ID='+str(@UserID)
 if(@FavoriteID>0)
 	set @CommandSQL+=' and f.ID>'+str(@FavoriteID)
 

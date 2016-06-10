@@ -142,6 +142,7 @@
     <Content Include="modules\css\iconfont\iconfont.svg" />
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\user\index.css" />
+    <Content Include="modules\css\user\login.css" />
     <Content Include="modules\images\browse.png" />
     <Content Include="modules\images\collect.png" />
     <Content Include="modules\images\collect_color.png" />
@@ -166,6 +167,7 @@
     <Content Include="modules\images\show.png" />
     <Content Include="modules\images\show_color.png" />
     <Content Include="modules\images\telephone.png" />
+    <Content Include="modules\images\weixin_logo.png" />
     <Content Include="modules\plug\touchSwipe\jquery.touchSwipe.min.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\index.js" />
@@ -223,6 +225,9 @@
       <Project>{2acdc731-d10d-412a-aa62-13fce97485ac}</Project>
       <Name>WinWarEntity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

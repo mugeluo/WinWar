@@ -14,9 +14,15 @@ namespace WinWarWeb.Controllers
         long userid = 111111;
         public ActionResult Index()
         {
+            //return Redirect("/User/Login");
+
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
         #region ajax
         public JsonResult GetNewsFavorites(int pageSize, long lastFavoriteID)
         {

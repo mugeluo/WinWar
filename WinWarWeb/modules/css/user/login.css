@@ -1,0 +1,72 @@
+﻿body {
+    background-color:#f2f4f8;
+}
+
+
+.login-box {
+    margin:35px 25px;
+    
+}
+.login-form {
+    border:1px solid #eee;
+    border-radius:3px;
+    background-color:#fff;
+}
+.login-username {
+    border-bottom:1px solid #eee;
+}
+.login-form input {
+    border:none;
+    width:90%;
+    height:40px;
+    line-height:40px;
+}
+.login-btn {
+    margin-top:30px;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    background-color:#3D9EE1;
+    border-radius:3px;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+.register-btn {
+    margin-top:10px;
+    height:40px;
+    line-height:40px;
+    text-align:center;
+    background-color:#fff;
+    border-radius:3px;
+    color:#3D9EE1;
+    font-size:16px;
+    cursor:pointer;
+}
+.login-other {
+    margin-top:50px;
+    border-top:1px solid #ddd;
+}
+.other-title {
+    width:150px;
+    height:20px;
+    text-align:center;
+    background-color:#f2f4f8;
+    margin:0 auto;
+    margin-top:-10px;
+    font-size:14px;
+    color:#999;
+}
+.login-accounts {
+    height: 40px;
+    margin-top: 20px;
+    text-align: center;
+}
+.account-weixin {
+    cursor:pointer;
+}
+.account-weixin img{
+    height: 36px;
+    width: 36px;
+    border-radius: 18px;
+}

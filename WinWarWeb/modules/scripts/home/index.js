@@ -69,8 +69,7 @@
         //弹出 输入关键字层
         $(".search").click(function () {
             $('.overlay').show();
-//            $('.overlay').css("height", document.body.scrollTop
-//+ document.body.clientHeight + "px").show();
+            $("#keywords").focus();
 
         });
 
@@ -84,6 +83,8 @@
                 $(".overlay-keywords").show();
                 $("#keywords-show").val(Paras.keywords);
 
+                NoNewsDate = false;
+                $(".load-more").hide();
                 Paras.pageIndex = 1;
                 Paras.lastNewsCode = 0;
                 ObjectJS.getNews();
@@ -94,6 +95,8 @@
             $('.overlay-keywords').hide();
             $("#keywords-show").val('');
 
+            NoNewsDate = false;
+            $(".load-more").hide();
             Paras.keywords = '';
             Paras.pageIndex = 1;
             Paras.lastNewsCode = 0;
@@ -162,12 +165,12 @@
             var item = data.items[i];
             var html = '';
             if (i == 0) {
-                html += '<li><div class="nav-item active" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
+                html += '<li ><div class="nav-item active" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
                 html += '<span class="select inline-block"></span>';
                 Paras.typeID = item.News_Type_2;
             }
             else {
-                html += '<li><div class="nav-item" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
+                html += '<li ><div class="nav-item" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
                 html += '<span class="inline-block"></span>';
             }
             html += '</li>';
@@ -183,7 +186,7 @@
     }
 
     ObjectJS.bindNavClick = function () {
-        $(".nav li .nav-item").click(function () {
+        $(".nav-list li .nav-item").click(function () {
             var _this = $(this);
             if (!_this.hasClass("active")) {
                 _this.parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");
@@ -234,6 +237,7 @@
         var items = data.items;
         Paras.lastNewsCode = data.lastNewsCode;
         $(".data-loading").hide();
+   
         if (items.length > 0) {
             DoT.exec("template/home/news-list.html", function (template) {
                 var innerhtml = template(items);

@@ -85,7 +85,7 @@
         setTimeout(function () {
             _alter.fadeIn();
             _alter.remove();
-        }, 500);
+        }, 1000);
     }
 
     /*重写confirm*/

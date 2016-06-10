@@ -40,7 +40,10 @@ namespace WinWarDAL
             paras[0].Value = newsCode;
             paras[0].Direction = ParameterDirection.InputOutput;
             DataTable dt = GetDataTable("P_GetNews_Mains", paras, CommandType.StoredProcedure);
-            newsCode = Convert.ToInt64(paras[0].Value);
+            if (paras[0].Value != DBNull.Value)
+            {
+                newsCode = Convert.ToInt64(paras[0].Value);
+            }
             return dt;
 
         }
@@ -56,7 +59,10 @@ namespace WinWarDAL
             paras[0].Value = favoriteid;
             paras[0].Direction = ParameterDirection.InputOutput;
             DataTable dt = GetDataTable("P_GetNEWS_Favorites", paras, CommandType.StoredProcedure);
-            favoriteid = Convert.ToInt64(paras[0].Value);
+            if (paras[0].Value != DBNull.Value)
+            {
+                favoriteid = Convert.ToInt64(paras[0].Value);
+            }
 
             return dt;
 

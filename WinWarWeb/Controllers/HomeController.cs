@@ -45,7 +45,7 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult GetNews(string keywords, int typeID, long lastNewsCode)
+        public JsonResult GetNews(string keywords, int typeID, long lastNewsCode, int pageSize)
         {
             var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, userid, ref lastNewsCode);
             jsonResult.Add("items", items);

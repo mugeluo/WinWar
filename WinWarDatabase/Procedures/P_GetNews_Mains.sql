@@ -18,7 +18,7 @@ GO
 CREATE PROCEDURE [dbo].[P_GetNews_Mains]
 	@UserID bigint=0,
 	@KeyWords nvarchar(4000),
-	@TypeID bigint=-1,
+	@TypeID bigint,
 	@PageSize int,
 	@NewsCode bigint=0 output
 AS
@@ -29,13 +29,19 @@ declare @Temp table(News_Uni_Code bigint,Pub_Time datetime,News_Author nvarchar(
  if(@NewsCode=0)
  begin
 	set @CommandSQL='select top '+str(@PageSize)+' News_Uni_Code,Pub_Time,News_Author,TITLE_MAIN,Pic_URL,View_Count,Comment_Count,Praise_Count,Collect_Count,
-				 REAL_SOURCE_NAME,NEWS_TYPE,TITLE_SUB from  NEWS_MAIN where IS_ISSUE=''1'' order by News_Uni_Code desc ' 
+				 REAL_SOURCE_NAME,NEWS_TYPE,TITLE_SUB from  NEWS_MAIN where IS_ISSUE=''1'' ' 
  end
  else
  begin
 	set @CommandSQL='select top '+str(@PageSize)+' News_Uni_Code,Pub_Time,News_Author,TITLE_MAIN,Pic_URL,View_Count,Comment_Count,Praise_Count,Collect_Count,
-				 REAL_SOURCE_NAME,NEWS_TYPE,TITLE_SUB from  NEWS_MAIN where IS_ISSUE=''1'' and News_Uni_Code<'+str(@NewsCode)+' order by News_Uni_Code desc '
+				 REAL_SOURCE_NAME,NEWS_TYPE,TITLE_SUB from  NEWS_MAIN where IS_ISSUE=''1'' and News_Uni_Code<'+str(@NewsCode)
  end
+
+  if(@KeyWords<>'')
+	set @CommandSQL+=' and ( TITLE_MAIN like ''%'+@KeyWords+'%'' ) '
+
+ set @CommandSQL+=' and NEWS_TYPE='+str(@TypeID)
+ set @CommandSQL+=' order by News_Uni_Code desc'
 
  insert into @Temp exec (@CommandSQL)
 

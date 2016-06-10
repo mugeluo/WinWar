@@ -4,13 +4,15 @@
 
     var Paras = {
         keywords:'',
-        pageIndex:1,
+        pageIndex: 1,
+        pageSize:15,
         parentTypeID: 16,
         typeID: 0,
         lastNewsCode:0
     };
     var NavsCache = [];//新闻导航缓存
     var NewsCache = [];//新闻列表缓存
+    var NoNewsDate = false;
     var ObjectJS = {};
 
     ObjectJS.init = function (parentTypeID) {
@@ -26,14 +28,17 @@
     ObjectJS.bindEvent = function () {
         //滚动加载 新闻列表
         $(window).bind("scroll", function () {
-            var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
-            if (bottom <= 20) {
-                setTimeout(function () {
-                    Paras.pageIndex++;
-                    ObjectJS.getNews();
-                }, 500);
+            if (!NoNewsDate) {
+                var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
+                if (bottom <= 20) {
+                    setTimeout(function () {
+                        Paras.pageIndex++;
+                        ObjectJS.getNews();
+                    }, 500);
 
+                }
             }
+
         });
 
         $(".overlay").click(function (e) {
@@ -79,6 +84,8 @@
                 $(".overlay-keywords").show();
                 $("#keywords-show").val(Paras.keywords);
 
+                Paras.pageIndex = 1;
+                Paras.lastNewsCode = 0;
                 ObjectJS.getNews();
             }
         });
@@ -88,6 +95,8 @@
             $("#keywords-show").val('');
 
             Paras.keywords = '';
+            Paras.pageIndex = 1;
+            Paras.lastNewsCode = 0;
             ObjectJS.getNews();
         });
         //ObjectJS.bindNav();
@@ -97,7 +106,6 @@
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
     };
-
 
     ObjectJS.bindNav = function () {
         var n = $('.nav-list li').size();
@@ -166,6 +174,8 @@
             $(".nav-list").append(html);
         }
 
+        NoNewsDate = false;
+        $(".load-more").hide();
         Paras.pageIndex == 1;
         Paras.lastNewsCode = 0;
         ObjectJS.bindNavClick();
@@ -179,8 +189,10 @@
                 _this.parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");
                 _this.addClass("active").next().addClass("select");
 
+                NoNewsDate = false;
+                $(".load-more").hide();
                 Paras.typeID = _this.data("id");
-                Paras.pageIndex == 1;
+                Paras.pageIndex =1;
                 Paras.lastNewsCode = 0;
                 ObjectJS.getNews();
             }
@@ -190,10 +202,21 @@
     ObjectJS.getNews = function () {
         $(".data-loading").show();
 
-        var data=NewsCache[Paras.parentTypeID+Paras.typeID];
-        if(data==null){
+        var data = null;
+        if (Paras.pageIndex == 1) {
+            data = NewsCache[Paras.parentTypeID + Paras.typeID+Paras.keywords];
+        }
+
+        if (data == null)
+        {
             Global.post("/Home/GetNews", Paras, function (data) {
-                NewsCache[Paras.parentTypeID + Paras.typeID] = data;
+                if (Paras.pageIndex == 1) {
+                    NewsCache[Paras.parentTypeID + Paras.typeID + Paras.keywords] = data;
+                }
+
+                if (Paras.pageSize > data.items.length) {
+                    NoNewsDate = true;
+                }
                 ObjectJS.bindNews(data);
             });
         }
@@ -204,22 +227,30 @@
     }
 
     ObjectJS.bindNews = function (data) {
-        
         if (Paras.pageIndex == 1) {
             $(".content ul").html('');
         }
+
         var items = data.items;
         Paras.lastNewsCode = data.lastNewsCode;
+        $(".data-loading").hide();
+        if (items.length > 0) {
+            DoT.exec("template/home/news-list.html", function (template) {
+                var innerhtml = template(items);
+                innerhtml = $(innerhtml);
+                $(".content ul").append(innerhtml);
+                innerhtml.fadeIn(400);
 
-        DoT.exec("template/home/news-list.html", function (template) {
-            $(".data-loading").hide();
-
-            var innerhtml = template(items);
-            innerhtml = $(innerhtml);
-
-            $(".content ul").append(innerhtml);
-            innerhtml.fadeIn(400);
-        });
+                if (NoNewsDate) {
+                    $(".load-more").show();
+                }
+            });
+        }
+        else {
+            if (Paras.pageIndex == 1) {
+                $(".content ul").html('<li class="no-data">暂无新闻</li>');
+            }
+        }
     }
 
     module.exports = ObjectJS;

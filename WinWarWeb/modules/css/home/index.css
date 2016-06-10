@@ -8,6 +8,7 @@
 }
 .nav-list {
     margin-top:10px;
+    height:40px;
     position:absolute;
     width:100%;
     left:0px;
@@ -20,6 +21,8 @@
     float:left;
     text-align:center;
     width:33%;
+    height:40px;
+    overflow:hidden;
 }
 .nav-list .nav-item{
     font-size:16px;
@@ -36,7 +39,7 @@
     display:none;
 }
 .search {
-    margin:60px 20px 10px 20px;
+    margin:60px 10px 10px 10px;
     border-radius:5px;
     border:1px solid #F5F5F5; 
     padding:6px 0;
@@ -58,7 +61,7 @@
 }
 
 .content {
-    margin:0px 24px 120px 24px;
+    margin:0px 10px 120px 10px;
 }
 
 .content .news{
@@ -142,19 +145,18 @@
 }
 
 .overlay-search {
-    margin:20px 55px 10px 20px;
+    margin:15px 55px 10px 10px;
     border-radius:5px;
     border:1px solid #F5F5F5; 
     background-color:#eee;
 }
 .overlay-search .iconfont {
-    font-size:18px;
+    font-size:16px;
     color:#9d9d9d;
     margin-left:10px;
 }
 .overlay-search input {
-    height:36px;
-    line-height:36px;
+    padding:6px 0;
     width:80%;
     border:none;
     color:#9d9d9d;
@@ -163,10 +165,10 @@
 }
 .overlay-btn {
     position:absolute;
-    top:26px;
+    top:24px;
     right:10px;
     color:#4a98e7;
-    font-size:18px;
+    font-size:16px;
     cursor:pointer;
 }
 

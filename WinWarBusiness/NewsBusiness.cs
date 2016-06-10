@@ -88,6 +88,22 @@ namespace WinWarBusiness
             return list;
         }
 
+        public List<NewsEntity> GetNewsFavorites(long userid, int pageSize, ref long favoriteid)
+        {
+            List<NewsEntity> list = new List<NewsEntity>();
+
+            DataTable dt = NewsDAL.BaseDAL.GetNewsFavorites(userid, pageSize, ref favoriteid);
+            foreach (DataRow dr in dt.Rows)
+            {
+                NewsEntity model = new NewsEntity();
+                model.FillData(dr);
+
+                list.Add(model);
+            }
+
+            return list;
+        }
+
         public NewsEntity GetNewsDetail(long newsCode, long userid)
         {
             NewsEntity item =null;

@@ -1,14 +1,13 @@
 ﻿@{
-    ViewBag.Title = "赢 VAR-我的";
+    ViewBag.Title = "赢 VAR 个人中心";
 }
 @section css{
     <link href="/modules/css/home/index.css" rel="stylesheet" />
     <link href="/modules/css/user/index.css" rel="stylesheet" />
 }
 @section scripts{
-    <script src="/modules/plug/touchSwipe/jquery.touchSwipe.min.js"></script>
     <script type="text/javascript">
-        seajs.use(["scripts/home/index"], function (obj) {
+        seajs.use(["scripts/user/index"], function (obj) {
             obj.init();
         });
     </script>
@@ -20,11 +19,11 @@
         </div>
         <div class="user-name">牧歌</div>
         <div class="user-moblie">
-            <span class="iconfont">&#xe610;</span>
+            <img class="icon" src="/modules/images/telephone.png" />
             <span class="mLeft5">1234455666666</span>
         </div>
         <div class="user-email">
-            <span class="iconfont">&#xe610;</span>
+            <img class="icon" src="/modules/images/envelope.png" />
             <span class="mLeft5">xiaoxiaomuge@143.com</span>
         </div>
     </div>
@@ -35,8 +34,10 @@
 </div>
 
 <div class="content">
-    <ul></ul>
+    <ul><li class="no-data">暂无收藏</li></ul>
     <div class="clear"></div>
+    <div class="data-loading hide"></div>
+    <div class="load-more hide">加载更多收藏</div>
 </div>
 
 <div class="menu">

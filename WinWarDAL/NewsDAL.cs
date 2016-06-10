@@ -45,6 +45,23 @@ namespace WinWarDAL
 
         }
 
+        public DataTable GetNewsFavorites(long userid, int pageSize, ref long favoriteid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@FavoriteID",SqlDbType.BigInt),
+                                       new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@UserID",userid)
+                                       
+                                   };
+            paras[0].Value = favoriteid;
+            paras[0].Direction = ParameterDirection.InputOutput;
+            DataTable dt = GetDataTable("P_GetNEWS_Favorites", paras, CommandType.StoredProcedure);
+            favoriteid = Convert.ToInt64(paras[0].Value);
+
+            return dt;
+
+        }
+
         public DataTable GetNewsDetail(long newsCode, long userid)
         {
             SqlParameter[] paras = { 

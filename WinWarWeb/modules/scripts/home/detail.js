@@ -64,9 +64,16 @@
         $("#btn-addComment").click(function () {
             Comment.Content = $("#comment-msg").val();
             if (Comment.Content == '') {
+                $('.overlay').hide();
                 return false;
             }
-
+            else {
+                if (Comment.Content.length > 500) {
+                    alert("内容太多了");
+                    return;
+                }
+            }
+           
             ObjectJS.addNewsComment();
         });
 

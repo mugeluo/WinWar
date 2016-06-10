@@ -143,6 +143,7 @@
     <Content Include="modules\css\layout.css" />
     <Content Include="modules\css\user\index.css" />
     <Content Include="modules\css\user\login.css" />
+    <Content Include="modules\images\back.png" />
     <Content Include="modules\images\browse.png" />
     <Content Include="modules\images\collect.png" />
     <Content Include="modules\images\collect_color.png" />

@@ -26,8 +26,9 @@
         Comment.News_Uni_Code = id;
         Paras.isCollect = isCollect;
         Paras.isPraise = isPraise;
-        //newsMain = newsMain.replace(/&quot;/g, '"');
-        //$("#newsMain").append(newsMain);
+
+        newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        $("#newsMain").html(newsMain);
 
         var $newsimg = $(".header-newsimg img");
         if ($newsimg.length == 1) {
@@ -167,7 +168,6 @@
                     Paras.isPraise = 1;
 
                     $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like_color.png");
-                    $("#addNewsPraiseCount").find(".praise-title").html("取消赞");
                     $(".Praise_Count").html(parseInt($(".Praise_Count").html()) +1);
                 }
                 else {
@@ -175,7 +175,6 @@
                     Paras.isPraise = 0;
 
                     $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like.png");
-                    $("#addNewsPraiseCount").find(".praise-title").html("赞");
                     $(".Praise_Count").html(parseInt($(".Praise_Count").html()) -1);
                 }
             }

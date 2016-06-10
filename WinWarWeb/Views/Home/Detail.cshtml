@@ -1,6 +1,6 @@
 ﻿@{
     var Item = (WinWarEntity.NewsEntity)ViewBag.Item;
-    var NewsMain =HttpUtility.HtmlDecode(Item.Html_Txt);
+    var NewsMain=Item.Html_Txt;
     ViewBag.Title = "赢 VAR  " + Item.Title_Main + "详情";
 }
 @section css{
@@ -24,7 +24,7 @@
             }
         }
     </div>
-    <div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{}"><span class="iconfont">&#xe654;</span></div>
+    <div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{}"><span class="iconfont"><img class="icon" src="/modules/images/back.png" /></span></div>
     <div class="header-content">
         <div class="source">@Item.Real_Source_Name</div>
         <div class="title">@Item.Title_Main</div>
@@ -33,9 +33,9 @@
 
 <div class="detail-content">
     <div class="news-author">
-        <div class="author-img left">
+      @*  <div class="author-img left">
              <img src="/modules/images/news.jpg" />
-        </div>
+        </div>*@
         <div class="author-detail left">
             <div class="author-name">@(string.IsNullOrEmpty(Item.News_Author)?"--":Item.News_Author)</div>
             <div class="author-time">@Item.Pub_Time.ToString("yyyy-MM-dd hh:mm:ss")</div>
@@ -47,10 +47,9 @@
         <div class="clear"></div>
     </div>
     <div class="detail-box" id="newsMain">
-      @*  @( HttpUtility.HtmlDecode(Item.Html_Txt) )*@
-    <script type="text/javascript">
-        document.getElementById("newsMain").innerHTML = '@(Item.Html_Txt)';
-    </script>   
+@*    <script type="text/javascript">
+        document.getElementById("newsMain").innerHTML = '@( HttpUtility.HtmlDecode( Item.Html_Txt ) )';
+    </script>   *@
     </div>
    
 </div>
@@ -98,20 +97,19 @@
                     <div class="iconfont">
                     <img class="icon" data-icon="like" src="/modules/images/like.png" />
                     </div>
-                    <span class="Praise_Count">@Item.Praise_Count</span><span class="mLeft5 praise-title">赞</span>
                     }
                     else
                     {
                      <div class="iconfont">
                     <img class="icon" data-icon="like" src="/modules/images/like_color.png" />
                     </div>
-                    <span class="Praise_Count">@Item.Praise_Count</span><span class="mLeft5 praise-title">取消赞</span>
                     }
+                    <span class="Praise_Count">@Item.Praise_Count</span><span class="mLeft5 praise-title">赞</span>
                 }                            
         </li>
         <li>
              <div class="iconfont">
-                <img class="icon" data-icon="reply" src="/modules/images/reply.png" />
+                <img class="icon" style="max-width:22px; max-height:22px;" data-icon="reply" src="/modules/images/reply.png" />
             </div>
             <span id="Comment_Count">@Item.Comment_Count</span>评论
         </li>

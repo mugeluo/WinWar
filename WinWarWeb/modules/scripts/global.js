@@ -71,28 +71,21 @@
         $("#window_alert").remove();
 
         var _alter = $("<div id='window_alert' class='alert'></div>");
-        var _header = $("<div class='alert-header'>提示</div>");
+        //var _header = $("<div class='alert-header'>提示</div>");
         var _wrap = $("<div class='alert-wrap'></div>").html(msg);
-        var _bottom = $("<div class='alert-bottom'></div>"),
-            _close = $("<div class='confirm right'>立即关闭</div>");
-        _bottom.append(_close);
-        _alter.append(_header).append(_wrap).append(_bottom);
+        //var _bottom = $("<div class='alert-bottom'></div>");
+            //_close = $("<div class='confirm right'>立即关闭</div>");
+        //_bottom.append(_close);
+        _alter.append(_wrap);
         _alter.appendTo("body");
 
         var left = $(window).width() / 2 - (_alter.width() / 2);
         _alter.offset({ left: left });
-        _close.click(function () {
-            _alter.remove();
-            if (url) {
-                location.href = url;
-            }
-        });
+
         setTimeout(function () {
+            _alter.fadeIn();
             _alter.remove();
-            if (url) {
-                location.href = url;
-            }
-        }, 5000);
+        }, 500);
     }
 
     /*重写confirm*/

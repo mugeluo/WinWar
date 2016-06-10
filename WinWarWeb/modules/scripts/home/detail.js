@@ -117,6 +117,8 @@
         Global.post("/Home/AddNewsComment",{comment:JSON.stringify(Comment)}, function (data) {
             if (data.result > 0) {
                 alert("评论成功");
+
+                $(".reply-list .no-data").remove();
                 var items = data.items;
                 DoT.exec("template/home/reply-list.html", function (template) {
                     var innerhtml = template(items);

@@ -45,6 +45,16 @@
     };
 
     ObjectJS.bindEvent = function () {
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 70) {
+                $(".header-back").css({"background-color":"#fff","border-bottom":"1px solid #ddd"}).find(".icon").css("color","#666");
+            }
+            else {
+                $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
+            }
+        });
+
+
         $(".overlay").click(function (e) {
             if (!$(e.target).parents().hasClass("detail-reply-msg") && !$(e.target).hasClass("detail-reply-msg")) {
                 $(".overlay").hide();

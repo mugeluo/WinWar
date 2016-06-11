@@ -52,14 +52,29 @@ input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:non
 .load-more {
     line-height:40px;
     text-align:center;
-    font-size:16px;
+    font-size:14px;
     color:#666;
     cursor:pointer;
 }
 .no-data {
     line-height:60px;
     text-align:center;
-    font-size:16px;
+    font-size:14px;
     color:#666;
 }
+
+/*置顶*/
+.back-top {
+    position:fixed;
+    display:none;
+    right:5px;
+    bottom:62px;
+    cursor:pointer;
+    z-index:1500;
+}
+.back-top .iconfont {
+    color:#3D9EE1;
+    font-size:38px;
+}
+
 

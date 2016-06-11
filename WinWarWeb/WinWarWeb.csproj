@@ -175,6 +175,7 @@
     <Content Include="modules\plug\doT.js" />
     <Content Include="modules\plug\verify.js" />
     <Content Include="modules\scripts\home\detail.js" />
+    <Content Include="modules\scripts\layout.js" />
     <Content Include="modules\scripts\user\index.js" />
     <Content Include="modules\template\home\news-list.html" />
     <Content Include="modules\template\home\reply-list.html" />

@@ -13,9 +13,20 @@
 <body>
     @RenderBody()
 
+    <div class="back-top" title="返回顶部">
+        <span class="iconfont">&#xe643;</span>
+    </div>
     <script src="/Scripts/jquery-1.11.1.js"></script>
    <script type="text/javascript" src="/Scripts/sea.js"></script>
     <script type="text/javascript" src="/Scripts/sea-config.js?v=20160525"></script>
+    <script type="text/javascript">
+        $(function () {
+            seajs.use(["/modules/scripts/layout"], function (layout) {
+                layout.init();
+            });
+        });
+
+    </script>
     @RenderSection("scripts", false)
 </body>
 </html>

@@ -77,6 +77,7 @@
 }
 .news  div, .news  span {
     color:#c9cdd1;
+    font-size:14px;
     vertical-align:top;
 }
 .news .news-title {
@@ -118,6 +119,16 @@
     font-size:12px;
     color:#666;
     text-align:center;
+    
+}
+.menu-list .item {
+    width:80px;
+    margin:0 auto;
+    cursor:pointer;
+}
+.menu-list .item2 {
+    width:80px;
+    margin:0 auto;
     cursor:pointer;
 }
 .menu-list .iconfont {

@@ -38,7 +38,6 @@
 
                 }
             }
-
         });
 
         $(".overlay").click(function (e) {
@@ -51,7 +50,7 @@
         $(".menu-list .item").click(function () {
             var _this=$(this);
             if (!_this.hasClass("active")) {
-                var $imgs = _this.siblings().removeClass("active").find("img");
+                var $imgs = $(".menu-list .item").removeClass("active").find("img");
                 $imgs.each(function () {
                     $(this).attr("src", "/modules/images/" + $(this).data("icon") + ".png");
                 });
@@ -90,6 +89,7 @@
                 ObjectJS.getNews();
             }
         });
+
         //取消关键字查询
         $("#btn-cancel").click(function () {
             $('.overlay-keywords').hide();
@@ -102,9 +102,10 @@
             Paras.lastNewsCode = 0;
             ObjectJS.getNews();
         });
+
         //ObjectJS.bindNav();
 
-        //初始化
+        //数据初始化
         if (Paras.parentTypeID != 16) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
@@ -254,7 +255,13 @@
             if (Paras.pageIndex == 1) {
                 $(".content ul").html('<li class="no-data">暂无新闻</li>');
             }
+            else {
+                if (NoNewsDate) {
+                    $(".load-more").show();
+                }
+            }
         }
+
     }
 
     module.exports = ObjectJS;

@@ -19,7 +19,11 @@ seajs.config({
 seajs.config({
     alias: {
         //数据验证
-        "verify": "plug/verify.js"
+        "verify": "plug/verify.js",
+        //下拉框
+        "dropdown": "plug/dropdown/dropdown.js",
+        //搜索插件
+        "search": "plug/seach_keys/seach_keys.js",
     }
 });
 

@@ -145,5 +145,26 @@ namespace WinWarDAL
         }
 
         #endregion
+
+        public DataTable GetNews(string keyWords, int typeid,
+            int pageSize, ref long newsCode)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@NewsCode",SqlDbType.BigInt),
+                                       new SqlParameter("@KeyWords",keyWords),
+                                       new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@TypeID",typeid)
+                                       
+                                   };
+            paras[0].Value = newsCode;
+            paras[0].Direction = ParameterDirection.InputOutput;
+            DataTable dt = GetDataTable("M_GetNews_Mains", paras, CommandType.StoredProcedure);
+            if (paras[0].Value != DBNull.Value)
+            {
+                newsCode = Convert.ToInt64(paras[0].Value);
+            }
+            return dt;
+
+        }
     }
 }

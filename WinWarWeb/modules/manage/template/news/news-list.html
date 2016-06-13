@@ -1,0 +1,17 @@
+﻿{%
+	for(var i=0, j=$data.length; i < j; i++){
+	var item = $data[i];
+%}
+<tr class="tr-header">
+    <td class="tLeft">{%=item.News_Uni_Code%}</td>
+    <td class="">{%=item.Title_Main%}</td>
+    <td class="width150">新闻分类</td>
+    <td class="tLeft">{%=item.News_Author%}</td>
+    <td class="width150">{%=item.Real_Source_Name%}</td>
+    <td>{%=item.Impt_Par==1?"重要":"不重要"%}</td>
+    <td>{%=item.Is_Issue==1?"发布":"未发布"%}</td>
+    <td class="width150">{%=item.Pub_Time.toDate("MM-dd hh:mm")%}</td>
+            
+    <td class="width80"></td>
+</tr>
+{% } %}

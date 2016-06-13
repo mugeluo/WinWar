@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Manage\Controllers\BaseController.cs" />
     <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -135,8 +136,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manage\modules\scripts\layout.js" />
-    <Content Include="Areas\Manage\modules\scripts\news\index.js" />
     <Content Include="Global.asax" />
     <Content Include="modules\css\base.css" />
     <Content Include="modules\css\home\detail.css" />
@@ -176,6 +175,16 @@
     <Content Include="modules\images\show_color.png" />
     <Content Include="modules\images\telephone.png" />
     <Content Include="modules\images\weixin_logo.png" />
+    <Content Include="modules\manage\scripts\layout.js" />
+    <Content Include="modules\manage\scripts\news\detail.js" />
+    <Content Include="modules\manage\scripts\news\index.js" />
+    <Content Include="modules\manage\template\news\news-list.html" />
+    <Content Include="modules\plug\datapager\images\next.png" />
+    <Content Include="modules\plug\datapager\images\previous.png" />
+    <Content Include="modules\plug\datapager\images\snext.png" />
+    <Content Include="modules\plug\datapager\images\sprevious.png" />
+    <Content Include="modules\plug\datapager\paginate.js" />
+    <Content Include="modules\plug\datapager\style.css" />
     <Content Include="modules\plug\dropdown\dropdown.js" />
     <Content Include="modules\plug\dropdown\style.css" />
     <Content Include="modules\plug\seach_keys\demo.html" />
@@ -259,6 +268,8 @@
     <Content Include="modules\plug\umeditor\umeditor.config.js" />
     <Content Include="modules\plug\umeditor\umeditor.js" />
     <Content Include="modules\plug\umeditor\umeditor.min.js" />
+    <Content Include="modules\plug\upload\jquery.form.js" />
+    <Content Include="modules\plug\upload\upload.js" />
     <Content Include="modules\scripts\global.js" />
     <Content Include="modules\scripts\home\index.js" />
     <Content Include="modules\plug\doT.js" />
@@ -286,7 +297,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Manage\Models\" />
-    <Folder Include="Areas\Manage\modules\css\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

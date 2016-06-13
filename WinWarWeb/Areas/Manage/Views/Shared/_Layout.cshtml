@@ -8,6 +8,7 @@
     <meta name="robots" content="noindex,nofollow">
     <link href="/modules/css/base.css" rel="stylesheet" />
     <link href="/modules/css/layout.css" rel="stylesheet" />
+    <link href="/modules/css/iconfont/iconfont.css" rel="stylesheet" />
     @RenderSection("css", false)
     <style type="text/css">
         body {
@@ -23,7 +24,7 @@
         <ul id="modulesMenu" class="menu left">
             <li class="left">
                 <a href="/Home/Index" class="select">
-                    <img class="ico" data-ico="/Content/menuico/home.png" data-hover="/Content/menuico/homehover.png" src="/Content/menuico/home.png" /> 
+                    @*<img class="ico" data-ico="/Content/menuico/home.png" data-hover="/Content/menuico/homehover.png" src="/Content/menuico/home.png" />*@ 
                     <span class="name">新闻</span>
                     <span class="cursor"></span>
                 </a> 
@@ -82,7 +83,7 @@
     <script type="text/javascript" src="/Scripts/sea.js"></script>
     <script type="text/javascript" src="/Scripts/sea-config.js?v=20160525"></script>
     <script type="text/javascript">
-        seajs.use(["/Areas/Manage/modules/scripts/layout"], function (layout) {
+        seajs.use(["Manage/scripts/layout"], function (layout) {
             layout.init();
         });
 

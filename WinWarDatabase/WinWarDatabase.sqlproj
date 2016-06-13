@@ -54,6 +54,7 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="Procedures" />
+    <Folder Include="Procedures\manage" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Procedures\P_GetPagerData.sql" />
@@ -69,5 +70,6 @@
     <None Include="Procedures\P_GetNewsComments.sql" />
     <None Include="Procedures\P_GetNewsDetail.sql" />
     <None Include="Procedures\P_GetNEWS_Favorites.sql" />
+    <None Include="Procedures\manage\M_GetNews_Mains.sql" />
   </ItemGroup>
 </Project>

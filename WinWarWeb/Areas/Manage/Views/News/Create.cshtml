@@ -1,7 +1,22 @@
 ﻿@{
     ViewBag.Title = "新建新闻";
 }
+@section css{
+    <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+}
 
+@section scripts{
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
+    <script type="text/javascript">
+        seajs.use(["manage/scripts/news/detail"], function (obj) {
+            var um = UM.getEditor('Html_Txt');
+
+            obj.init();
+        });
+    </script>
+}
 <div class="header-box">
     <span class="header-title left" >新建新闻</span>
 </div>
@@ -9,30 +24,68 @@
 <div class="content-body mTop20">
         <ul class="table-add">
         <li>
-            <span class="column-title">客户名称：</span>
-            <span><input type="text" maxlength="50" id="name" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+            <span class="column-title">分类：</span> 
+            <span id="ParentType"></span>
+            <span class="mLeft10" id="NewsType"></span>
         </li>
         <li>
-            <span class="column-title">联系电话：</span> 
-            <span><input type="text" maxlength="13" id="contactMobile" data-empty="必填" data-type="mobile" class="input verify" /></span>
+            <span class="column-title">正标题：</span>
+            <span><input type="text" maxlength="50" id="Title_Main" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+        </li>
+       <li>
+            <span class="column-title">副标题：</span>
+            <span><input type="text" maxlength="50" id="Title_Sub" style="width:300px;" data-empty="必填" class="input verify" /></span> 
         </li>
         <li>
-            <span class="column-title">邮箱：</span>
-            <span><input type="text" maxlength="200" id="email" data-type="email" class="input verify" /></span>
+            <span class="column-title">引标题 ：</span>
+            <span><input type="text" maxlength="50" id="Title_App" style="width:300px;" data-empty="必填" class="input verify" /></span> 
         </li>
         <li>
-            <span class="column-title">省份城市：</span> 
-            <span id="city"></span>
+            <span class="column-title">涉及行业：</span>
+            <span><input type="text" maxlength="50" id="INDU_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
         </li>
         <li>
-            <span class="column-title">详细地址：</span> 
-            <span><input type="text" maxlength="200" style="width:300px;" id="address" class="input" /></span>
+            <span class="column-title">涉及公司 ：</span>
+            <span><input type="text" maxlength="50" id="COM_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+        </li>
+             <li>
+            <span class="column-title">涉及产品 ：</span>
+            <span><input type="text" maxlength="50" id="PROD_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
         </li>
         <li>
-            <span class="column-title">备注：</span>
-            <textarea id="remark"></textarea>
+            <span class="column-title">图片 ：</span>
+            <span id="Pic_URL"></span> 
         </li>
-
+        <li>
+            <span class="column-title">作者：</span>
+            <span><input type="text" maxlength="200" id="News_Author" data-type="email" class="input verify" /></span>
+        </li>
+        <li>
+            <span class="column-title">来源：</span> 
+            <span><input type="text" maxlength="13" id="Real_Source_Name" data-empty="必填" data-type="mobile" class="input verify" /></span>
+        </li>
+        
+        <li>
+            <span class="column-title left">重要性：</span> 
+            <div class="left radiobox hand"> <span class="iconfont ico-radiobox hover" data-value="1"><span></span></span> 重要 </div>
+            <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="0"><span></span></span> 不重要 </div>
+            <div class="clear"></div>
+        </li>
+        <li>
+            <span class="column-title left">正负面性：</span> 
+            <div class="left radiobox hand "> <span class="iconfont ico-radiobox hover" data-value="0"><span></span></span> 正面 </div>
+            <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="0"><span></span></span> 中性 </div>
+            <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox " data-value="1"><span></span></span> 负面 </div>
+            <div class="clear"></div>
+        </li>
+        <li>
+            <span class="column-title">摘要：</span> 
+            <span><textarea id="News_Sum"></textarea></span>
+        </li>
+        <li>
+            <span class="column-title">详情：</span>
+            <span><textarea id="Html_Txt" style="width:800px;"></textarea></span>
+        </li>
     </ul>
     <div class="mTop20">
         <div class="btn" id="btnSave">保存</div>

@@ -5,6 +5,8 @@ seajs.config({
     alias: {
         "jquery": "/Scripts/jquery-1.11.1.js",
         "global": "scripts/global.js",
+        //分页控件
+        "pager": "plug/datapager/paginate.js",
         //HTML模板引擎
         "dot": "plug/doT.js"
     },
@@ -22,6 +24,8 @@ seajs.config({
         "verify": "plug/verify.js",
         //下拉框
         "dropdown": "plug/dropdown/dropdown.js",
+        //上传
+        "upload": "plug/upload/upload.js",
         //搜索插件
         "search": "plug/seach_keys/seach_keys.js",
     }

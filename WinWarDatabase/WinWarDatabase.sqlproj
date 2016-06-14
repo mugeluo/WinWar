@@ -71,5 +71,6 @@
     <None Include="Procedures\P_GetNewsDetail.sql" />
     <None Include="Procedures\P_GetNEWS_Favorites.sql" />
     <None Include="Procedures\manage\M_GetNews_Mains.sql" />
+    <None Include="Procedures\manage\M_AddNews.sql" />
   </ItemGroup>
 </Project>

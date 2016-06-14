@@ -147,24 +147,49 @@ namespace WinWarDAL
         #endregion
 
         public DataTable GetNews(string keyWords, int typeid,
-            int pageSize, ref long newsCode)
+            int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
         {
             SqlParameter[] paras = { 
-                                       new SqlParameter("@NewsCode",SqlDbType.BigInt),
+                                       new SqlParameter("@TotalCount",SqlDbType.Int),
+                                       new SqlParameter("@PageCount",SqlDbType.Int),
                                        new SqlParameter("@KeyWords",keyWords),
                                        new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@PageIndex",pageIndex),
                                        new SqlParameter("@TypeID",typeid)
                                        
                                    };
-            paras[0].Value = newsCode;
+            paras[0].Value = totalCount;
+            paras[1].Value = pageCount;
             paras[0].Direction = ParameterDirection.InputOutput;
+            paras[1].Direction = ParameterDirection.InputOutput;
             DataTable dt = GetDataTable("M_GetNews_Mains", paras, CommandType.StoredProcedure);
-            if (paras[0].Value != DBNull.Value)
-            {
-                newsCode = Convert.ToInt64(paras[0].Value);
-            }
+
+            totalCount = Convert.ToInt32(paras[0].Value);
+            pageCount = Convert.ToInt32(paras[1].Value);
             return dt;
 
         }
+
+        public bool AddNews(long id,string title, string titleSub,string titleApp,
+            string newsSum, string author, string source,
+            int posiPar,int important,int typeid,
+            string content)
+        {
+            SqlParameter[] paras = { 
+                                    new SqlParameter("@ID",id),
+                                     new SqlParameter("@Title",title),
+                                     new SqlParameter("@TitleSub",titleSub),
+                                     new SqlParameter("@TitleApp",titleApp),
+                                     new SqlParameter("@NewsSum",newsSum),
+                                     new SqlParameter("@Author",author),
+                                     new SqlParameter("@Source",source),
+                                     new SqlParameter("@PosiPar",posiPar),
+                                     new SqlParameter("@Important",important),
+                                     new SqlParameter("@TypeID",typeid),
+                                     new SqlParameter("@Content",content)
+                                   };
+            return ExecuteNonQuery("M_AddNews", paras, CommandType.StoredProcedure) > 0;
+        }
+
     }
 }

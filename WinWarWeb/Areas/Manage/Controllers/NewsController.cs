@@ -23,13 +23,15 @@ namespace WinWarWeb.Areas.Manage.Controllers
         }
 
         #region ajax
-        public JsonResult GetNews(string keywords, int typeID, long lastNewsCode, int pageSize)
+        public JsonResult GetNews(string keywords, int typeID, int pageSize, int pageIndex)
         {
-            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, ref lastNewsCode);
+            int totalCount = 0;
+            int pageCount = 0;
+            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, pageIndex,ref totalCount, ref pageCount);
             jsonResult.Add("items", items);
-            jsonResult.Add("lastNewsCode", lastNewsCode);
-            jsonResult.Add("totalCount",23);
-            jsonResult.Add("pageCount", 3);
+            jsonResult.Add("totalCount", totalCount);
+            jsonResult.Add("pageCount", pageCount);
+
             return new JsonResult()
             {
                 Data = jsonResult,

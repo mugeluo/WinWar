@@ -41,18 +41,6 @@
             <span><input type="text" maxlength="50" id="Title_App" style="width:300px;" data-empty="必填" class="input verify" /></span> 
         </li>
         <li>
-            <span class="column-title">涉及行业：</span>
-            <span><input type="text" maxlength="50" id="INDU_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
-        </li>
-        <li>
-            <span class="column-title">涉及公司 ：</span>
-            <span><input type="text" maxlength="50" id="COM_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
-        </li>
-             <li>
-            <span class="column-title">涉及产品 ：</span>
-            <span><input type="text" maxlength="50" id="PROD_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
-        </li>
-        <li>
             <span class="column-title">图片 ：</span>
             <span id="Pic_URL"></span> 
         </li>
@@ -86,9 +74,21 @@
             <span class="column-title">详情：</span>
             <span><textarea id="Html_Txt" style="width:800px;"></textarea></span>
         </li>
+        <li>
+            <span class="column-title">涉及行业：</span>
+            <span><input type="text" maxlength="50" id="INDU_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+        </li>
+        <li>
+            <span class="column-title">涉及公司 ：</span>
+            <span><input type="text" maxlength="50" id="COM_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+        </li>
+             <li>
+            <span class="column-title">涉及产品 ：</span>
+            <span><input type="text" maxlength="50" id="PROD_UNI_CODE" style="width:300px;" data-empty="必填" class="input verify" /></span> 
+        </li>
     </ul>
     <div class="mTop20">
-        <div class="btn" id="btnSave">保存</div>
+        <div class="btn" id="btn-saveNews">保存</div>
         <a class="btn mLeft10" href="@(Url.RequestContext.HttpContext.Request.UrlReferrer == null ? "/Customer/Customers" : "javascript:if(history.length>1){ history.go(-1);} else{ location.href='/Customer/MyCustomer'}")">
             返回
         </a>

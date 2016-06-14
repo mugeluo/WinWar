@@ -2,6 +2,18 @@
     var Global = require("global");
     var Upload = require("upload");
 
+    var News = {
+        Title_Main: '',
+        Title_Sub: '',
+        Title_App: '',
+        News_Sum: '',
+        News_Author: '',
+        Real_Source_Name: '',
+        Nega_Post_Par: 3,
+        Impt_Par: 2,
+        News_Type: 0,
+        Html_Txt:''
+    };
     var ObjectJS = {};
     ObjectJS.init = function () {
         ObjectJS.bindEvent();
@@ -64,7 +76,23 @@
             }
         });
 
+        $("#btn-saveNews").click(function () {
+            alert(111);
+            //ObjectJS.saveNews();
+        });
+
     };
+
+    ObjectJS.saveNews = function () {
+        Global.post("/manage/news/saveNews", { news: JSON.stringify(News) }, function (data) {
+            if (data.result == 1) {
+
+            }
+            else {
+
+            }
+        });
+    }
 
     module.exports = ObjectJS;
 });

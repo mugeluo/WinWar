@@ -6,10 +6,9 @@
     var Params = {
         keywords: '',
         pageIndex: 1,
-        pageSize: 10,
+        pageSize: 15,
         parentTypeID: 16,
-        typeID: 0,
-        lastNewsCode: 0
+        typeID: 0
     };
     var ObjectJS={};
     ObjectJS.init = function () {
@@ -24,45 +23,69 @@
         require.async("dropdown", function () {
             $("#ParentType").dropdown({
                 prevText: "一级分类-",
-                defaultText: "首页咨询",
-                defaultValue: "16",
+                defaultText: "全部",
+                defaultValue: "-1",
                 data: ParentTypes,
                 dataValue: "ID",
                 dataText: "Name",
                 width: "140",
                 onChange: function (data) {
-                    Global.post("/Home/GetNewsTypeByParentID", { id: data.value }, function (data) {
-                        require.async("dropdown", function () {
-                            var NewsTypes = data.items;
-                            var NewsType = NewsTypes[0];
-                            $("#NewsType").dropdown({
-                                prevText: "二级分类-",
-                                defaultText: NewsType.News_Type_Name2,
-                                defaultValue: NewsType.News_Type_2,
-                                data: NewsTypes,
-                                dataValue: "News_Type_2",
-                                dataText: "News_Type_Name2",
-                                width: "140",
-                                onChange: function (data) {
-                                    //ObjectJS.Params.PageIndex = 1;
-                                    //ObjectJS.Params.DepartID = data.value;
-                                    //ObjectJS.getList();
-                                }
+                    if (data.value != -1) {
+                        Global.post("/Home/GetNewsTypeByParentID", { id: data.value }, function (data) {
+                            require.async("dropdown", function () {
+                                var NewsTypes = data.items;
+                                var NewsType = NewsTypes[0];
+                                $("#NewsType").dropdown({
+                                    prevText: "二级分类-",
+                                    defaultText: "全部",
+                                    defaultValue: "-1",
+                                    data: NewsTypes,
+                                    dataValue: "News_Type_2",
+                                    dataText: "News_Type_Name2",
+                                    width: "140",
+                                    onChange: function (data) {
+                                        Params.pageIndex = 1;
+                                        Params.typeID = data.value;
+                                        ObjectJS.getList();
+                                    }
+                                });
                             });
+
                         });
-
-                    });
-
+                    }
                 }
             });
+
+            //Global.post("/Home/GetNewsTypeByParentID", { id: 16 }, function (data) {
+            //    require.async("dropdown", function () {
+            //        var NewsTypes = data.items;
+            //        var NewsType = NewsTypes[0];
+            //        $("#NewsType").dropdown({
+            //            prevText: "二级分类-",
+            //            defaultText: "全部",
+            //            defaultValue: "-1",
+            //            data: NewsTypes,
+            //            dataValue: "News_Type_2",
+            //            dataText: "News_Type_Name2",
+            //            width: "140",
+            //            onChange: function (data) {
+            //                Params.pageIndex = 1;
+            //                Params.typeID = data.value;
+            //                ObjectJS.getList();
+            //            }
+            //        });
+            //    });
+
+            //});
+
         });
 
         //搜索框
         require.async("search", function () {
             $(".searth-module").searchKeys(function (keyWords) {
-                //ObjectJS.Params.PageIndex = 1;
-                //ObjectJS.Params.keyWords = keyWords;
-                //ObjectJS.getList();
+                Params.pageIndex = 1;
+                params.keyWords = keyWords;
+                ObjectJS.getList();
             });
         });
 

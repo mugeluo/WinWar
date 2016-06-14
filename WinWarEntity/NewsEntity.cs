@@ -77,6 +77,7 @@ namespace WinWarEntity
         /// </summary>
         public int Is_Collect { get; set; }
 
+        public string NEWS_TYPE_NAME2 { get; set; }
 
         /// <summary>
         /// 填充数据

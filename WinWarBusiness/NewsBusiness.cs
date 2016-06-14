@@ -197,12 +197,12 @@ namespace WinWarBusiness
 
         #region manage
         public List<NewsEntity> GetNews(string keyWords, int typeid,
-            int pageSize, ref long newsCode)
+            int pageSize,int pageIndex, ref int totalCount, ref int pageCount )
         {
             List<NewsEntity> list = new List<NewsEntity>();
 
-            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid, 
-                pageSize, ref newsCode);
+            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid,
+                pageSize,pageIndex, ref totalCount,ref pageCount);
             foreach (DataRow dr in dt.Rows)
             {
                 NewsEntity model = new NewsEntity();
@@ -212,6 +212,12 @@ namespace WinWarBusiness
             }
 
             return list;
+        }
+
+        public bool AddNews(NewsEntity news)
+        {
+            return NewsDAL.BaseDAL.AddNews(news.News_Uni_Code, news.Title_Main, news.Title_Sub, news.Title_App, news.News_Sum,
+                news.News_Author, news.Real_Source_Name, news.Nega_Post_Par, news.Impt_Par, news.News_Type, news.Html_Txt);
         }
         #endregion
 

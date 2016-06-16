@@ -26,8 +26,9 @@
         Comment.News_Uni_Code = id;
         Paras.isCollect = isCollect;
         Paras.isPraise = isPraise;
-
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        //newsMain = decodeURI(newsMain);
+        
         $("#newsMain").html(newsMain);
 
         var $newsimg = $(".header-newsimg img");

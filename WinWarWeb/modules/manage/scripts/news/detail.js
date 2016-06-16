@@ -1,6 +1,7 @@
 ﻿define(function (require, exports, module) {
     var Global = require("global");
     var Upload = require("upload");
+    var Verify = require("verify"), VerifyObject;
 
     var News = {
         Title_Main: '',
@@ -15,10 +16,22 @@
         Html_Txt:''
     };
     var ObjectJS = {};
-    ObjectJS.init = function () {
+    var Editor = null;
+    ObjectJS.init = function (um) {
+        ObjectJS.News_Type = 0;
+        Editor = um;
         ObjectJS.bindEvent();
 
-        //ObjectJS.getList();
+        VerifyObject = Verify.createVerify({
+            element: ".verify",
+            emptyAttr: "data-empty",
+            verifyType: "data-type",
+            regText: "data-text"
+        });
+
+        //ObjectJS.getDetail();
+
+        VerifyObject.isPass();
     };
 
     ObjectJS.bindEvent = function () {
@@ -47,11 +60,10 @@
                                 dataText: "News_Type_Name2",
                                 width: "140",
                                 onChange: function (data) {
-                                    //ObjectJS.Params.PageIndex = 1;
-                                    //ObjectJS.Params.DepartID = data.value;
-                                    //ObjectJS.getList();
+                                    ObjectJS.News_Type = data.value;
                                 }
                             });
+                            ObjectJS.News_Type = NewsType.News_Type_2;
                         });
 
                     });
@@ -77,19 +89,47 @@
         });
 
         $("#btn-saveNews").click(function () {
-            alert(111);
-            //ObjectJS.saveNews();
+            if (!VerifyObject.isPass()) {
+                return false;
+            }
+            if (ObjectJS.News_Type == 0) {
+                alert("选择新闻二级分类");
+                return;
+            }
+
+            News = {
+                Title_Main: $("#Title_Main").val(),
+                Title_Sub: $("#Title_Sub").val(),
+                Title_App: $("#Title_App").val(),
+                News_Sum: $("#News_Sum").val(),
+                News_Author: $("#News_Author").val(),
+                Real_Source_Name: $("#Real_Source_Name").val(),
+                Is_Issue:$(".Is_Issue .radiobox .hover").data("value"),
+                Nega_Post_Par: $(".Nega_Post_Par .radiobox .hover").data("value"),
+                Impt_Par: $(".Impt_Par .radiobox .hover").data("value"),
+                News_Type: ObjectJS.News_Type,
+                Html_Txt: encodeURI(Editor.getContent())
+            };
+
+            ObjectJS.saveNews();
         });
+
+
 
     };
 
     ObjectJS.saveNews = function () {
         Global.post("/manage/news/saveNews", { news: JSON.stringify(News) }, function (data) {
             if (data.result == 1) {
-
+                confirm("是否继续新建新闻?", function () {
+                    location.href = location.href;
+                },
+                function () {
+                    location.href = "/Manage/News/Index";
+                });
             }
             else {
-
+                alert("抱歉,保存失败");
             }
         });
     }

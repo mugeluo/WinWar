@@ -172,8 +172,8 @@ namespace WinWarDAL
 
         public bool AddNews(long id,string title, string titleSub,string titleApp,
             string newsSum, string author, string source,
-            int posiPar,int important,int typeid,
-            string content)
+            int posiPar,int important,string isIssue,
+            int typeid,string content)
         {
             SqlParameter[] paras = { 
                                     new SqlParameter("@ID",id),
@@ -185,6 +185,7 @@ namespace WinWarDAL
                                      new SqlParameter("@Source",source),
                                      new SqlParameter("@PosiPar",posiPar),
                                      new SqlParameter("@Important",important),
+                                     new SqlParameter("@IsIssue",isIssue),
                                      new SqlParameter("@TypeID",typeid),
                                      new SqlParameter("@Content",content)
                                    };

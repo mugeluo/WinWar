@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WinWarBusiness;
+using WinWarEntity;
 
 namespace WinWarWeb.Areas.Manage.Controllers
 {
@@ -31,6 +33,20 @@ namespace WinWarWeb.Areas.Manage.Controllers
             jsonResult.Add("items", items);
             jsonResult.Add("totalCount", totalCount);
             jsonResult.Add("pageCount", pageCount);
+
+            return new JsonResult()
+            {
+                Data = jsonResult,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult SaveNews(string news)
+        {
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            NewsEntity model = serializer.Deserialize<NewsEntity>(news);
+            bool flag = NewsBusiness.BaseBusiness.AddNews(model);
+            jsonResult.Add("result", flag?1:0);
 
             return new JsonResult()
             {

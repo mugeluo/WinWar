@@ -358,7 +358,16 @@ nav .action-box .point { width:6px; height:6px; border-radius:3px; background-co
          min-width: 150px; max-width:300px; box-shadow: 0 0 12px #4a90e2; overflow:auto;background-color:#4a90e2;border-radius:8px;}
 
 .alert .alert-wrap { line-height:20px; margin:12px 15px;word-wrap: break-word;  word-break:break-all; text-align:center;color:#fff;font-size:16px; }
-
+.alert-header
+{
+    padding: 10px;
+    font-size: 14px;
+    color: #444;
+}
+.alert-bottom {
+    width:112px;
+    margin:10px auto;
+}
 .alert .confirm { padding:5px 10px; background-color:#4a98e7; color:#fff; border:none; cursor:pointer; display:inline-block; border-radius:2px; }
 .alert .confirm:hover {  background-color:#2F73B8;  }
 .alert .close { padding:5px 10px; background-color:#ccc; color:#666; border:none; cursor:pointer; display:inline-block; border-radius:2px; }

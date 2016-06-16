@@ -25,12 +25,19 @@ CREATE PROCEDURE [dbo].[M_AddNews]
 	@Source nvarchar(100)='',
 	@PosiPar int=3,
 	@Important int=2,
+	@IsIssue int=0,
 	@TypeID bigint,
 	@Content text
 AS
-insert into NEWS_MAIN(NEWS_UNI_CODE,TITLE_MAIN,TITLE_SUB,TITLE_APP,NEWS_SUM,NEWS_AUTHOR,REAL_SOURCE_NAME,NEGA_POSI_PAR,IMPT_PAR,NEWS_TYPE)
-values(@ID,@Title,@TitleSub,@TitleApp,@NewsSum,@Author,@Source,@PosiPar,@Important,@TypeID)
+declare @NEWS_UNI_CODE bigint
+
+select @NEWS_UNI_CODE=max(NEWS_UNI_CODE) from NEWS_MAIN
+
+set @NEWS_UNI_CODE+=1
+
+insert into NEWS_MAIN(NEWS_UNI_CODE,TITLE_MAIN,TITLE_SUB,TITLE_APP,NEWS_SUM,NEWS_AUTHOR,REAL_SOURCE_NAME,NEGA_POSI_PAR,IMPT_PAR,IS_ISSUE,NEWS_TYPE)
+values(@NEWS_UNI_CODE,@Title,@TitleSub,@TitleApp,@NewsSum,@Author,@Source,@PosiPar,@Important,@IsIssue,@TypeID)
 
 insert into NEWS_CONTENT(NEWS_UNI_CODE,HTML_TXT)
-values(@ID,@Content)
+values(@NEWS_UNI_CODE,@Content)
 

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "管理列表";
+    var roles = (List<WinWarEntity.Role>)ViewBag.Roles;     
+}
+
+@section css{
+    <link rel="stylesheet" href="/modules/manage/css/system/organization.css" />
+}
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["manage/scripts/organization/users"], function (obj) {
+            obj.init('@Html.ToJSONString(roles)');
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">管理列表</span>
+    <a href="CreateUser" class="btn-add right @(ExpandClass.IsLimits(HttpContext.Current,"108010302"))" id="addUser">添加管理员</a>
+</div>
+
+<div class="content-body">
+    <div class="search-items mTop10">
+        <div id="ddlDepart" class="left"></div>
+        <div id="ddlRole" class="left mLeft20"></div>
+        <div class="right searth-module" data-text="输入关键字..." data-width="200"> </div>
+    </div>
+    <table class="table-list">
+        <tr class="tr-header">
+            <td class="tLeft">账号</td>
+            <td class="">姓名</td>
+            <td>角色</td>
+            <td class="width150">创建时间</td>
+            <td class="width150">创建人</td>
+            <td class="width80">操作</td>
+        </tr>
+    </table>
+    <div id="pager" class="mTop20"></div>
+</div>
+<ul class="dropdown-ul hide" style="width:90px;">
+    <li class="@(ExpandClass.IsLimits(HttpContext.Current,"108010303"))" id="setObjectRole">角色设置</li>
+     @{
+         if (ViewBag.IsSysAdmin)
+         {
+             <li id="editBaseInfo">编辑信息</li>
+         }        
+      }
+    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "108010304"))" id="deleteObject">注销员工</li>
+     @{
+         if (ViewBag.IsSysAdmin)
+         {
+             <li id="resetPassword">重置密码</li>
+            <li id="resetMobilePhone">解绑手机</li>
+         }        
+      }
+    
+</ul>

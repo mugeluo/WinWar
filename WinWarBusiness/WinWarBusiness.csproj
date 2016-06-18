@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonBusiness.cs" />
     <Compile Include="NewsBusiness.cs" />
+    <Compile Include="OrganizationBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -50,6 +53,10 @@
     <ProjectReference Include="..\WinWarEntity\WinWarEntity.csproj">
       <Project>{2acdc731-d10d-412a-aa62-13fce97485ac}</Project>
       <Name>WinWarEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinWarTool\WinWarTool.csproj">
+      <Project>{aaef8f26-ef13-4526-8ccd-19d02e6f2e27}</Project>
+      <Name>WinWarTool</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

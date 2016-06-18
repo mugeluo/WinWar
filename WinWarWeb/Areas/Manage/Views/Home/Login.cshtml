@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+<title>后台登录</title>
+<link href="/modules/css/base.css" rel="stylesheet" />
+    <link href="/modules/css/layout.css" rel="stylesheet" />
+    <link href="/modules/css/iconfont/iconfont.css" rel="stylesheet" />
+    <link href="/modules/css/user/login.css" rel="stylesheet" />
+ <script src="/Scripts/jquery-1.11.1.js"></script>
+   <script type="text/javascript" src="/Scripts/sea.js"></script>
+    <script type="text/javascript" src="/Scripts/sea-config.js?v=20160525"></script>
+    <script type="text/javascript">
+        $(function () {
+            seajs.use(["manage/scripts/home/login"], function (obj) {
+                obj.init();
+            });
+        });
+
+    </script>
+
+<div class="login-box">
+    <div class="registerErr hide"></div>
+    <div class="login-form">
+        <div class="login-username">
+            <input type="text" id="iptUserName" placeholder="用户名" />
+        </div>
+        <div class="login-pwd">
+            <input type="password" id="iptPwd" placeholder="密码" />
+        </div>
+        
+    </div>
+    <div class="login-btn" id="btnLogin">
+            登录
+    </div>
+</div>

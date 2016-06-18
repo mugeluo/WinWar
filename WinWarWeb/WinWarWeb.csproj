@@ -123,8 +123,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Manage\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
     <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
+    <Compile Include="Areas\Manage\Controllers\OrganizationController.cs" />
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
+    <Compile Include="Areas\Manage\Models\FilterUser.cs" />
+    <Compile Include="Common\Common.cs" />
+    <Compile Include="Common\ExpandClass.cs" />
+    <Compile Include="Common\UserAuthorize.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -154,7 +160,18 @@
     <Content Include="modules\images\comment.png" />
     <Content Include="modules\images\envelope.png" />
     <Content Include="modules\images\ico-btnadd.png" />
+    <Content Include="modules\images\ico-check.png" />
+    <Content Include="modules\images\ico-checked.png" />
+    <Content Include="modules\images\ico-dropdown-white.png" />
+    <Content Include="modules\images\ico-dropdown.png" />
     <Content Include="modules\images\ico-loading.gif" />
+    <Content Include="modules\images\ico-tree-full.png" />
+    <Content Include="modules\images\ico-tree-last.png" />
+    <Content Include="modules\images\ico-tree-line.png" />
+    <Content Include="modules\images\ico-tree-open.png" />
+    <Content Include="modules\images\ico-tree-pull.png" />
+    <Content Include="modules\images\ico_search.png" />
+    <Content Include="modules\images\ico_searchhover.png" />
     <Content Include="modules\images\information.png" />
     <Content Include="modules\images\information_color.png" />
     <Content Include="modules\images\like.png" />
@@ -175,10 +192,20 @@
     <Content Include="modules\images\show_color.png" />
     <Content Include="modules\images\telephone.png" />
     <Content Include="modules\images\weixin_logo.png" />
+    <Content Include="modules\manage\css\system\organization.css" />
+    <Content Include="modules\manage\scripts\home\login.js" />
     <Content Include="modules\manage\scripts\layout.js" />
     <Content Include="modules\manage\scripts\news\detail.js" />
     <Content Include="modules\manage\scripts\news\index.js" />
+    <Content Include="modules\manage\scripts\organization\roles.js" />
+    <Content Include="modules\manage\scripts\organization\users.js" />
     <Content Include="modules\manage\template\news\news-list.html" />
+    <Content Include="modules\manage\template\organization\permissions.html" />
+    <Content Include="modules\manage\template\organization\role-detail.html" />
+    <Content Include="modules\manage\template\organization\roles.html" />
+    <Content Include="modules\manage\template\organization\setuserrole.html" />
+    <Content Include="modules\manage\template\organization\staff-detail.html" />
+    <Content Include="modules\manage\template\organization\users.html" />
     <Content Include="modules\plug\datapager\images\next.png" />
     <Content Include="modules\plug\datapager\images\previous.png" />
     <Content Include="modules\plug\datapager\images\snext.png" />
@@ -187,6 +214,10 @@
     <Content Include="modules\plug\datapager\style.css" />
     <Content Include="modules\plug\dropdown\dropdown.js" />
     <Content Include="modules\plug\dropdown\style.css" />
+    <Content Include="modules\plug\easydialog\easydialog.css" />
+    <Content Include="modules\plug\easydialog\easydialog.js" />
+    <Content Include="modules\plug\easydialog\ico-close-hover.png" />
+    <Content Include="modules\plug\easydialog\ico-close.png" />
     <Content Include="modules\plug\seach_keys\demo.html" />
     <Content Include="modules\plug\seach_keys\seach_keys.js" />
     <Content Include="modules\plug\seach_keys\style.css" />
@@ -296,7 +327,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Manage\Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -345,7 +375,7 @@
     <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manage\Views\News\Create.cshtml" />
+    <Content Include="Areas\Manage\Views\News\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="modules\plug\umeditor\net\getContent.ashx" />
@@ -366,6 +396,23 @@
     <Content Include="modules\plug\umeditor\third-party\mathquill\font\Symbola.otf" />
     <Content Include="modules\plug\umeditor\third-party\mathquill\font\Symbola.ttf" />
     <Content Include="modules\plug\umeditor\third-party\mathquill\font\Symbola.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manage\Views\Organization\RolePermission.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\Roles.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\Users.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manage\Views\Organization\CreateUser.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manage\Views\Home\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Manage\Views\Home\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Areas\Manage\Views\Shared\_LayoutHome.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

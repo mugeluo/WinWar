@@ -28,6 +28,8 @@ seajs.config({
         "upload": "plug/upload/upload.js",
         //搜索插件
         "search": "plug/seach_keys/seach_keys.js",
+        //弹出层插件
+        "easydialog": "plug/easydialog/easydialog.js"
     }
 });
 

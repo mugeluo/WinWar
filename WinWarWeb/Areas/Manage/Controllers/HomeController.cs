@@ -12,12 +12,21 @@ namespace WinWarWeb.Areas.Manage.Controllers
         // GET: /Manage/Home/
         public ActionResult Index()
         {
+            if (Session["ClientManager"] == null) {
+                return Redirect("/manage/home/Login");
+            }
             return View();
         }
 
         public ActionResult Login()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["ClientManager"] = null;
+            return Redirect("/manage/home/Login");
         }
 
         public JsonResult UserLogin(string userName, string pwd)

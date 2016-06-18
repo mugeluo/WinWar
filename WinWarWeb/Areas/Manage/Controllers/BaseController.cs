@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace WinWarWeb.Areas.Manage.Controllers
 {
+    [WinWarWeb.Manage.Common.UserAuthorize]
     public class BaseController : Controller
     {
         //

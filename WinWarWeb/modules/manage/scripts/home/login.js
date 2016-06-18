@@ -40,7 +40,7 @@ define(function (require, exports, module) {
             function (data)
             {
 
-                $("#btnLogin").html("绑定").removeAttr("disabled");
+                $("#btnLogin").html("登录").removeAttr("disabled");
 
                 if (data.result == 1)
                 {

@@ -3,6 +3,7 @@
      string controller = Url.RequestContext.RouteData.Values["controller"].ToString().ToUpper();
      string action = Url.RequestContext.RouteData.Values["action"].ToString().ToUpper();
      WinWarEntity.Menu controllerMenu = ExpandClass.GetController(HttpContext.Current, controller);
+     WinWarEntity.Users CurrentUser = (WinWarEntity.Users)Session["ClientManager"];
 }
 <html>
 <head>
@@ -21,11 +22,11 @@
 <body>
    
     <header>
-        <div class="logo left"><a href="/Home/Index"><img id="companyLogo" src=""/></a></div>
+        <div class="logo left"><a href="/Manage/Home/Index"><img id="companyLogo" src=""/></a></div>
         <div class="left companyname long" id="companyName" title="11111">赢 VAR</div>
         <ul id="modulesMenu" class="menu left">
             <li class="left">
-                <a href="/Home/Index" class="@(controller=="HOME"?"select":"")">
+                <a href="/Manage/Home/Index" class="@(controller=="HOME"?"select":"")">
                     <img class="ico" data-ico="/Content/menuico/home.png" data-hover="/Content/menuico/homehover.png" src="/Content/menuico/home.png" /> 
                     <span class="name">首页</span>
                     <span class="cursor"></span>
@@ -34,7 +35,7 @@
             @foreach (WinWarEntity.Menu model in ExpandClass.GetChildMenuByCode(HttpContext.Current, ExpandClass.CLIENT_TOP_CODE))
             { 
                 <li class="left" data-code="@(model.MenuCode)">
-                    <a class="@( (controller!="HOME" && model.MenuCode.ToUpper()==controllerMenu.PCode.ToUpper()) ? "select" : "")" href="/@(model.Controller)/@(model.View)">
+                    <a class="@( (controller!="HOME" && model.MenuCode.ToUpper()==controllerMenu.PCode.ToUpper()) ? "select" : "")" href="/Manage/@(model.Controller)/@(model.View)">
                         <img class="ico" data-ico="@(model.IcoPath)" data-hover="@(model.IcoHover)" src="@(model.IcoPath)" /> 
                         <span class="name">@(model.Name)</span>
                         <span class="cursor"></span>
@@ -48,7 +49,7 @@
                 <img src="/modules/images/manage/defaultavatar.png" class="avatar" />
             </span>
             <span class="username">
-                牧歌
+                @(CurrentUser.Name)
             </span>
             <span class="dropdown">
                 <span class="dropdown-top"></span>
@@ -72,32 +73,13 @@
                         @foreach (WinWarEntity.Menu view in ExpandClass.GetChildMenuByCode(HttpContext.Current, model.MenuCode))
                         {
                             <li class="action @(view.View.ToUpper()==action ? "select" : "")" data-code="@(view.MenuCode)">
-                                <a href="/@(view.Controller + "/" + view.View)" ><span class="name">@(view.Name)</span></a>
+                                <a href="/Manage/@(view.Controller + "/" + view.View)" ><span class="name">@(view.Name)</span></a>
                             </li>
                         }
                      </ul>
                 </div>
             }
         </nav>
-       @* <nav>
-                <div class="controller" >
-                    <div class="controller-box">
-                        <div class="controller-name">
-                            <span class="open left rotate"></span>
-                            <span class="name left">系统管理</span>
-                        </div>
-                    </div>
-                    <ul class="action-box">
-                         <li class="action select" >
-                            <a href="/Manage/Organization/Users" ><span class="name">管理员列表</span></a>
-                        </li>
-                         <li class="action" >
-                            <a href="/Manage/Organization/Roles" ><span class="name">角色列表</span></a>
-                        </li>
-                     </ul>
-                </div>
-
-        </nav>*@
         <div class="main-content">
             @RenderBody()
         </div>
@@ -108,7 +90,7 @@
         <div class="top-lump"></div>
         <ul class="items-list">
 @*             <li class="item"><a href="/MyAccount/Index">个人中心</a></li>*@
-            <li class="item"><a href="/Home/Logout">安全退出</a></li>
+            <li class="item"><a href="/Manage/Home/Logout">安全退出</a></li>
         </ul>
     </div>
 

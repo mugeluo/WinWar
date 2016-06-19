@@ -16,7 +16,7 @@ namespace WinWarDAL
 
         public DataTable GetNewsTypes()
         {
-            return GetDataTable("Select * from NEWS_TYPE");
+            return GetDataTable("Select * from NEWS_TYPE order by Cls_Code");
         }
 
         public DataTable GetNewsTypeByID(int code)

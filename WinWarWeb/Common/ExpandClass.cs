@@ -86,8 +86,6 @@ public static class ExpandClass
 
     public static string IsLimits(HttpContext httpContext, string menucode)
     {
-        return "";
-
         if (httpContext.Session["ClientManager"] != null)
         {
             WinWarEntity.Users model = (WinWarEntity.Users)httpContext.Session["ClientManager"];

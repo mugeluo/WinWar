@@ -11,7 +11,7 @@
 }
 <div class="header-box">
     <span class="header-title left" >新闻列表</span>
-    <a href="Create" class="btn-add right" id="addUser">新建新闻</a>
+    <a href="Create" class="btn-add right @(ExpandClass.IsLimits(HttpContext.Current, "101010200"))" id="addUser">新建新闻</a>
 </div>
 <div class="search-header">
     <ul class="search-tab search-status">
@@ -57,6 +57,6 @@
     <div id="pager" class="mTop20"></div>
 </div>
 <ul class="dropdown-ul hide" style="width:90px;">
-    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "108010303"))" id="publishNews">发布</li>
-    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "108010304"))" id="cancelPublishNews">取消发布</li>
+    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "101010300"))" id="publishNews">发布</li>
+    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "101010300"))" id="cancelPublishNews">取消发布</li>
 </ul>

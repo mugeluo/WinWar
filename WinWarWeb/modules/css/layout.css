@@ -30,7 +30,9 @@ input[type="reset"]::-moz-focus-inner,
 input[type="button"]::-moz-focus-inner,
 input[type="submit"]::-moz-focus-inner,
 input[type="file"] > input[type="button"]::-moz-focus-inner{padding:0;border:none;}
-
+.nolimits {
+display:none!important;
+}
 /*header样式*/
 header { height:50px; width:100%; background-color:#2F73B8; position:fixed; top:0; z-index:1999; opacity:0.9; box-shadow:0 0 5px #2F73B8;}
 

@@ -196,12 +196,12 @@ namespace WinWarBusiness
         #endregion
 
         #region manage
-        public List<NewsEntity> GetNews(string keyWords, int typeid,
+        public List<NewsEntity> GetNews(string keyWords, int typeid,int publishStatus,
             int pageSize,int pageIndex, ref int totalCount, ref int pageCount )
         {
             List<NewsEntity> list = new List<NewsEntity>();
 
-            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid,
+            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid,publishStatus,
                 pageSize,pageIndex, ref totalCount,ref pageCount);
             foreach (DataRow dr in dt.Rows)
             {
@@ -217,8 +217,20 @@ namespace WinWarBusiness
         public bool AddNews(NewsEntity news)
         {
             return NewsDAL.BaseDAL.AddNews(news.News_Uni_Code, news.Title_Main, news.Title_Sub, news.Title_App, news.News_Sum,
-                news.News_Author, news.Real_Source_Name, news.Nega_Post_Par, news.Impt_Par,news.Is_Issue,
+                news.News_Author, news.Real_Source_Name, news.Nega_Posi_Par, news.Impt_Par,news.Is_Issue,
                 news.News_Type, news.Html_Txt);
+        }
+
+        public bool EditNews(NewsEntity news)
+        {
+            return NewsDAL.BaseDAL.EditNews(news.News_Uni_Code, news.Title_Main, news.Title_Sub, news.Title_App, news.News_Sum,
+                news.News_Author, news.Real_Source_Name, news.Nega_Posi_Par, news.Impt_Par, news.Is_Issue,
+                news.News_Type, news.Html_Txt);
+        }
+
+        public bool PublishNews(long newsCode, int isPublish)
+        {
+            return NewsDAL.BaseDAL.PublishNews(newsCode, isPublish);
         }
         #endregion
 

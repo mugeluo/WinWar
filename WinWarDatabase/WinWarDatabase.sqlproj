@@ -78,5 +78,7 @@
     <Build Include="Procedures\manage\M_UpdateRolePermission.sql" />
     <Build Include="Procedures\manage\M_UpdateUserRole.sql" />
     <Build Include="Procedures\manage\M_GetUserToLogin.sql" />
+    <None Include="Procedures\manage\M_PublishNews.sql" />
+    <None Include="Procedures\manage\M_EditNews.sql" />
   </ItemGroup>
 </Project>

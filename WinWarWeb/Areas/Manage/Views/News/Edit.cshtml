@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "新建新闻";
+    var News = (WinWarEntity.NewsEntity)ViewBag.News;
+    ViewBag.Title = "编辑新闻"+News.Title_Main;
 }
 @section css{
     <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
@@ -13,12 +14,12 @@
         seajs.use(["manage/scripts/news/detail"], function (obj) {
             var um = UM.getEditor('Html_Txt');
 
-            obj.init(um);
+            obj.initEdit(um,'@News.News_Uni_Code', '@News.News_Type', '@News.Is_Issue', '@News.Nega_Posi_Par', '@News.Impt_Par', '@News.Html_Txt');
         });
     </script>
 }
 <div class="header-box">
-    <span class="header-title left" >新建新闻</span>
+    <span class="header-title left" >编辑新闻-@News.Title_Main</span>
 </div>
 
 <div class="content-body mTop20">
@@ -30,42 +31,41 @@
         </li>
         <li>
             <span class="column-title">正标题：</span>
-            <span><input type="text" maxlength="50" id="Title_Main" style="width:320px;" data-empty="必填" class="input verify" /></span> 
+            <span><input type="text" maxlength="50" id="Title_Main" value="@News.Title_Main" style="width:320px;" data-empty="必填" class="input verify" /></span> 
         </li>
        <li>
             <span class="column-title">副标题：</span>
-            <span><input type="text" maxlength="50" id="Title_Sub" style="width:320px;"  class="input" /></span> 
+            <span><input type="text" maxlength="50" id="Title_Sub" value="@News.Title_Sub" style="width:320px;"  class="input" /></span> 
         </li>
         <li>
             <span class="column-title">引标题 ：</span>
-            <span><input type="text" maxlength="50" id="Title_App" style="width:320px;"  class="input" /></span> 
+            <span><input type="text" maxlength="50" id="Title_App" value="@News.Title_App" style="width:320px;"  class="input" /></span> 
         </li>
         <li>
             <span class="column-title">作者：</span>
-            <span><input type="text" maxlength="200" id="News_Author"  class="input" /></span>
+            <span><input type="text" maxlength="200" id="News_Author" value="@News.News_Author"  class="input" /></span>
         </li>
         <li>
             <span class="column-title">来源：</span> 
-            <span><input type="text" maxlength="13" id="Real_Source_Name"  class="input" /></span>
+            <span><input type="text" maxlength="13" id="Real_Source_Name" value="@News.Real_Source_Name" class="input" /></span>
         </li>
         <li class="Is_Issue">
             <span class="column-title left">是否发布：</span> 
-            <div class="left radiobox hand"> <span class="iconfont ico-radiobox hover" data-value="1"><span></span></span> 发布 </div>
+            <div class="left radiobox hand"> <span class="iconfont ico-radiobox" data-value="1"><span></span></span> 发布 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="0"><span></span></span> 不发布 </div>
             <div class="clear"></div>
         </li>
         <li class="Impt_Par">
             <span class="column-title left">重要性：</span> 
-            <div class="left radiobox hand"> <span class="iconfont ico-radiobox hover" data-value="3"><span></span></span> 重要 </div>
+            <div class="left radiobox hand"> <span class="iconfont ico-radiobox" data-value="3"><span></span></span> 重要 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="4"><span></span></span> 非常重要 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="2"><span></span></span> 一般 </div>
-            <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="1"><span></span></span> 不重要 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="1"><span></span></span> 不重要 </div>
             <div class="clear"></div>
         </li>
         <li class="Nega_Posi_Par">
             <span class="column-title left">正负面性：</span> 
-            <div class="left radiobox hand "> <span class="iconfont ico-radiobox hover" data-value="2"><span></span></span> 正面 </div>
+            <div class="left radiobox hand "> <span class="iconfont ico-radiobox" data-value="2"><span></span></span> 正面 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox" data-value="3"><span></span></span> 中性 </div>
             <div class="left radiobox hand mLeft10"> <span class="iconfont ico-radiobox " data-value="1"><span></span></span> 负面 </div>
             <div class="clear"></div>
@@ -76,24 +76,12 @@
         </li>
         <li>
             <span class="column-title">摘要：</span> 
-            <span><textarea id="News_Sum"></textarea></span>
+            <span><textarea id="News_Sum">@News.News_Sum</textarea></span>
         </li>
         <li>
             <span class="column-title">详情：</span>
             <span><textarea id="Html_Txt" style="width:800px;"></textarea></span>
         </li>
-      @*  <li>
-            <span class="column-title">涉及行业：</span>
-            <span><input type="text" maxlength="50" id="INDU_UNI_CODE" style="width:300px;"  class="input" /></span> 
-        </li>
-        <li>
-            <span class="column-title">涉及公司 ：</span>
-            <span><input type="text" maxlength="50" id="COM_UNI_CODE" style="width:300px;"  class="input" /></span> 
-        </li>
-             <li>
-            <span class="column-title">涉及产品 ：</span>
-            <span><input type="text" maxlength="50" id="PROD_UNI_CODE" style="width:300px;" class="input" /></span> 
-        </li>*@
     </ul>
     <div class="mTop20">
         <div class="btn" id="btn-saveNews">保存</div>

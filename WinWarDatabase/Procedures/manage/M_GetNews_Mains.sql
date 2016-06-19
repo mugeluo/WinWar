@@ -18,6 +18,7 @@ GO
 CREATE PROCEDURE [dbo].[M_GetNews_Mains]
 	@KeyWords nvarchar(400)='',
 	@TypeID bigint=0,
+	@PublishStatus int=-1,
 	@PageSize int=10,
 	@PageIndex int=1,
 	@TotalCount int output,
@@ -42,6 +43,9 @@ declare @tableName nvarchar(4000),
 
 	if(@TypeID<>0)
 		set @condition+=' and n.NEWS_TYPE='+str(@TypeID)
+
+	if(@PublishStatus<>-1)
+		set @condition+=' and n.Is_Issue='+str(@PublishStatus)
 
 	declare @total int,@page int
 	exec P_GetPagerData @tableName,@columns,@condition,@key,@OrderColumn,@pageSize,@pageIndex,@total out,@page out,0 

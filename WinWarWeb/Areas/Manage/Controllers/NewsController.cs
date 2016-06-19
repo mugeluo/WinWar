@@ -24,12 +24,20 @@ namespace WinWarWeb.Areas.Manage.Controllers
             return View();
         }
 
+        public ActionResult Edit(long id)
+        {
+            var news= NewsBusiness.BaseBusiness.GetNewsDetail(id, 0);
+            ViewBag.News = news;
+
+            return View();
+        }
         #region ajax
-        public JsonResult GetNews(string keywords, int typeID, int pageSize, int pageIndex)
+        public JsonResult GetNews(string keywords, int typeID,int publishStatus, int pageSize, int pageIndex)
         {
             int totalCount = 0;
             int pageCount = 0;
-            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, pageIndex,ref totalCount, ref pageCount);
+            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID,publishStatus,
+                pageSize, pageIndex,ref totalCount, ref pageCount);
             jsonResult.Add("items", items);
             jsonResult.Add("totalCount", totalCount);
             jsonResult.Add("pageCount", pageCount);
@@ -41,12 +49,33 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
+        [ValidateInput(false)]
         public JsonResult SaveNews(string news)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             NewsEntity model = serializer.Deserialize<NewsEntity>(news);
-            bool flag = NewsBusiness.BaseBusiness.AddNews(model);
+            bool flag = false;
+            if (model.News_Uni_Code == 0)
+            {
+                flag = NewsBusiness.BaseBusiness.AddNews(model);
+            }
+            else
+            {
+                flag = NewsBusiness.BaseBusiness.EditNews(model);
+            }
             jsonResult.Add("result", flag?1:0);
+
+            return new JsonResult()
+            {
+                Data = jsonResult,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult PublishNews(long id, int isPublish)
+        {
+           bool flag= NewsBusiness.BaseBusiness.PublishNews(id, isPublish);
+           jsonResult.Add("result",flag?1:0);
 
             return new JsonResult()
             {

@@ -4,14 +4,16 @@
 %}
 <tr class="tr-header">
     <td class="tLeft">{%=item.News_Uni_Code%}</td>
-    <td class=""><a href="#" target="_blank">{%=item.Title_Main%}</a></td>
+    <td class=""><a href="Edit/{%=item.News_Uni_Code%}">{%=item.Title_Main%}</a></td>
     <td class="width150">{%=item.NEWS_TYPE_NAME2%}</td>
     <td class="tLeft">{%=item.News_Author%}</td>
     <td class="width150">{%=item.Real_Source_Name%}</td>
     <td>{%=item.Impt_Par==1?"重要":"不重要"%}</td>
     <td>{%=item.Is_Issue==1?"发布":"未发布"%}</td>
-    <td class="width150">{%=item.Pub_Time.toDate("yyyy-MM-dd hh:mm")%}</td>
+    <td class="width150">{%=item.Pub_Time.toDate("yyyy-MM-dd")=="3939-01-01"?"--":item.Pub_Time.toDate("yyyy-MM-dd hh:mm")%}</td>
             
-    <td class="width80"></td>
+     <td class="center dropdown"  data-publish="{%=item.Is_Issue%}" data-id="{%=item.News_Uni_Code%}" >
+        <span class="ico-dropdown"></span>
+    </td>
 </tr>
 {% } %}

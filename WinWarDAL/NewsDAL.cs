@@ -146,7 +146,7 @@ namespace WinWarDAL
 
         #endregion
 
-        public DataTable GetNews(string keyWords, int typeid,
+        public DataTable GetNews(string keyWords, int typeid, int publishStatus,
             int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
         {
             SqlParameter[] paras = { 
@@ -155,6 +155,7 @@ namespace WinWarDAL
                                        new SqlParameter("@KeyWords",keyWords),
                                        new SqlParameter("@PageSize",pageSize),
                                        new SqlParameter("@PageIndex",pageIndex),
+                                       new SqlParameter("@PublishStatus",publishStatus),
                                        new SqlParameter("@TypeID",typeid)
                                        
                                    };
@@ -189,7 +190,38 @@ namespace WinWarDAL
                                      new SqlParameter("@TypeID",typeid),
                                      new SqlParameter("@Content",content)
                                    };
-            return ExecuteNonQuery("M_AddNews", paras, CommandType.StoredProcedure) > 0;
+            return ExecuteNonQuery("M_EditNews", paras, CommandType.StoredProcedure) > 0;
+        }
+
+        public bool EditNews(long id, string title, string titleSub, string titleApp,
+            string newsSum, string author, string source,
+            int posiPar, int important, string isIssue,
+            int typeid, string content)
+        {
+            SqlParameter[] paras = { 
+                                    new SqlParameter("@ID",id),
+                                     new SqlParameter("@Title",title),
+                                     new SqlParameter("@TitleSub",titleSub),
+                                     new SqlParameter("@TitleApp",titleApp),
+                                     new SqlParameter("@NewsSum",newsSum),
+                                     new SqlParameter("@Author",author),
+                                     new SqlParameter("@Source",source),
+                                     new SqlParameter("@PosiPar",posiPar),
+                                     new SqlParameter("@Important",important),
+                                     new SqlParameter("@IsIssue",isIssue),
+                                     new SqlParameter("@TypeID",typeid),
+                                     new SqlParameter("@Content",content)
+                                   };
+            return ExecuteNonQuery("M_EditNews", paras, CommandType.StoredProcedure) > 0;
+        }
+
+        public bool PublishNews(long newsCode, int isPublish)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@NewsCode",newsCode),
+                                     new SqlParameter("@IsPublish",isPublish)
+                                   };
+            return ExecuteNonQuery("M_PublishNews", paras, CommandType.StoredProcedure) > 0;
         }
 
     }

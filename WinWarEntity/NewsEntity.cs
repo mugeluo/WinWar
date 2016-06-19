@@ -14,7 +14,7 @@ namespace WinWarEntity
 
         public string News_Author { get; set; }
 
-        public int Nega_Post_Par { get; set; }
+        public int Nega_Posi_Par { get; set; }
 
         public string Title_Main { get; set; }
 

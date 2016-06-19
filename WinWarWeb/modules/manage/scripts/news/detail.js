@@ -4,6 +4,7 @@
     var Verify = require("verify"), VerifyObject;
 
     var News = {
+        News_Uni_Code:0,
         Title_Main: '',
         Title_Sub: '',
         Title_App: '',
@@ -32,6 +33,29 @@
         //ObjectJS.getDetail();
 
         VerifyObject.isPass();
+    };
+
+    ObjectJS.initEdit = function (um, News_Uni_Code, News_Type, Is_Issue, Nega_Posi_Par, Impt_Par, Html_Txt) {
+        News.News_Uni_Code = News_Uni_Code;
+        Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        ObjectJS.News_Type = News_Type;
+        Editor = um;
+        ObjectJS.bindEvent();
+
+        VerifyObject = Verify.createVerify({
+            element: ".verify",
+            emptyAttr: "data-empty",
+            verifyType: "data-type",
+            regText: "data-text"
+        });
+
+        $(".Is_Issue .radiobox .ico-radiobox[data-value='" + Is_Issue + "']").addClass("hover");
+        $(".Impt_Par .radiobox .ico-radiobox[data-value='" + Impt_Par + "']").addClass("hover");
+        $(".Nega_Posi_Par .radiobox .ico-radiobox[data-value='" + Nega_Posi_Par + "']").addClass("hover");
+        Editor.ready(function () {
+            Editor.setContent(Html_Txt);
+        });
+        
     };
 
     ObjectJS.bindEvent = function () {
@@ -88,6 +112,36 @@
             }
         });
 
+        $(".Is_Issue .radiobox").click(function () {
+            var _this = $(this);
+            var _radiobox=_this.find(".ico-radiobox");
+            if (!_radiobox.hasClass("hover")) {
+                _radiobox.addClass("hover");
+                _this.siblings().find(".ico-radiobox").removeClass("hover");
+            }
+
+        });
+
+        $(".Nega_Post_Par .radiobox").click(function () {
+            var _this = $(this);
+            var _radiobox = _this.find(".ico-radiobox");
+            if (!_radiobox.hasClass("hover")) {
+                _radiobox.addClass("hover");
+                _this.siblings().find(".ico-radiobox").removeClass("hover");
+            }
+
+        });
+
+        $(".Impt_Par .radiobox").click(function () {
+            var _this = $(this);
+            var _radiobox = _this.find(".ico-radiobox");
+            if (!_radiobox.hasClass("hover")) {
+                _radiobox.addClass("hover");
+                _this.siblings().find(".ico-radiobox").removeClass("hover");
+            }
+
+        });
+
         $("#btn-saveNews").click(function () {
             if (!VerifyObject.isPass()) {
                 return false;
@@ -98,6 +152,7 @@
             }
 
             News = {
+                News_Uni_Code:News.News_Uni_Code,
                 Title_Main: $("#Title_Main").val(),
                 Title_Sub: $("#Title_Sub").val(),
                 Title_App: $("#Title_App").val(),
@@ -105,28 +160,33 @@
                 News_Author: $("#News_Author").val(),
                 Real_Source_Name: $("#Real_Source_Name").val(),
                 Is_Issue:$(".Is_Issue .radiobox .hover").data("value"),
-                Nega_Post_Par: $(".Nega_Post_Par .radiobox .hover").data("value"),
+                Nega_Posi_Par: $(".Nega_Posi_Par .radiobox .hover").data("value"),
                 Impt_Par: $(".Impt_Par .radiobox .hover").data("value"),
                 News_Type: ObjectJS.News_Type,
-                Html_Txt: encodeURI(Editor.getContent())
+                Html_Txt: Editor.getContent()
             };
 
             ObjectJS.saveNews();
         });
-
-
-
     };
 
     ObjectJS.saveNews = function () {
         Global.post("/manage/news/saveNews", { news: JSON.stringify(News) }, function (data) {
             if (data.result == 1) {
-                confirm("是否继续新建新闻?", function () {
-                    location.href = location.href;
-                },
-                function () {
-                    location.href = "/Manage/News/Index";
-                });
+                if (News.News_Uni_Code == 0) {
+                    confirm("是否继续新建新闻?", function () {
+                        location.href = location.href;
+                    },
+                    function () {
+                        location.href = "/Manage/News/Index";
+                    });
+                }
+                else {
+                    alert("保存成功");
+                    setTimeout(function () {
+                        location.href = "/Manage/News/Index";
+                    }, 500);
+                }
             }
             else {
                 alert("抱歉,保存失败");

@@ -5,7 +5,7 @@
 <tr class="tr-header">
     <td class="tLeft">{%=item.News_Uni_Code%}</td>
     <td class=""><a href="Edit/{%=item.News_Uni_Code%}">{%=item.Title_Main%}</a></td>
-    <td class="width150">{%=item.NEWS_TYPE_NAME2%}</td>
+    <td class="width150">{%=item.NEWS_TYPE_NAME2==null?"--":item.NEWS_TYPE_NAME2%}</td>
     <td class="tLeft">{%=item.News_Author%}</td>
     <td class="width150">{%=item.Real_Source_Name%}</td>
     <td>{%=item.Impt_Par==1?"重要":"不重要"%}</td>

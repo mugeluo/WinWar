@@ -19,12 +19,12 @@ namespace WinWarDAL
             return GetDataTable("Select * from NEWS_TYPE");
         }
 
-        public DataTable GetNewsTypeByID(int id)
+        public DataTable GetNewsTypeByID(int code)
         {
             SqlParameter[] paras = { 
-                                     new SqlParameter("@ID",id),
+                                     new SqlParameter("@Cls_Code",code),
                                    };
-            return GetDataTable("Select * from NEWS_TYPE where ID=@ID", paras, CommandType.Text);
+            return GetDataTable("Select * from NEWS_TYPE where Cls_Code=@Cls_Code", paras, CommandType.Text);
         }
 
         public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)
@@ -146,8 +146,7 @@ namespace WinWarDAL
 
         #endregion
 
-        public DataTable GetNews(string keyWords, int typeid, int publishStatus,
-            int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
+        public DataTable GetNews(string keyWords, int bigTypeID, int typeid, int publishStatus, int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@TotalCount",SqlDbType.Int),
@@ -156,7 +155,8 @@ namespace WinWarDAL
                                        new SqlParameter("@PageSize",pageSize),
                                        new SqlParameter("@PageIndex",pageIndex),
                                        new SqlParameter("@PublishStatus",publishStatus),
-                                       new SqlParameter("@TypeID",typeid)
+                                       new SqlParameter("@TypeID",typeid),
+                                       new SqlParameter("@BigTypeID",bigTypeID)
                                        
                                    };
             paras[0].Value = totalCount;

@@ -17,6 +17,7 @@ GO
 ************************************************************/
 CREATE PROCEDURE [dbo].[M_GetNews_Mains]
 	@KeyWords nvarchar(400)='',
+	@BigTypeID int=-1,
 	@TypeID bigint=0,
 	@PublishStatus int=-1,
 	@PageSize int=10,
@@ -32,21 +33,33 @@ declare @tableName nvarchar(4000),
 	@orderColumn nvarchar(100),
 	@key nvarchar(100)
 	
-	set @tableName='NEWS_MAIN n left join NEWS_TYPE t on n.NEWS_TYPE=t.CLS_CODE '
-	set @columns='n.*,t.NEWS_TYPE_NAME2'
-	set @key='n.PUB_TIME'
-	set @orderColumn='n.NEWS_UNI_CODE'
+	set @tableName='NEWS_MAIN'
+	set @columns='*'
+	set @key='NEWS_UNI_CODE'
+	set @orderColumn=''
 	set @condition=' 1=1 '
 
 	if(@KeyWords<>'')
-		set @condition+=' and ( n.TITLE_MAIN like ''%'+@KeyWords+'%'' ) '
+	begin
+		set @condition+=' and (TITLE_MAIN like ''%'+@KeyWords+'%'' ) '
+	end
 
-	if(@TypeID<>0)
-		set @condition+=' and n.NEWS_TYPE='+str(@TypeID)
+	if(@TypeID>0)
+	begin
+		set @condition+=' and NEWS_TYPE='+str(@TypeID)
+	end
+	else if(@BigTypeID>0)
+	begin
+		create table #Type(TypeID int)
+		insert into #Type select NEWS_TYPE_2 from NEWS_TYPE where NEWS_TYPE_1=@BigTypeID and NEWS_TYPE_2 is not null and NEWS_TYPE_2<>''
+
+		set @condition+=' and NEWS_TYPE in (select TypeID from #Type)'
+	end
 
 	if(@PublishStatus<>-1)
-		set @condition+=' and n.Is_Issue='+str(@PublishStatus)
-
+	begin
+		set @condition+=' and Is_Issue='+str(@PublishStatus)
+	end
 	declare @total int,@page int
 	exec P_GetPagerData @tableName,@columns,@condition,@key,@OrderColumn,@pageSize,@pageIndex,@total out,@page out,0 
 	select @totalCount=@total,@pageCount =@page

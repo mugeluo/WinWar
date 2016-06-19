@@ -44,14 +44,14 @@ namespace WinWarBusiness
 
         #region 查询
 
-        public NewsTypeEntity GetNewsTypeByCode(int id)
+        public NewsTypeEntity GetNewsTypeByCode(int code)
         {
-            if (CacheNewsType.Where(m => m.ID == id).Count() > 0)
+            if (CacheNewsType.Where(m => m.Cls_Code == code).Count() > 0)
             {
-                CacheNewsType.Where(m => m.ID == id).FirstOrDefault();
+                return CacheNewsType.Where(m => m.Cls_Code == code).FirstOrDefault();
             }
             NewsTypeEntity model = new NewsTypeEntity();
-            DataTable dt = NewsDAL.BaseDAL.GetNewsTypeByID(id);
+            DataTable dt = NewsDAL.BaseDAL.GetNewsTypeByID(code);
             if ( dt.Rows.Count>0)
             {
                 model.FillData(dt.Rows[0]);
@@ -62,7 +62,14 @@ namespace WinWarBusiness
 
         public List<NewsTypeEntity> GetNewsTypeByParentID(int id)
         {
-            return CacheNewsType.FindAll(m => m.News_Type_1 == id && m.News_Type_2 != -1);
+            if (id > 0)
+            {
+                return CacheNewsType.FindAll(m => m.News_Type_1 == id && m.News_Type_2 > 0);
+            }
+            else
+            {
+                return CacheNewsType.FindAll(m => m.News_Type_2 <= 0);
+            }
         }
         /// <summary>
         /// 获取新闻
@@ -196,18 +203,19 @@ namespace WinWarBusiness
         #endregion
 
         #region manage
-        public List<NewsEntity> GetNews(string keyWords, int typeid,int publishStatus,
-            int pageSize,int pageIndex, ref int totalCount, ref int pageCount )
+        public List<NewsEntity> GetNews(string keyWords, int bigTypeID, int typeid, int publishStatus, int pageSize, int pageIndex, ref int totalCount, ref int pageCount)
         {
             List<NewsEntity> list = new List<NewsEntity>();
 
-            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid,publishStatus,
-                pageSize,pageIndex, ref totalCount,ref pageCount);
+            DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, bigTypeID, typeid, publishStatus, pageSize, pageIndex, ref totalCount, ref pageCount);
             foreach (DataRow dr in dt.Rows)
             {
                 NewsEntity model = new NewsEntity();
                 model.FillData(dr);
-
+                if (model.News_Type > 0) 
+                {
+                    model.NewsType = GetNewsTypeByCode(model.News_Type);
+                }
                 list.Add(model);
             }
 

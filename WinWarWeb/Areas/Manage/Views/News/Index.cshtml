@@ -13,31 +13,50 @@
     <span class="header-title left" >新闻列表</span>
     <a href="Create" class="btn-add right" id="addUser">新建新闻</a>
 </div>
-
-<div class="content-body mTop20">
+<div class="search-header">
+    <ul class="search-tab search-status">
+        <li data-id="-1" >全部订单</li>
+        <li data-id="0" class="hover">未发布</li>
+        <li data-id="1"">已发布</li>
+    </ul>
+</div>
+<div class="content-body">
+        <div class="search-body">
+        <ul class="search-item search-bigtype">
+            <li class="column-name">一级分类：</li>
+            <li class="item hover" data-id="-1">全部</li>
+            @foreach (var type in (List<WinWarEntity.NewsTypeEntity>)ViewBag.Types)
+            {
+                 <li data-id="@(type.News_Type_1)" class="item">@(type.News_Type_Name1)</li>
+            }
+        </ul>
+        <ul class="search-item search-type">
+            <li class="column-name">二级分类：</li>
+            <li data-id="-1" class="item hover">全部</li>
+        </ul>
+    </div>
     <div class="search-items mTop10">
-        <div id="PublishStatus" class="left mRight20"></div>
-        <div id="ParentType" class="left"></div>
         <div id="NewsType" class="left mLeft20"></div>
-        <div class="right searth-module" data-text="输入姓名/手机/Email..." data-width="200"> </div>
+        <div class="right searth-module" data-text="关键字..." data-width="200"> </div>
     </div>
     <table class="table-list">
         <tr class="tr-header">
-            <td class="tLeft">新闻编码</td>
-            <td class="">标题</td>
-            <td class="width150">新闻分类</td>
-            <td class="tLeft">作者</td>
-            <td class="width150">来源</td>
+            <td class="tLeft">标题</td>
+            <td class="width150 tLeft">新闻分类</td>
+            <td class="width80">作者</td>
+            <td class="width150 tLeft">来源</td>
             <td>重要性</td>
             <td>是否发布</td>
+            <td class="width80">浏览数</td>
+            <td class="width80">收藏数</td>
+            <td class="width80">评论数</td>
             <td class="width150">发布时间</td>
-            
             <td class="width80">操作</td>
         </tr>
     </table>
     <div id="pager" class="mTop20"></div>
 </div>
 <ul class="dropdown-ul hide" style="width:90px;">
-    <li class="@(ExpandClass.IsLimits(HttpContext.Current,"108010303"))" id="publishNews">发布</li>
+    <li class="@(ExpandClass.IsLimits(HttpContext.Current, "108010303"))" id="publishNews">发布</li>
     <li class="@(ExpandClass.IsLimits(HttpContext.Current, "108010304"))" id="cancelPublishNews">取消发布</li>
 </ul>

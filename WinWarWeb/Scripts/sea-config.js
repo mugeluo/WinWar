@@ -4,6 +4,7 @@ seajs.config({
     base: "/modules/",
     alias: {
         "jquery": "/Scripts/jquery-1.11.1.js",
+        //"jquery": "/Scripts/zepto.js",
         "global": "scripts/global.js",
         //分页控件
         "pager": "plug/datapager/paginate.js",

@@ -12,7 +12,7 @@
     };
     var NavsCache = [];//新闻导航缓存
     var NewsCache = [];//新闻列表缓存
-    var NoNewsDate = false;
+    var NoNewsData = false;
     var ObjectJS = {};
 
     ObjectJS.init = function (parentTypeID) {
@@ -28,7 +28,7 @@
     ObjectJS.bindEvent = function () {
         //滚动加载 新闻列表
         $(window).bind("scroll", function () {
-            if (!NoNewsDate) {
+            if (!NoNewsData) {
                 var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
                 if (bottom <= 20) {
                     setTimeout(function () {
@@ -82,7 +82,7 @@
                 $(".overlay-keywords").show();
                 $("#keywords-show").val(Paras.keywords);
 
-                NoNewsDate = false;
+                NoNewsData = false;
                 $(".load-more").hide();
                 Paras.pageIndex = 1;
                 Paras.lastNewsCode = 0;
@@ -95,7 +95,7 @@
             $('.overlay-keywords').hide();
             $("#keywords-show").val('');
 
-            NoNewsDate = false;
+            NoNewsData = false;
             $(".load-more").hide();
             Paras.keywords = '';
             Paras.pageIndex = 1;
@@ -103,47 +103,11 @@
             ObjectJS.getNews();
         });
 
-        //ObjectJS.bindNav();
-
         //数据初始化
         if (Paras.parentTypeID != 16) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
     };
-
-    ObjectJS.bindNav = function () {
-        var n = $('.nav-list li').size();
-        var wh = 100 * n + "%";
-        $('.nav-list').width(wh);
-        var lt = (100 / n / 3);
-        var lt_li = lt + "%";
-        $('.nav-list li').width(lt_li);
-        var y = 0;
-        var w = n / 2;
-
-        $(".nav-list").swipe({
-            swipeLeft: function () {
-                alert(111);
-                if (y == -lt * w) {
-                    alert('已经到最后页');
-                } else {
-                    y = y - lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-            },
-            swipeRight: function () {
-                if (y == 0) {
-                    alert('已经到第一页')
-                } else {
-                    y = y + lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-
-            }
-        });
-    }
 
     ObjectJS.getNewsTypeByParentID = function () {
         var data = NavsCache[Paras.parentTypeID];
@@ -178,22 +142,24 @@
             $(".nav-list").append(html);
         }
 
-        NoNewsDate = false;
+        NoNewsData = false;
         $(".load-more").hide();
         Paras.pageIndex == 1;
         Paras.lastNewsCode = 0;
-        ObjectJS.bindNavClick();
+
+        ObjectJS.bindNewsNavClick();
+        //ObjectJS.bindNewsNavSlide();
         ObjectJS.getNews();
     }
 
-    ObjectJS.bindNavClick = function () {
+    ObjectJS.bindNewsNavClick = function () {
         $(".nav-list li .nav-item").click(function () {
             var _this = $(this);
             if (!_this.hasClass("active")) {
                 _this.parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");
                 _this.addClass("active").next().addClass("select");
 
-                NoNewsDate = false;
+                NoNewsData = false;
                 $(".load-more").hide();
                 Paras.typeID = _this.data("id");
                 Paras.pageIndex =1;
@@ -201,6 +167,40 @@
                 ObjectJS.getNews();
             }
         });
+    }
+
+    ObjectJS.bindNewsNavSlide = function () {
+        var n = $('.nav-list li').size();
+        var wh = 100 * n + "%";
+        $('.nav-list').width(wh);
+        var lt = (100 / n / 3);
+        var lt_li = lt + "%";
+        $('.nav-list li').width(lt_li);
+        var y = 0;
+        var w = n / 2;
+
+        $(".nav-list").swipe({
+            swipeLeft: function () {
+                if (y == -lt * w) {
+                    alert('已经到最后页');
+                } else {
+                    y = y - lt;
+                    var t = y + "%";
+                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                }
+            },
+            swipeRight: function () {
+                if (y == 0) {
+                    alert('已经到第一页')
+                } else {
+                    y = y + lt;
+                    var t = y + "%";
+                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
+                }
+
+            }
+        });
+
     }
 
     ObjectJS.getNews = function () {
@@ -219,7 +219,7 @@
                 }
 
                 if (Paras.pageSize > data.items.length) {
-                    NoNewsDate = true;
+                    NoNewsData = true;
                 }
                 ObjectJS.bindNews(data);
             });
@@ -246,7 +246,7 @@
                 $(".content ul").append(innerhtml);
                 innerhtml.fadeIn(400);
 
-                if (NoNewsDate) {
+                if (NoNewsData) {
                     $(".load-more").show();
                 }
             });
@@ -256,7 +256,7 @@
                 $(".content ul").html('<li class="no-data">暂无新闻</li>');
             }
             else {
-                if (NoNewsDate) {
+                if (NoNewsData) {
                     $(".load-more").show();
                 }
             }

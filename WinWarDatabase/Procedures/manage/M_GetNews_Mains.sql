@@ -41,7 +41,7 @@ declare @tableName nvarchar(4000),
 
 	if(@KeyWords<>'')
 	begin
-		set @condition+=' and (TITLE_MAIN like ''%'+@KeyWords+'%'' ) '
+		set @condition+=' and ( TITLE_MAIN like ''%'+@KeyWords+'%'' or TITLE_SUB like ''%'+@KeyWords+'%'' or TITLE_APP like ''%'+@KeyWords+'%'' or NEWS_AUTHOR like ''%'+@KeyWords+'%'') '
 	end
 
 	if(@TypeID>0)

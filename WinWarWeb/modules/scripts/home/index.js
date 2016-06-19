@@ -148,12 +148,12 @@
         Paras.lastNewsCode = 0;
 
         ObjectJS.bindNewsNavClick();
-        //ObjectJS.bindNewsNavSlide();
+        ObjectJS.bindNewsNavSlide();
         ObjectJS.getNews();
     }
 
     ObjectJS.bindNewsNavClick = function () {
-        $(".nav-list li .nav-item").click(function () {
+        $(".nav-list li").delegate(".nav-item","click",function () {
             var _this = $(this);
             if (!_this.hasClass("active")) {
                 _this.parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");

@@ -18,7 +18,8 @@ GO
 CREATE PROCEDURE [dbo].[P_GetNews_Mains]
 	@UserID bigint=0,
 	@KeyWords nvarchar(4000),
-	@TypeID bigint,
+	@BigTypeID int=-1,
+	@TypeID int=-1,
 	@PageSize int,
 	@NewsCode bigint=0 output
 AS
@@ -40,7 +41,20 @@ declare @Temp table(News_Uni_Code bigint,Pub_Time datetime,News_Author nvarchar(
   if(@KeyWords<>'')
 	set @CommandSQL+=' and (TITLE_MAIN like ''%'+@KeyWords+'%'')'
 
- set @CommandSQL+=' and NEWS_TYPE='+str(@TypeID)
+
+if(@TypeID>0)
+begin
+	set @CommandSQL+=' and NEWS_TYPE='+str(@TypeID)
+end
+else if(@BigTypeID>0)
+begin
+	create table #Type(TypeID int)
+	insert into #Type select NEWS_TYPE_2 from NEWS_TYPE where NEWS_TYPE_1=@BigTypeID and NEWS_TYPE_2 is not null and NEWS_TYPE_2<>''
+
+	set @CommandSQL+=' and NEWS_TYPE in (select TypeID from #Type)'
+end
+
+
  set @CommandSQL+=' order by News_Uni_Code desc'
 
  insert into @Temp exec (@CommandSQL)

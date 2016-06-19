@@ -6,6 +6,17 @@
     overflow:hidden;
     background-color:#4a90e2;
 }
+.nav .passport-box {
+    position: fixed;
+    top:12px;
+    left:10px;
+    z-index:1100;
+    cursor:pointer;
+}
+.nav .passport-box .icon{
+    max-width:26px;
+    max-height:26px;
+}
 .nav-list {
     margin-top:10px;
     height:40px;
@@ -126,13 +137,14 @@
     margin:0 auto;
     cursor:pointer;
 }
+.menu-list .iconfont {
+    height:35px;
+    padding-bottom:5px;
+}
 .menu-list .item2 {
     width:80px;
     margin:0 auto;
     cursor:pointer;
-}
-.menu-list .iconfont {
-    padding-bottom:5px;
 }
 .menu-list .icon{
     max-width:26px;

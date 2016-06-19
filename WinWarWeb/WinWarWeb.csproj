@@ -203,12 +203,15 @@
     <Content Include="modules\images\link_color.png" />
     <Content Include="modules\images\manage\defaultavatar.png" />
     <Content Include="modules\images\me.png" />
+    <Content Include="modules\images\me_centre.png" />
     <Content Include="modules\images\me_color.png" />
     <Content Include="modules\images\news.jpg" />
     <Content Include="modules\images\reply.png" />
     <Content Include="modules\images\reply_color.png" />
     <Content Include="modules\images\reply_min.png" />
     <Content Include="modules\images\reply_min_color.png" />
+    <Content Include="modules\images\send.png" />
+    <Content Include="modules\images\send_color.png" />
     <Content Include="modules\images\show.png" />
     <Content Include="modules\images\show_color.png" />
     <Content Include="modules\images\telephone.png" />

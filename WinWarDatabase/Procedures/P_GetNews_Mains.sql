@@ -38,7 +38,7 @@ declare @Temp table(News_Uni_Code bigint,Pub_Time datetime,News_Author nvarchar(
  end
 
   if(@KeyWords<>'')
-	set @CommandSQL+=' and ( TITLE_MAIN like ''%'+@KeyWords+'%'' ) '
+	set @CommandSQL+=' and (TITLE_MAIN like ''%'+@KeyWords+'%'')'
 
  set @CommandSQL+=' and NEWS_TYPE='+str(@TypeID)
  set @CommandSQL+=' order by News_Uni_Code desc'

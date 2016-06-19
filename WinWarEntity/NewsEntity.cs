@@ -80,6 +80,7 @@ namespace WinWarEntity
         public string NEWS_TYPE_NAME2 { get; set; }
 
         public NewsTypeEntity NewsType { get; set; }
+
         /// <summary>
         /// 填充数据
         /// </summary>

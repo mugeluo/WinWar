@@ -72,12 +72,12 @@
     <None Include="Procedures\P_GetNEWS_Favorites.sql" />
     <None Include="Procedures\manage\M_GetNews_Mains.sql" />
     <None Include="Procedures\manage\M_AddNews.sql" />
-    <Build Include="Procedures\manage\M_DeleteRole.sql" />
-    <Build Include="Procedures\manage\M_DeleteUserByID.sql" />
-    <Build Include="Procedures\manage\M_InsterUser.sql" />
-    <Build Include="Procedures\manage\M_UpdateRolePermission.sql" />
-    <Build Include="Procedures\manage\M_UpdateUserRole.sql" />
-    <Build Include="Procedures\manage\M_GetUserToLogin.sql" />
+    <None Include="Procedures\manage\M_DeleteRole.sql" />
+    <None Include="Procedures\manage\M_DeleteUserByID.sql" />
+    <None Include="Procedures\manage\M_InsterUser.sql" />
+    <None Include="Procedures\manage\M_UpdateRolePermission.sql" />
+    <None Include="Procedures\manage\M_UpdateUserRole.sql" />
+    <None Include="Procedures\manage\M_GetUserToLogin.sql" />
     <None Include="Procedures\manage\M_PublishNews.sql" />
     <None Include="Procedures\manage\M_EditNews.sql" />
   </ItemGroup>

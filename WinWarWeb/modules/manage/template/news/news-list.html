@@ -9,7 +9,7 @@
     <td class="center">{%=item.News_Author%}</td>
     <td>{%=item.Real_Source_Name%}</td>
     <td class="center">{%=item.Impt_Par==1?"重要":"不重要"%}</td>
-    <td class="center">{%=item.Is_Issue==1?"发布":"未发布"%}</td>
+    <td class="center {%=item.Is_Issue==1||'red'%}">{%=item.Is_Issue==1?"已发布":"未发布"%}</td>
     <td class="center">{%=item.View_Count%}</td>
     <td class="center">{%=item.Collect_Count%}</td>
     <td class="center">{%=item.Comment_Count%}</td>

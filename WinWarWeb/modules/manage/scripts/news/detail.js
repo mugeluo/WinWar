@@ -13,10 +13,10 @@
         Real_Source_Name: '',
         Nega_Post_Par: 3,
         Impt_Par: 2,
-        News_Type: 0,
+        News_Type: "",
         News_Type_Name2:'',
-        News_Type_1: 16,
-        News_Type_Name1: '首页咨询',
+        News_Type_1: "",
+        News_Type_Name1: "",
         Html_Txt:''
     };
     var ObjectJS = {};
@@ -32,8 +32,6 @@
             verifyType: "data-type",
             regText: "data-text"
         });
-
-        //ObjectJS.getDetail();
 
         VerifyObject.isPass();
     };
@@ -66,75 +64,28 @@
     };
 
     ObjectJS.bindEvent = function () {
-        //部门搜索
-        var ParentTypes = [{ ID: '16', Name: '首页咨询' }, { ID: '6', Name: '产业链' }, { ID: '17', Name: '极客秀' }];
+        var _self = this;
         require.async("dropdown", function () {
+            Global.post("/Home/GetNewsTypeByParentID", { id: -1 }, function (data) {
+                $("#ParentType").dropdown({
+                    prevText: "一级分类-",
+                    defaultText: News.News_Type_Name1 || data.items[0].News_Type_Name1,
+                    defaultValue: News.News_Type_1 || data.items[0].News_Type_1,
+                    data: data.items,
+                    dataValue: "News_Type_1",
+                    dataText: "News_Type_Name1",
+                    width: "140",
+                    onChange: function (data) {
+                        _self.getChildTypes(data.value, null, null);
+                    }
+                });
 
-            $("#ParentType").dropdown({
-                prevText: "一级分类-",
-                defaultText: News.News_Type_Name1,
-                defaultValue: News.News_Type_1,
-                data: ParentTypes,
-                dataValue: "ID",
-                dataText: "Name",
-                width: "140",
-                onChange: function (data) {
-                    Global.post("/Home/GetNewsTypeByParentID", { id: data.value }, function (data) {
-                        require.async("dropdown", function () {
-                            var NewsTypes = data.items;
-                            var NewsType = {};
-                            //if (news.News_Type != 0) {
-                            //    NewsType.News_Type_2 = News.News_Type;
-                            //    NewsType.News_Type_Name2 = News.News_Type_Name2;
-                            //}
-                            var NewsType = NewsTypes[0];
-                            $("#NewsType").dropdown({
-                                prevText: "二级分类-",
-                                defaultText: NewsType.News_Type_Name2,
-                                defaultValue: NewsType.News_Type_2,
-                                data: NewsTypes,
-                                dataValue: "News_Type_2",
-                                dataText: "News_Type_Name2",
-                                width: "140",
-                                onChange: function (data) {
-                                    ObjectJS.News_Type = data.value;
-                                }
-                            });
-                            ObjectJS.News_Type = NewsType.News_Type_2;
-                        });
-
-                    });
-                    
+                if (News.News_Type && News.News_Type_Name2) {
+                    _self.getChildTypes(News.News_Type_1, News.News_Type, News.News_Type_Name2);
+                } else {
+                    _self.getChildTypes(data.items[0].News_Type_1, null, null);
                 }
             });
-
-            if (News.News_Type != 0) {
-                Global.post("/Home/GetNewsTypeByParentID", { id: News.News_Type_1 }, function (data) {
-                    require.async("dropdown", function () {
-                        var NewsTypes = data.items;
-                        var NewsType = {};
-                        NewsType.News_Type_2 = News.News_Type;
-                        NewsType.News_Type_Name2 = News.News_Type_Name2;
-     
-
-                        $("#NewsType").dropdown({
-                            prevText: "二级分类-",
-                            defaultText: NewsType.News_Type_Name2,
-                            defaultValue: NewsType.News_Type_2,
-                            data: NewsTypes,
-                            dataValue: "News_Type_2",
-                            dataText: "News_Type_Name2",
-                            width: "140",
-                            onChange: function (data) {
-                                ObjectJS.News_Type = data.value;
-                            }
-                        });
-                        ObjectJS.News_Type = NewsType.News_Type_2;
-                    });
-
-                });
-            }
-
         });
 
         ProductIco = Upload.createUpload({
@@ -200,7 +151,7 @@
                 News_Sum: $("#News_Sum").val(),
                 News_Author: $("#News_Author").val(),
                 Real_Source_Name: $("#Real_Source_Name").val(),
-                Is_Issue:$(".Is_Issue .radiobox .hover").data("value"),
+                Is_Issue: 0,
                 Nega_Posi_Par: $(".Nega_Posi_Par .radiobox .hover").data("value"),
                 Impt_Par: $(".Impt_Par .radiobox .hover").data("value"),
                 News_Type: ObjectJS.News_Type,
@@ -210,6 +161,27 @@
             ObjectJS.saveNews();
         });
     };
+
+    //获取下级分类
+    ObjectJS.getChildTypes = function (parentid, typeid, typename) {
+        Global.post("/Home/GetNewsTypeByParentID", { id: parentid }, function (data) {
+            require.async("dropdown", function () {
+                $("#NewsType").dropdown({
+                    prevText: "二级分类-",
+                    defaultText: typename || data.items[0].News_Type_Name2,
+                    defaultValue: typeid || data.items[0].News_Type_2,
+                    data: data.items,
+                    dataValue: "News_Type_2",
+                    dataText: "News_Type_Name2",
+                    width: "140",
+                    onChange: function (data) {
+                        ObjectJS.News_Type = data.value;
+                    }
+                });
+            });
+
+        });
+    }
 
     ObjectJS.saveNews = function () {
         Global.post("/manage/news/saveNews", { news: JSON.stringify(News) }, function (data) {

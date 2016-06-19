@@ -48,8 +48,9 @@ namespace WinWarBusiness
         {
             if (CacheNewsType.Where(m => m.ID == id).Count() > 0)
             {
-                CacheNewsType.Where(m => m.ID == id).FirstOrDefault();
+              return  CacheNewsType.Where(m => m.ID == id).FirstOrDefault();
             }
+
             NewsTypeEntity model = new NewsTypeEntity();
             DataTable dt = NewsDAL.BaseDAL.GetNewsTypeByID(id);
             if ( dt.Rows.Count>0)
@@ -113,6 +114,7 @@ namespace WinWarBusiness
             {
                 item = new NewsEntity();
                 item.FillData(dt.Rows[0]);
+                item.NewsType = GetNewsTypeByCode(item.News_Type);
             }
 
             return item;

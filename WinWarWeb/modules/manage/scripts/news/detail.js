@@ -14,6 +14,9 @@
         Nega_Post_Par: 3,
         Impt_Par: 2,
         News_Type: 0,
+        News_Type_Name2:'',
+        News_Type_1: 16,
+        News_Type_Name1: '首页咨询',
         Html_Txt:''
     };
     var ObjectJS = {};
@@ -35,10 +38,14 @@
         VerifyObject.isPass();
     };
 
-    ObjectJS.initEdit = function (um, News_Uni_Code, News_Type, Is_Issue, Nega_Posi_Par, Impt_Par, Html_Txt) {
-        News.News_Uni_Code = News_Uni_Code;
-        Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+    ObjectJS.initEdit = function (um, News_Uni_Code, News_Type_1, News_Type_Name1, News_Type, News_Type_Name2, Is_Issue, Nega_Posi_Par, Impt_Par, Html_Txt) {
+        News.News_Type_1 = News_Type_1;
+        News.News_Type_Name1 = News_Type_Name1;
+        News.News_Type = News_Type;
+        News.News_Type_Name2 = News_Type_Name2;
         ObjectJS.News_Type = News_Type;
+        Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        
         Editor = um;
         ObjectJS.bindEvent();
 
@@ -62,10 +69,11 @@
         //部门搜索
         var ParentTypes = [{ ID: '16', Name: '首页咨询' }, { ID: '6', Name: '产业链' }, { ID: '17', Name: '极客秀' }];
         require.async("dropdown", function () {
+
             $("#ParentType").dropdown({
                 prevText: "一级分类-",
-                defaultText: "首页咨询",
-                defaultValue: "16",
+                defaultText: News.News_Type_Name1,
+                defaultValue: News.News_Type_1,
                 data: ParentTypes,
                 dataValue: "ID",
                 dataText: "Name",
@@ -74,6 +82,11 @@
                     Global.post("/Home/GetNewsTypeByParentID", { id: data.value }, function (data) {
                         require.async("dropdown", function () {
                             var NewsTypes = data.items;
+                            var NewsType = {};
+                            //if (news.News_Type != 0) {
+                            //    NewsType.News_Type_2 = News.News_Type;
+                            //    NewsType.News_Type_Name2 = News.News_Type_Name2;
+                            //}
                             var NewsType = NewsTypes[0];
                             $("#NewsType").dropdown({
                                 prevText: "二级分类-",
@@ -94,6 +107,34 @@
                     
                 }
             });
+
+            if (News.News_Type != 0) {
+                Global.post("/Home/GetNewsTypeByParentID", { id: News.News_Type_1 }, function (data) {
+                    require.async("dropdown", function () {
+                        var NewsTypes = data.items;
+                        var NewsType = {};
+                        NewsType.News_Type_2 = News.News_Type;
+                        NewsType.News_Type_Name2 = News.News_Type_Name2;
+     
+
+                        $("#NewsType").dropdown({
+                            prevText: "二级分类-",
+                            defaultText: NewsType.News_Type_Name2,
+                            defaultValue: NewsType.News_Type_2,
+                            data: NewsTypes,
+                            dataValue: "News_Type_2",
+                            dataText: "News_Type_Name2",
+                            width: "140",
+                            onChange: function (data) {
+                                ObjectJS.News_Type = data.value;
+                            }
+                        });
+                        ObjectJS.News_Type = NewsType.News_Type_2;
+                    });
+
+                });
+            }
+
         });
 
         ProductIco = Upload.createUpload({

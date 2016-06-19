@@ -24,7 +24,7 @@ namespace WinWarDAL
             SqlParameter[] paras = { 
                                      new SqlParameter("@ID",id),
                                    };
-            return GetDataTable("Select * from NEWS_TYPE where ID=@ID", paras, CommandType.Text);
+            return GetDataTable("Select * from NEWS_TYPE where CLS_CODE=@ID", paras, CommandType.Text);
         }
 
         public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)

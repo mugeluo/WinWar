@@ -43,6 +43,7 @@
     <Compile Include="CommonBusiness.cs" />
     <Compile Include="NewsBusiness.cs" />
     <Compile Include="OrganizationBusiness.cs" />
+    <Compile Include="PassportBusiness.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

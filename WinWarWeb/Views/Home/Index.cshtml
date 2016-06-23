@@ -2,21 +2,27 @@
     ViewBag.Title = "赢 VAR";
 }
 @section css{
+    <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
     <link href="/modules/css/home/index.css" rel="stylesheet" />
 }
 
 @section scripts{
-    <script src="/modules/plug/touchSwipe/jquery.touchSwipe.min.js"></script>
+    <script src="/modules/plug/swiper/swiper.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/home/index"], function (obj) {
             obj.init('@ViewBag.ID');
         });
     </script>
 }
-<div class="nav">
+@*<div class="nav">
+    <div class="swiper-wrapper"></div>
     <ul class="nav-list"></ul>
     <div class="clear"></div>
     <div class="passport-box" onclick="location.href='/user/index'"><img class="icon" data-icon="information" src="/modules/images/me_centre.png" /></div>
+</div>*@
+
+<div class="swiper-container">
+    <div class="swiper-wrapper"></div>
 </div>
 
 <div class="search">

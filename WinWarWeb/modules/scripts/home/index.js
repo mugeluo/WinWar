@@ -124,22 +124,19 @@
     };
 
     ObjectJS.bindNewsTypeByParentID = function (data) {
-        $(".nav-list").html('');
+        $(".swiper-wrapper").html('');
 
         for (var i = 0, len = data.items.length; i < len; i++) {
             var item = data.items[i];
             var html = '';
             if (i == 0) {
-                html += '<li ><div class="nav-item active" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
-                html += '<span class="select inline-block"></span>';
+                html += '<div class="swiper-slide select" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
                 Paras.typeID = item.News_Type_2;
             }
             else {
-                html += '<li ><div class="nav-item" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
-                html += '<span class="inline-block"></span>';
+                html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
             }
-            html += '</li>';
-            $(".nav-list").append(html);
+            $(".swiper-wrapper").append(html);
         }
 
         NoNewsData = false;
@@ -153,11 +150,10 @@
     }
 
     ObjectJS.bindNewsNavClick = function () {
-        $(".nav-list li").delegate(".nav-item","click",function () {
+        $(".swiper-wrapper .swiper-slide").unbind().click(function () {
             var _this = $(this);
-            if (!_this.hasClass("active")) {
-                _this.parent().siblings().find(".nav-item").removeClass("active").next().removeClass("select");
-                _this.addClass("active").next().addClass("select");
+            if (!_this.hasClass("select")) {
+                _this.addClass("select").siblings().removeClass("select");
 
                 NoNewsData = false;
                 $(".load-more").hide();
@@ -170,37 +166,10 @@
     }
 
     ObjectJS.bindNewsNavSlide = function () {
-        var n = $('.nav-list li').size();
-        var wh = 100 * n + "%";
-        $('.nav-list').width(wh);
-        var lt = (100 / n / 3);
-        var lt_li = lt + "%";
-        $('.nav-list li').width(lt_li);
-        var y = 0;
-        var w = n / 2;
-
-        $(".nav-list").swipe({
-            swipeLeft: function () {
-                if (y == -lt * w) {
-                    alert('已经到最后页');
-                } else {
-                    y = y - lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-            },
-            swipeRight: function () {
-                if (y == 0) {
-                    alert('已经到第一页')
-                } else {
-                    y = y + lt;
-                    var t = y + "%";
-                    $(this).css({ '-webkit-transform': "translate(" + t + ")", '-webkit-transition': '500ms linear' });
-                }
-
-            }
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3,
+            spaceBetween: 30
         });
-
     }
 
     ObjectJS.getNews = function () {

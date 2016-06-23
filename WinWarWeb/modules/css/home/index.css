@@ -1,11 +1,36 @@
-﻿.nav {
-    width:100%;
-    height:50px;
-    position: fixed;
+﻿.swiper-container {
+    width: 100%;
+    height: 50px;
+    position:fixed;
+    z-index:1000;
     top:0px;
-    overflow:hidden;
+    left:0px;
     background-color:#4a90e2;
 }
+.swiper-container .swiper-slide { 
+    font-size:16px;
+    color:#9EC9E7;
+    height:50px;
+    cursor:pointer;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.swiper-container .select {
+    color:#fff;
+    height:47px;
+    border-bottom:3px solid #B671DF;
+} 
 .nav .passport-box {
     position: fixed;
     top:12px;
@@ -17,38 +42,8 @@
     max-width:26px;
     max-height:26px;
 }
-.nav-list {
-    margin-top:10px;
-    height:40px;
-    position:absolute;
-    width:100%;
-    left:0px;
-    top:0px;
-    z-index:1000;
-    cursor:pointer;
-    overflow:hidden;
-}
-.nav-list li{
-    float:left;
-    text-align:center;
-    width:33%;
-    height:40px;
-    overflow:hidden;
-}
-.nav-list .nav-item{
-    font-size:16px;
-    color:#9EC9E7;
-}
-.nav-list .active {
-    color:#fff;
-}
-.nav-list .select{
-    width:8px;
-    height:8px;
-    border-radius:4px;
-    background-color:#fff;
-    display:none;
-}
+
+
 .search {
     margin:60px 10px 10px 10px;
     border-radius:5px;

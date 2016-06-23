@@ -246,6 +246,9 @@
     <Content Include="modules\plug\seach_keys\demo.html" />
     <Content Include="modules\plug\seach_keys\seach_keys.js" />
     <Content Include="modules\plug\seach_keys\style.css" />
+    <Content Include="modules\plug\swiper\css\swiper.css" />
+    <Content Include="modules\plug\swiper\css\swiper.min.css" />
+    <Content Include="modules\plug\swiper\swiper.min.js" />
     <Content Include="modules\plug\touchSwipe\jquery.touchSwipe.min.js" />
     <Content Include="modules\plug\umeditor\dialogs\emotion\emotion.css" />
     <Content Include="modules\plug\umeditor\dialogs\emotion\emotion.js" />
@@ -444,6 +447,9 @@
   <ItemGroup>
     <Content Include="Areas\Manage\Views\News\Edit.cshtml" />
     <None Include="Areas\Manage\Views\Shared\_LayoutHome.cshtml" />
+    <Content Include="modules\plug\swiper\maps\swiper.jquery.min.js.map" />
+    <Content Include="modules\plug\swiper\maps\swiper.jquery.umd.min.js.map" />
+    <Content Include="modules\plug\swiper\maps\swiper.min.js.map" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

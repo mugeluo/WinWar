@@ -21,6 +21,8 @@ namespace WinWarWeb.Controllers
 
         public ActionResult Login()
         {
+            ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode("http://localhost:9999/Home/WeiXinCallBack"));
+            
             return View();
         }
         #region ajax

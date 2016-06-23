@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WeiXin.Sdk
 {
-    public class Class1
+     public class Passport
     {
+
     }
 }

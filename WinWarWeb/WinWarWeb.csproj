@@ -372,6 +372,10 @@
     <Content Include="Views\User\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WeiXin.Sdk\WeiXin.Sdk.csproj">
+      <Project>{a01e43b8-fabf-4601-8894-4374026aa08c}</Project>
+      <Name>WeiXin.Sdk</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WinWarBusiness\WinWarBusiness.csproj">
       <Project>{ce9d2362-dbd2-49a8-84f1-d64a9ef9c803}</Project>
       <Name>WinWarBusiness</Name>
@@ -455,9 +459,9 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>9999</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:23809/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

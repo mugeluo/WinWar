@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WinWarEntity
 {
+    [Serializable]
     public class Passport
     {
 		private int _autoid;
@@ -32,7 +33,6 @@ namespace WinWarEntity
 		private DateTime _turnovertime;
 		private DateTime _createtime= DateTime.Now;
 		private string _createuserid;
-		private string _clientid;
 
 
         public List<Menu> Menus { get; set; }

@@ -450,6 +450,7 @@
     <Content Include="modules\plug\swiper\maps\swiper.jquery.min.js.map" />
     <Content Include="modules\plug\swiper\maps\swiper.jquery.umd.min.js.map" />
     <Content Include="modules\plug\swiper\maps\swiper.min.js.map" />
+    <Content Include="Views\User\WeiXinCallBack.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

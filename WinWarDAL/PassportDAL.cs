@@ -12,16 +12,15 @@ namespace WinWarDAL
     {
         public static PassportDAL BaseDAL = new PassportDAL();
 
-        public bool BindWeiXinID(string name, string avatar, string mobilePhone, string weiXinID)
+        public bool BindWeiXinID(string name, string avatar, string weiXinID)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@Name",name),
                                        new SqlParameter("@Avatar",avatar),
-                                       new SqlParameter("@MobilePhone",mobilePhone),
-                                        new SqlParameter("@WeiXinID",weiXinID)
+                                        new SqlParameter("@BindWeiXinID",weiXinID)
                                    };
 
-            return ExecuteNonQuery(" if(not exists(Select * from passport where BindWeiXinID=@WeiXinID and status<>9)) insert into passport(Name,Avatar,MobilePhone,WeiXinID) values(@Name,@Avatar,@MobilePhone,@BindWeiXinID) ", paras, CommandType.Text)>0;
+            return ExecuteNonQuery(" if(not exists(Select * from passport where BindWeiXinID=@BindWeiXinID and status<>9)) insert into passport(UserID,Name,Avatar,BindWeiXinID) values(NEWID(),@Name,@Avatar,@BindWeiXinID) ", paras, CommandType.Text) > 0;
         }
 
         public DataTable GetPassportByWeiXinID(string weiXinID)

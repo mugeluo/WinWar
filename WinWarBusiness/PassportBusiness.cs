@@ -11,9 +11,9 @@ namespace WinWarBusiness
 {
     public class PassportBusiness
     {
-        public static bool BindWeiXinID(string name, string avatar,string mobilePhone, string weiXinID)
+        public static bool BindWeiXinID(string name, string avatar, string weiXinID)
         {
-           return PassportDAL.BaseDAL.BindWeiXinID(name, avatar, mobilePhone,weiXinID);
+           return PassportDAL.BaseDAL.BindWeiXinID(name, avatar,weiXinID);
         }
 
         public static Passport GetPassportByWeiXinID(string weiXinID)

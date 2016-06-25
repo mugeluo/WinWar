@@ -1,19 +1,26 @@
-﻿.swiper-container {
+﻿.nav {
+   background-color:#4a90e2; 
+   height:50px;
+   width: 100%;
+   top:0px;
+    position:fixed;
+    z-index:1000;
+}
+.swiper-container {
     width: 100%;
     height: 50px;
     position:fixed;
-    z-index:1000;
     top:0px;
-    left:0px;
+    left:30px;
     background-color:#4a90e2;
 }
 .swiper-container .swiper-slide { 
-    font-size:16px;
-    color:#9EC9E7;
-    height:50px;
+    
     cursor:pointer;
+    text-align:center;
+    padding-top:10px;
     /* Center slide text vertically */
-    display: -webkit-box;
+    /*display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
@@ -24,25 +31,36 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     -webkit-align-items: center;
-    align-items: center;
+    align-items: center;*/
 }
-.swiper-container .select {
-    color:#fff;
-    height:47px;
-    border-bottom:3px solid #B671DF;
+.swiper-container .swiper-slide div{
+    font-size:16px;
+    color:#9EC9E7;
+}
+ .swiper-slide .circle {
+    width:8px;
+    height:8px;
+    border-radius:4px;
+    background-color:#fff;
+    display:none;
 } 
-.nav .passport-box {
+ .swiper-container  .select .name{
+    color:#fff;
+}
+.swiper-container  .select  .circle{
+    display:inline-block;
+}
+ .passport-icon {
     position: fixed;
     top:12px;
-    left:10px;
+    left:5px;
     z-index:1100;
     cursor:pointer;
 }
-.nav .passport-box .icon{
+ .passport-icon .icon{
     max-width:26px;
     max-height:26px;
 }
-
 
 .search {
     margin:60px 10px 10px 10px;
@@ -200,4 +218,36 @@
     /*filter:Alpha(Opacity=80); -moz-opacity :0.8;opacity:0.8;*/ 
     width:100%;
     height:100px;
+}
+
+.passport-box {
+    display:none;
+    position:fixed;
+    top:0px;
+    left:0px;
+    width:250px;
+    height:100%;
+    z-index:2000;
+    background-color:#569ae9;
+    color:#9EC9E7;
+}
+.passport-content {
+    width:180px;
+    margin:50px auto;
+}
+.passport-content .passport-name {
+    font-size:24px;
+    color:#fff;
+    letter-spacing:5px;
+}
+.passport-content .passport-avatar img{
+    width:100px;
+    height:100px;
+    border-radius:50px;
+}
+.passport-box div,.passport-box a {
+    color:#eeefef;
+    text-align:center;
+    font-size:20px;
+    letter-spacing:2px;
 }

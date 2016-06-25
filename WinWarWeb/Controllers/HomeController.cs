@@ -17,6 +17,7 @@ namespace WinWarWeb.Controllers
         public ActionResult Index(string  id)
         {
             ViewBag.ID = id ?? "16";
+            ViewBag.Passport = currentPassport;
             return View();
         }
 

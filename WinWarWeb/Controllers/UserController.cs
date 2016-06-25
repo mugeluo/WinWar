@@ -14,8 +14,11 @@ namespace WinWarWeb.Controllers
         long userid = 111111;
         public ActionResult Index()
         {
-            //return Redirect("/User/Login");
+            if (Session["WinWarUser"] == null){
+                return Redirect("/home/index");
+            }
 
+            ViewBag.Passport = currentPassport;
             return View();
         }
 
@@ -24,6 +27,13 @@ namespace WinWarWeb.Controllers
             ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl));
             
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            Session["WinWarUser"] = null;
+
+            return Redirect("/home/index");
         }
 
         //微信登录
@@ -65,6 +75,7 @@ namespace WinWarWeb.Controllers
 
             return Redirect("/Home/Index");
         }
+
         #region ajax
         public JsonResult GetNewsFavorites(int pageSize, long lastFavoriteID)
         {

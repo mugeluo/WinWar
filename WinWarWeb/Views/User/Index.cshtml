@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "赢 VAR 个人中心";
+    var Passport = (WinWarEntity.Passport)ViewBag.Passport;
 }
 @section css{
     <link href="/modules/css/home/index.css" rel="stylesheet" />
@@ -15,17 +16,17 @@
 <div class="user-box">
     <div class="user-detail">
         <div class="user-avatar">
-            <img src="/modules/images/news.jpg" />
+            <img src="@Passport.Avatar" />
         </div>
-        <div class="user-name">牧歌</div>
-        <div class="user-moblie">
+        <div class="user-name">@Passport.Name</div>
+        @*<div class="user-moblie">
             <img class="icon" src="/modules/images/telephone.png" />
             <span class="mLeft5">1234455666666</span>
         </div>
         <div class="user-email">
             <img class="icon" src="/modules/images/envelope.png" />
             <span class="mLeft5">xiaoxiaomuge@143.com</span>
-        </div>
+        </div>*@
     </div>
 </div>
 

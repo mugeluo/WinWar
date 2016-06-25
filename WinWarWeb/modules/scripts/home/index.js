@@ -15,7 +15,8 @@
     var NoNewsData = false;
     var ObjectJS = {};
 
-    ObjectJS.init = function (parentTypeID) {
+    ObjectJS.init = function (parentTypeID, userID) {
+        ObjectJS.userID = userID;
         Paras.parentTypeID = parentTypeID;
 
         ObjectJS.bindEvent();
@@ -26,6 +27,13 @@
     };
 
     ObjectJS.bindEvent = function () {
+        $(document).click(function (e) {
+            //隐藏下拉
+            if (!$(e.target).parents().hasClass("passport-icon") && !$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
+                $(".passport-box").fadeOut();
+            }
+        });
+
         //滚动加载 新闻列表
         $(window).bind("scroll", function () {
             if (!NoNewsData) {
@@ -107,6 +115,15 @@
         if (Paras.parentTypeID != 16) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
+
+        $(".passport-icon").click(function () {
+            if (ObjectJS.userID != '') {
+                $(".passport-box").fadeIn();
+            }
+            else {
+                location.href = "/user/login";
+            }
+        });
     };
 
     ObjectJS.getNewsTypeByParentID = function () {
@@ -130,11 +147,11 @@
             var item = data.items[i];
             var html = '';
             if (i == 0) {
-                html += '<div class="swiper-slide select" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
+                html += '<div class="swiper-slide select" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
                 Paras.typeID = item.News_Type_2;
             }
             else {
-                html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '">' + item.News_Type_Name2 + '</div>';
+                html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
             }
             $(".swiper-wrapper").append(html);
         }

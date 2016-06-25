@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "赢 VAR";
+    var Passport = (WinWarEntity.Passport)ViewBag.Passport;
 }
 @section css{
     <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
@@ -10,21 +11,17 @@
     <script src="/modules/plug/swiper/swiper.min.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/home/index"], function (obj) {
-            obj.init('@ViewBag.ID');
+            obj.init('@ViewBag.ID','@Passport.UserID');
         });
     </script>
 }
-@*<div class="nav">
-    <div class="swiper-wrapper"></div>
-    <ul class="nav-list"></ul>
-    <div class="clear"></div>
-    <div class="passport-box" onclick="location.href='/user/index'"><img class="icon" data-icon="information" src="/modules/images/me_centre.png" /></div>
-</div>*@
-
-<div class="swiper-container">
-    <div class="swiper-wrapper"></div>
+<div class="nav">
+    <div class="swiper-container">
+        <div class="swiper-wrapper"></div>
+  
+    </div>
+     <div class="passport-icon"><img class="icon" data-icon="information" src="/modules/images/me_centre.png" /></div>
 </div>
-
 <div class="search">
     <div class="search-box">
         <span class="iconfont">&#xe605;</span>
@@ -92,3 +89,17 @@
     </div>
     <div class="overlay-btn" id="btn-cancel">取消</div>
 </div>
+
+@{
+    if(!string.IsNullOrEmpty(Passport.UserID))
+    {
+        <div class="passport-box">
+            <div class="passport-content">
+                <div class="passport-avatar "><img src="@Passport.Avatar" /></div>
+                <div class="passport-name mTop10">@Passport.Name</div>
+                <div class="mTop80"><a href="/User/Index" style="display:block;">我的收藏</a></div>
+                <div class="mTop30"><a href="/User/Index" style="display:block;">退出</a></div>
+            </div>
+        </div>
+    }
+}

@@ -99,17 +99,6 @@ namespace WinWarBusiness
                     }
                 }
             }
-
-            //记录登录日志
-            //if (model != null)
-            //{
-            //    LogBusiness.AddLoginLog(loginname, true,Manage.ClientBusiness.GetClientDetail(model.ClientID).AgentID == model.AgentID ? IntFactoryEnum.EnumSystemType.Client : IntFactoryEnum.EnumSystemType.Agent, operateip, model.UserID, model.AgentID, model.ClientID);
-            //}
-            //else
-            //{
-            //    LogBusiness.AddLoginLog(loginname, false, IntFactoryEnum.EnumSystemType.Client, operateip, "", "", "");
-            //}
-
             return model;
         }
 

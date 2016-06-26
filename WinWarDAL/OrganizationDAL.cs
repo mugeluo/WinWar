@@ -198,7 +198,7 @@ namespace WinWarDAL
 
         public bool UpdateUserPass(string userid, string loginPwd)
         {
-            string sql = "update users set LoginPwd=@LoginPwd where UserID=@UserID";
+            string sql = "update Users set LoginPwd=@LoginPwd where UserID=@UserID";
 
             SqlParameter[] paras = { 
                                        new SqlParameter("@UserID",userid),

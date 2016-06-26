@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "修改密码";
+}
+
+@section scripts{
+    <script type="text/javascript">
+        seajs.use(["manage/scripts/organization/updatepwd"], function (ObjectJS) {
+            ObjectJS.detailInit();
+        }); 
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left">修改密码</span>
+</div>
+<div class="content-body">
+    <ul class="table-add">
+        <li>
+            <span class="width80">原密码：</span>
+            <span><input id="OldPwd" type="password"/></span>
+             <span id="OldPwdError" class="red mLeft10"></span>
+        </li>
+        <li>
+            <span class="width80">新密码：</span>
+            <span><input id="NewPwd" type="password" /></span>
+            <span id="NewPwdError" class="red mLeft10"></span>
+        </li>
+        <li>
+            <span class="width80">确认密码：</span>
+            <span><input id="NewConfirmPwd" type="password"/></span>
+            <span id="NewConfirmPwdError" class="red mLeft10"></span>
+        </li>
+    </ul>
+    <div class="mTop20">
+        <input type="button" id="saveAdmin" class="btn" value="保存" />
+    </div>
+</div>
+
+

@@ -222,6 +222,7 @@
     <Content Include="modules\manage\scripts\layout.js" />
     <Content Include="modules\manage\scripts\news\detail.js" />
     <Content Include="modules\manage\scripts\news\index.js" />
+    <Content Include="modules\manage\scripts\organization\updatepwd.js" />
     <Content Include="modules\manage\scripts\organization\roles.js" />
     <Content Include="modules\manage\scripts\organization\users.js" />
     <Content Include="modules\manage\template\news\news-list.html" />
@@ -446,6 +447,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Organization\UpdatePwd.cshtml" />
     <None Include="Areas\Manage\Views\Shared\_LayoutHome.cshtml" />
     <Content Include="modules\plug\swiper\maps\swiper.jquery.min.js.map" />
     <Content Include="modules\plug\swiper\maps\swiper.jquery.umd.min.js.map" />

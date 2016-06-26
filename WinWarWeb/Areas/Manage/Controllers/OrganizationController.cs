@@ -65,18 +65,13 @@ namespace WinWarWeb.Areas.Manage.Controllers
             return View();
         }
 
+        public ActionResult UpdatePwd()
+        {
+            return View();
+        }
+
         #region Ajax
 
-
-
-
-
-
-
-        /// <summary>
-        /// 获取角色列表
-        /// </summary>
-        /// <returns></returns>
         public JsonResult GetRoles()
         {
             var list = OrganizationBusiness.GetRoles();
@@ -107,11 +102,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 保存角色
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
         public JsonResult SaveRole(string entity)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -137,11 +127,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 删除角色
-        /// </summary>
-        /// <param name="roleid"></param>
-        /// <returns></returns>
         public JsonResult DeleteRole(string roleid)
         {
             int result = 0;
@@ -154,12 +139,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 重置密码
-        /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="loginPwd"></param>
-        /// <returns></returns>
         public JsonResult UpdateUserPwd(string userID, string loginPwd)
         {
             bool bl = OrganizationBusiness.UpdateUserPass(userID, loginPwd, CurrentUser.AgentID);
@@ -171,13 +150,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 重置手机号
-        /// </summary>
-        /// <param name="bindMobile"></param>
-        /// <param name="option"></param>
-        /// <param name="code"></param>
-        /// <returns></returns>
         public JsonResult UpdateMobilePhone(string userID)
         {
             bool flag = false;
@@ -211,12 +183,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 修改员工基本信息
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <param name="userID"></param>
-        /// <returns></returns>
         public JsonResult UpdateUserBaseInfo(string entity, string userID)
         {
             int result = 0;
@@ -238,12 +204,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 保存角色权限
-        /// </summary>
-        /// <param name="roleid"></param>
-        /// <param name="permissions"></param>
-        /// <returns></returns>
         public JsonResult SaveRolePermission(string roleid, string permissions)
         {
             if (permissions.Length > 0)
@@ -259,70 +219,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
-        /// <summary>
-        /// 获取明道用户列表
-        /// </summary>
-        /// <returns></returns>
-        //public JsonResult GetMDUsers()
-        //{
-        //    if (!string.IsNullOrEmpty(CurrentUser.MDToken))
-        //    {
-        //        var list = AlibabaSdk.UserBusiness.GetUserAll(CurrentUser.MDToken, "", 0, 1000).users;
-        //        JsonDictionary.Add("status", true);
-        //        JsonDictionary.Add("items", list.OrderBy(u => u.name));
-        //    }
-        //    else 
-        //    {
-        //        JsonDictionary.Add("status", false);
-        //    }
-        //    return new JsonResult()
-        //    {
-        //        Data = JsonDictionary,
-        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-        //    };
-        //}
-
-        /// <summary>
-        /// 添加明道用户
-        /// </summary>
-        /// <param name="parentid">上级ID</param>
-        /// <param name="mduserids">明道Id列表</param>
-        /// <returns></returns>
-        //public JsonResult SaveMDUser(string parentid, string mduserids)
-        //{
-        //    bool bl = false;
-
-        //    string[] list = mduserids.Split(',');
-        //    foreach (string mduserid in list)
-        //    {
-        //        if (!string.IsNullOrEmpty(mduserid) && !string.IsNullOrEmpty(CurrentUser.MDToken))
-        //        {
-        //            var model = AlibabaSdk.UserBusiness.GetUserDetail(CurrentUser.MDToken, mduserid);
-        //            if (model.error_code <= 0)
-        //            {
-        //                var user = model.user;
-        //                int result = 0;
-
-        //                bool isAdmin = false;//AlibabaSdk.Entity.App.AppBusiness.IsAppAdmin(CurrentUser.MDToken, user.id, out error);
-
-        //                OrganizationBusiness.CreateUser("", "", user.name, user.mobilePhone, user.email, "", "", "", "", "", parentid, CurrentUser.AgentID, CurrentUser.ClientID, user.id, user.project.id, isAdmin ? 1 : 0, CurrentUser.UserID, out result);
-        //                //添加成功
-        //                if (result == 1)
-        //                {
-        //                    bl = true;
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    JsonDictionary.Add("status", bl);
-        //    return new JsonResult()
-        //    {
-        //        Data = JsonDictionary,
-        //        JsonRequestBehavior = JsonRequestBehavior.AllowGet
-        //    };
-        //}
 
         public JsonResult SaveUser(string entity)
         {
@@ -353,11 +249,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 根据上级获取用户列表
-        /// </summary>
-        /// <param name="parentid"></param>
-        /// <returns></returns>
         public JsonResult GetUsersByParentID(string parentid = "")
         {
             //var list = OrganizationBusiness.GetUsersByParentID(parentid, CurrentUser.AgentID).OrderBy(m => m.FirstName).ToList();
@@ -369,10 +260,7 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 获取用户列表
-        /// </summary>
-        /// <returns></returns>
+
         public JsonResult GetUsers(string filter)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
@@ -414,13 +302,6 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-
-        /// <summary>
-        /// 编辑组织架构上级
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <param name="parentid"></param>
-        /// <returns></returns>
         public JsonResult UpdateUserParentID(string ids, string parentid)
         {
             bool bl = false;//
@@ -465,12 +346,7 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        /// <summary>
-        /// 组织架构替换人员
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <param name="olduserid"></param>
-        /// <returns></returns>
+
         public JsonResult ChangeUsersParentID(string userid, string olduserid)
         {
 
@@ -483,11 +359,7 @@ namespace WinWarWeb.Areas.Manage.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-        /// <summary>
-        /// 删除员工
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <returns></returns>
+
         public JsonResult DeleteUserByID(string userid)
         {
             int result = 0;
@@ -507,6 +379,34 @@ namespace WinWarWeb.Areas.Manage.Controllers
             bool bl = new OrganizationBusiness().UpdateUserRole(userid, roleid, CurrentUser.UserID, OperateIP);
 
             JsonDictionary.Add("status", bl);
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult ConfirmLoginPwd(string loginName, string loginPwd)
+        {
+            if (string.IsNullOrEmpty(loginName))
+            {
+                loginName = CurrentUser.LoginName;
+            }
+            bool bl = OrganizationBusiness.ConfirmLoginPwd(loginName, loginPwd);
+            JsonDictionary.Add("Result", bl);
+
+            return new JsonResult()
+            {
+                Data = JsonDictionary,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult UpdateUserPass(string loginPwd)
+        {
+            bool bl = OrganizationBusiness.UpdateUserPass(CurrentUser.UserID, loginPwd, CurrentUser.AgentID);
+            JsonDictionary.Add("Result", bl);
+
             return new JsonResult()
             {
                 Data = JsonDictionary,

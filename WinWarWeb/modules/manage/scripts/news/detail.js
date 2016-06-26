@@ -37,6 +37,7 @@
     };
 
     ObjectJS.initEdit = function (um, News_Uni_Code, News_Type_1, News_Type_Name1, News_Type, News_Type_Name2, Is_Issue, Nega_Posi_Par, Impt_Par, Html_Txt) {
+        News.News_Uni_Code = News_Uni_Code;
         News.News_Type_1 = News_Type_1;
         News.News_Type_Name1 = News_Type_Name1;
         News.News_Type = News_Type;
@@ -104,17 +105,7 @@
             }
         });
 
-        $(".Is_Issue .radiobox").click(function () {
-            var _this = $(this);
-            var _radiobox=_this.find(".ico-radiobox");
-            if (!_radiobox.hasClass("hover")) {
-                _radiobox.addClass("hover");
-                _this.siblings().find(".ico-radiobox").removeClass("hover");
-            }
-
-        });
-
-        $(".Nega_Post_Par .radiobox").click(function () {
+        $(".Nega_Posi_Par .radiobox").click(function () {
             var _this = $(this);
             var _radiobox = _this.find(".ico-radiobox");
             if (!_radiobox.hasClass("hover")) {

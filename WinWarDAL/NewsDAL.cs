@@ -190,7 +190,7 @@ namespace WinWarDAL
                                      new SqlParameter("@TypeID",typeid),
                                      new SqlParameter("@Content",content)
                                    };
-            return ExecuteNonQuery("M_EditNews", paras, CommandType.StoredProcedure) > 0;
+            return ExecuteNonQuery("M_AddNews", paras, CommandType.StoredProcedure) > 0;
         }
 
         public bool EditNews(long id, string title, string titleSub, string titleApp,

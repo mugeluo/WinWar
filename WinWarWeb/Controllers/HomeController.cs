@@ -14,8 +14,17 @@ namespace WinWarWeb.Controllers
         // GET: /Home/
         public ActionResult Index(string  id)
         {
-            ViewBag.ID = id ?? "16";
-            ViewBag.Passport = currentPassport;
+            if (currentPassport.UserID == 0)
+            {
+
+                var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
+                return Redirect(authorizeUrl);
+            }
+            else
+            {
+                ViewBag.ID = id ?? "6";
+                ViewBag.Passport = currentPassport;
+            }
             return View();
         }
 
@@ -60,17 +69,11 @@ namespace WinWarWeb.Controllers
 
         public JsonResult GetNewsComments(long id,long lastCommentID,int pageSize)
         {
-            if (Session["WinWarUser"] == null)
-            {
-                jsonResult.Add("result", -1);
-            }
-            else
-            {
-                var items = NewsBusiness.BaseBusiness.GetNewsComments(id, pageSize, currentPassport.UserID, ref lastCommentID);
-                jsonResult.Add("items", items);
-                jsonResult.Add("lastCommentID", lastCommentID);
-                jsonResult.Add("result", 1);
-            }
+            var items = NewsBusiness.BaseBusiness.GetNewsComments(id, pageSize, currentPassport.UserID, ref lastCommentID);
+            jsonResult.Add("items", items);
+            jsonResult.Add("lastCommentID", lastCommentID);
+            jsonResult.Add("result", 1);
+
 
             return new JsonResult()
             {

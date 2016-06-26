@@ -6,24 +6,35 @@
         keywords:'',
         pageIndex: 1,
         pageSize:15,
-        parentTypeID: 16,
+        parentTypeID: 6,
         typeID: 0,
         lastNewsCode:0
     };
     var NavsCache = [];//新闻导航缓存
     var NewsCache = [];//新闻列表缓存
+    var ReadNewsCache = [];//已读新闻列表缓存
     var NoNewsData = false;
     var ObjectJS = {};
 
     ObjectJS.init = function (parentTypeID, userID) {
+        ReadNewsCache = window.localStorage.getItem("ReadNewsCache");
+        if (ReadNewsCache != null && ReadNewsCache != '') {
+            ReadNewsCache = ReadNewsCache.split('|');
+        }
+        else {
+            ReadNewsCache = [];
+        }
+
         ObjectJS.userID = userID;
         Paras.parentTypeID = parentTypeID;
 
         ObjectJS.bindEvent();
 
-        if (Paras.parentTypeID == 16) {
+        if (Paras.parentTypeID == 6) {
             ObjectJS.getNewsTypeByParentID();
         }
+
+        
     };
 
     ObjectJS.bindEvent = function () {
@@ -112,7 +123,7 @@
         });
 
         //数据初始化
-        if (Paras.parentTypeID != 16) {
+        if (Paras.parentTypeID != 6) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
 
@@ -141,7 +152,7 @@
     };
 
     ObjectJS.bindNewsTypeByParentID = function (data) {
-        $(".swiper-wrapper").html('');
+        $(".nav .swiper-wrapper").html('');
 
         for (var i = 0, len = data.items.length; i < len; i++) {
             var item = data.items[i];
@@ -153,7 +164,7 @@
             else {
                 html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
             }
-            $(".swiper-wrapper").append(html);
+            $(".nav .swiper-wrapper").append(html);
         }
 
         NoNewsData = false;
@@ -167,7 +178,7 @@
     }
 
     ObjectJS.bindNewsNavClick = function () {
-        $(".swiper-wrapper .swiper-slide").unbind().click(function () {
+        $(".nav .swiper-wrapper .swiper-slide").unbind().click(function () {
             var _this = $(this);
             if (!_this.hasClass("select")) {
                 _this.addClass("select").siblings().removeClass("select");
@@ -183,14 +194,14 @@
     }
 
     ObjectJS.bindNewsNavSlide = function () {
-        var swiper = new Swiper('.swiper-container', {
+        var swiper = new Swiper('.nav .swiper-container', {
             slidesPerView: 3,
             spaceBetween: 30
         });
     }
 
     ObjectJS.getNews = function () {
-        $(".data-loading").show();
+        $(".content .data-loading").show();
 
         var data = null;
         if (Paras.pageIndex == 1) {
@@ -218,24 +229,45 @@
 
     ObjectJS.bindNews = function (data) {
         if (Paras.pageIndex == 1) {
-            $(".content ul").html('');
+            $(".news-list .content ul").html('');
         }
 
         var items = data.items;
         Paras.lastNewsCode = data.lastNewsCode;
-        $(".data-loading").hide();
+        $(".content .data-loading").hide();
    
         if (items.length > 0) {
             DoT.exec("template/home/news-list.html", function (template) {
                 var innerhtml = template(items);
                 innerhtml = $(innerhtml);
-                $(".content ul").append(innerhtml);
+                $(".news-list .content ul").append(innerhtml);
                 innerhtml.fadeIn(400);
 
                 if (NoNewsData) {
                     $(".load-more").show();
                 }
+
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    if (ReadNewsCache.indexOf(""+item.News_Uni_Code) > -1) {
+                        $("#news_" + item.News_Uni_Code + " .news-title").addClass("news-read");
+                    }
+                }
+
+                if (Paras.pageIndex == 1) {
+                    var swiper = new Swiper('.news-list .swiper-container', {
+                        direction: 'vertical',
+                        onTouchEnd: function () {
+                            var y = swiper.getWrapperTranslate("y")
+                        }
+                    });
+                }
+                $(".news-list .swiper-container .swiper-slide").css("height", "auto");
+                
+
             });
+
+            
         }
         else {
             if (Paras.pageIndex == 1) {

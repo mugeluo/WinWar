@@ -21,7 +21,22 @@
 
     var ObjectJS = {};
 
-    ObjectJS.init = function (id, newsMain, isCollect, isPraise,userID) {
+    ObjectJS.init = function (id, newsMain, isCollect, isPraise, userID) {
+        //
+        var ReadNewsCache = window.localStorage.getItem("ReadNewsCache");
+        if (ReadNewsCache == null || ReadNewsCache=='') {
+            ReadNewsCache = [];
+            ReadNewsCache.push(id)
+            window.localStorage.setItem("ReadNewsCache", ReadNewsCache.join('|') );
+        }
+        else {
+            ReadNewsCache = ReadNewsCache.split('|');
+            if (ReadNewsCache.indexOf(id)==-1) {
+                ReadNewsCache.push(id);
+                window.localStorage.setItem("ReadNewsCache", ReadNewsCache.join('|'));
+            }
+        }
+
         Paras.id = id;
         Paras.isCollect = isCollect;
         Paras.isPraise = isPraise;

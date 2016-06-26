@@ -23,9 +23,9 @@ namespace WinWarWeb.Controllers
 
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl),returnUrl);
-            
-            return View();
+            //ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl),returnUrl);
+            var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), returnUrl, YXERP.Common.Common.IsMobileDevice());
+            return Redirect(authorizeUrl);
         }
 
         public ActionResult Logout()
@@ -70,10 +70,6 @@ namespace WinWarWeb.Controllers
                     if (!string.IsNullOrEmpty(state))
                     {
                         return Redirect(state);
-                    }
-                    else
-                    {
-                        return Redirect("/User/Index");
                     }
                 }
             }

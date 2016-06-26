@@ -11,9 +11,18 @@ namespace WeiXin.Sdk
 {
     public class Token
     {
-        public static string GetAuthorizeUrl(string redirect_uri,string returnUrl){
-            string url= string.Format("https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type={2}&scope={3}",
-                AppConfig.AppKey, redirect_uri, "code", "snsapi_login");
+        public static string GetAuthorizeUrl(string redirect_uri,string returnUrl,bool isMobile){
+            string apiUrl = "https://open.weixin.qq.com";
+            if (isMobile)
+            {
+                apiUrl += "/connect/oauth2/authorize";
+            }
+            else
+            {
+                apiUrl += "/connect/qrconnect";
+            }
+            string url= string.Format("{0}?appid={1}&redirect_uri={2}&response_type={3}&scope={4}",
+               apiUrl, AppConfig.AppKey, redirect_uri, "code", "snsapi_login");
 
             if (!string.IsNullOrEmpty(returnUrl)) {
                 url += "&state="+returnUrl;
@@ -33,6 +42,8 @@ namespace WeiXin.Sdk
             var result = HttpRequest.RequestServer(ApiOption.access_token, paras, RequestType.Post);
             return JsonConvert.DeserializeObject<TokenEntity>(result);
         }
+
+       
 
     }
 }

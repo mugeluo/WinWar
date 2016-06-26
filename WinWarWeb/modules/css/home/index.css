@@ -6,7 +6,7 @@
     position:fixed;
     z-index:1000;
 }
-.swiper-container {
+.nav .swiper-container {
     width: 100%;
     height: 50px;
     position:fixed;
@@ -14,7 +14,7 @@
     left:30px;
     background-color:#4a90e2;
 }
-.swiper-container .swiper-slide { 
+.nav .swiper-container .swiper-slide { 
     
     cursor:pointer;
     text-align:center;
@@ -33,23 +33,24 @@
     -webkit-align-items: center;
     align-items: center;*/
 }
-.swiper-container .swiper-slide div{
+.nav .swiper-container .swiper-slide div{
     font-size:16px;
     color:#9EC9E7;
 }
- .swiper-slide .circle {
+ .nav .swiper-slide .circle {
     width:8px;
     height:8px;
     border-radius:4px;
     background-color:#fff;
     display:none;
 } 
- .swiper-container  .select .name{
+.nav  .swiper-container  .select .name{
     color:#fff;
 }
-.swiper-container  .select  .circle{
+.nav .swiper-container  .select  .circle{
     display:inline-block;
 }
+
  .passport-icon {
     position: fixed;
     top:12px;
@@ -71,9 +72,7 @@
     text-align:center;
     cursor:pointer;
 }
-.search-box {
 
-}
 .search .iconfont {
     font-size:18px;
     color:#9d9d9d;
@@ -83,6 +82,32 @@
     font-size:14px;
     margin-left:5px;
 }
+.news-list {
+    position:relative;
+}
+.news-list .swiper-container {
+        width: 100%;
+        position:absolute;
+        z-index:500;
+        top:0px;
+    }
+.news-list .swiper-slide {
+        background: #fff;
+
+        /* Center slide text vertically */
+        /*display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;*/
+    }
 
 .content {
     margin:0px 10px 120px 10px;
@@ -108,6 +133,9 @@
     color:#333!important;
     font-size:16px;
 }
+.news .news-read {
+    color:#9d9d9d!important;
+}
 .news .author {
     color:#cecece!important;
     font-size:16px;
@@ -125,6 +153,10 @@
 .news .icon {
     max-width:16px;
     max-height:16px;
+}
+.news .reply-count {
+    display:inline-block;
+    margin-top:2px;
 }
 
 .menu {

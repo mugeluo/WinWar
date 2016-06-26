@@ -25,9 +25,12 @@
             }
         }
     </div>
-    <div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{location.href='/home/index'}">
+    @*<div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{location.href='/home/index'}">
         <span class="iconfont icon">&#xe60a;
-         @*   <img class="icon" src="/modules/images/back.png" />*@
+        </span>
+    </div>*@
+    <div class="header-back" onclick="location.href='/home/index'">
+        <span class="iconfont icon">&#xe60a;
         </span>
     </div>
     <div class="header-content">
@@ -52,9 +55,6 @@
         <div class="clear"></div>
     </div>
     <div class="detail-box" id="newsMain">
-@*    <script type="text/javascript">
-        document.getElementById("newsMain").innerHTML = '@( HttpUtility.HtmlDecode( Item.Html_Txt ) )';
-    </script>   *@
     </div>
    
 </div>

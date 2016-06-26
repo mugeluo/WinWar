@@ -21,11 +21,12 @@
 
     var ObjectJS = {};
 
-    ObjectJS.init = function (id, newsMain, isCollect, isPraise) {
+    ObjectJS.init = function (id, newsMain, isCollect, isPraise,userID) {
         Paras.id = id;
-        Comment.News_Uni_Code = id;
         Paras.isCollect = isCollect;
         Paras.isPraise = isPraise;
+        Comment.News_Uni_Code = id;
+        ObjectJS.userID = userID;
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         //newsMain = decodeURI(newsMain);
         
@@ -46,6 +47,7 @@
     };
 
     ObjectJS.bindEvent = function () {
+        //
         $(window).scroll(function () {
             if ($(window).scrollTop() > 70) {
                 $(".header-back").css({"background-color":"#fff","border-bottom":"1px solid #ddd"}).find(".icon").css("color","#666");
@@ -54,15 +56,24 @@
                 $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
             }
         });
-
-
+        
+        //
         $(".overlay").click(function (e) {
             if (!$(e.target).parents().hasClass("detail-reply-msg") && !$(e.target).hasClass("detail-reply-msg")) {
                 $(".overlay").hide();
             }
         });
 
+        //
         $("#li-addComment").click(function () {
+            if (ObjectJS.userID == 0) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+
+                return;
+            }
+
             $('.overlay').show();
         });
 
@@ -73,6 +84,14 @@
 
         //添加评论
         $("#btn-addComment").click(function () {
+            if (ObjectJS.userID == 0) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+
+                return;
+            }
+
             Comment.Content = $("#comment-msg").val();
             if (Comment.Content == '') {
                 $('.overlay').hide();
@@ -90,12 +109,28 @@
 
         //收藏
         $("#addNewsCollectCount").click(function () {
+            if (ObjectJS.userID == 0) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+
+                return;
+            }
+
             Paras.isAdd = Paras.isCollect == 1 ? 0 : 1;
             ObjectJS.addNewsCollectCount();
         });
 
         //喜欢
         $("#addNewsPraiseCount").click(function () {
+            if (ObjectJS.userID == 0) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+
+                return;
+            }
+
             Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
             ObjectJS.addNewsPraiseCount();
         });
@@ -134,7 +169,7 @@
 
     ObjectJS.addNewsComment = function () {
         Global.post("/Home/AddNewsComment",{comment:JSON.stringify(Comment)}, function (data) {
-            if (data.result > 0) {
+            if (data.result == 1) {
                 alert("评论成功");
 
                 $(".reply-list .no-data").remove();
@@ -154,12 +189,18 @@
                 $('.overlay').hide();
 
             }
+            else if (data.result == -1) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+            }
+
         });
     }
 
     ObjectJS.addNewsCollectCount = function () {
         Global.post("/Home/AddNewsCollectCount", Paras, function (data) {
-            if (data.result > 0) {
+            if (data.result == 1) {
                 if (Paras.isAdd == 1) {
                     alert("收藏成功");
                     Paras.isCollect = 1;
@@ -175,13 +216,19 @@
                     $("#addNewsCollectCount").find("span").html("收藏");
                 }
             }
+            else if (data.result == -1) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+            }
+
         });
     }
 
     ObjectJS.addNewsPraiseCount = function () {
         Global.post("/Home/AddNewsPraiseCount", Paras, function (data) {
-            if (data.result > 0) {
-                if (Paras.isAdd) {
+            if (data.result == 1) {
+                if (Paras.isAdd==1) {
                     alert("点赞成功");
                     Paras.isPraise = 1;
 
@@ -196,6 +243,12 @@
                     $(".Praise_Count").html(parseInt($(".Praise_Count").html()) -1);
                 }
             }
+            else if (data.result == -1) {
+                confirm("您还未登录，立即去登录", function () {
+                    location.href = "/user/login?returnUrl="+location.href;
+                });
+            }
+
         });
     }
 

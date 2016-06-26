@@ -91,14 +91,14 @@
 </div>
 
 @{
-    if(!string.IsNullOrEmpty(Passport.UserID))
+    if(Passport.UserID!=0)
     {
         <div class="passport-box">
             <div class="passport-content">
                 <div class="passport-avatar "><img src="@Passport.Avatar" /></div>
                 <div class="passport-name mTop10">@Passport.Name</div>
                 <div class="mTop80"><a href="/User/Index" style="display:block;">我的收藏</a></div>
-                <div class="mTop30"><a href="/User/Index" style="display:block;">退出</a></div>
+                <div class="mTop30"><a href="/User/Logout" style="display:block;">退出</a></div>
             </div>
         </div>
     }

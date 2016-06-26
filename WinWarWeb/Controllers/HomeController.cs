@@ -12,8 +12,6 @@ namespace WinWarWeb.Controllers
     {
         //
         // GET: /Home/
-
-        int userid = 111111;
         public ActionResult Index(string  id)
         {
             ViewBag.ID = id ?? "16";
@@ -28,8 +26,9 @@ namespace WinWarWeb.Controllers
                return Redirect("/Home/Index");
             }
 
-            var item = NewsBusiness.BaseBusiness.GetNewsDetail(id, userid);
+            var item = NewsBusiness.BaseBusiness.GetNewsDetail(id, currentPassport.UserID);
             ViewBag.Item = item;
+            ViewBag.Passport = currentPassport;
 
             return View();
         }
@@ -48,7 +47,7 @@ namespace WinWarWeb.Controllers
 
         public JsonResult GetNews(string keywords, int typeID, long lastNewsCode, int pageSize)
         {
-            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, userid, ref lastNewsCode);
+            var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, currentPassport.UserID, ref lastNewsCode);
             jsonResult.Add("items", items);
             jsonResult.Add("lastNewsCode", lastNewsCode);
 
@@ -61,9 +60,17 @@ namespace WinWarWeb.Controllers
 
         public JsonResult GetNewsComments(long id,long lastCommentID,int pageSize)
         {
-            var items = NewsBusiness.BaseBusiness.GetNewsComments(id, pageSize, userid, ref lastCommentID);
-            jsonResult.Add("items", items);
-            jsonResult.Add("lastCommentID", lastCommentID);
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
+            }
+            else
+            {
+                var items = NewsBusiness.BaseBusiness.GetNewsComments(id, pageSize, currentPassport.UserID, ref lastCommentID);
+                jsonResult.Add("items", items);
+                jsonResult.Add("lastCommentID", lastCommentID);
+                jsonResult.Add("result", 1);
+            }
 
             return new JsonResult()
             {
@@ -74,20 +81,29 @@ namespace WinWarWeb.Controllers
 
         public JsonResult AddNewsComment(string comment)
         {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            NewsCommentEntity model = serializer.Deserialize<NewsCommentEntity>(comment);
-
-            bool flag = NewsBusiness.BaseBusiness.AddNewsComment(model.Content, model.News_Uni_Code, userid,model.User_Name,
-                model.Reply_ID, model.Reply_User_ID, model.Reply_User_Name);
-            jsonResult.Add("result", flag?1:0);
-
-            if (flag) {
-                List<NewsCommentEntity> items = new List<NewsCommentEntity>();
-                model.Create_Date = DateTime.Now;
-                model.Reply_Count = 1;
-                items.Add(model);
-                jsonResult.Add("items",items);
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
             }
+            else
+            {
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                NewsCommentEntity model = serializer.Deserialize<NewsCommentEntity>(comment);
+
+                bool flag = NewsBusiness.BaseBusiness.AddNewsComment(model.Content, model.News_Uni_Code, currentPassport.UserID, model.User_Name,
+                    model.Reply_ID, model.Reply_User_ID, model.Reply_User_Name);
+                jsonResult.Add("result", flag ? 1 : 0);
+
+                if (flag)
+                {
+                    List<NewsCommentEntity> items = new List<NewsCommentEntity>();
+                    model.Create_Date = DateTime.Now;
+                    model.Reply_Count = 1;
+                    items.Add(model);
+                    jsonResult.Add("items", items);
+                }
+            }
+
             return new JsonResult()
             {
                 Data = jsonResult,
@@ -97,8 +113,15 @@ namespace WinWarWeb.Controllers
 
         public JsonResult AddNewsCollectCount(long id, int isAdd)
         {
-            bool flag = NewsBusiness.BaseBusiness.AddNewsCollectCount(id, isAdd==1?true:false, userid);
-            jsonResult.Add("result", flag ? 1 : 0);
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
+            }
+            else
+            {
+                bool flag = NewsBusiness.BaseBusiness.AddNewsCollectCount(id, isAdd==1?true:false, currentPassport.UserID);
+                jsonResult.Add("result", flag ? 1 : 0);  
+            }
 
             return new JsonResult()
             {
@@ -109,8 +132,15 @@ namespace WinWarWeb.Controllers
 
         public JsonResult AddNewsPraiseCount(long id, int isAdd)
         {
-            bool flag = NewsBusiness.BaseBusiness.AddNewsPraiseCount(id, isAdd == 1 ? true : false,userid);
-            jsonResult.Add("result", flag ? 1 : 0);
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
+            }
+            else
+            {
+                bool flag = NewsBusiness.BaseBusiness.AddNewsPraiseCount(id, isAdd == 1 ? true : false, currentPassport.UserID);
+                jsonResult.Add("result", flag ? 1 : 0);
+            }
 
             return new JsonResult()
             {

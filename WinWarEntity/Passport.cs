@@ -49,11 +49,11 @@ namespace WinWarEntity
 		/// 
 		/// </summary>
         [Property("Lower")]
-		public string UserID
-		{
-			set{ _userid=value;}
-			get{return _userid;}
-		}
+        public long UserID
+        {
+            set;
+            get;
+        }
 		/// <summary>
 		/// 
 		/// </summary>

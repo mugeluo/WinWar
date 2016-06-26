@@ -27,7 +27,7 @@ namespace WinWarDAL
             return GetDataTable("Select * from NEWS_TYPE where Cls_Code=@Cls_Code", paras, CommandType.Text);
         }
 
-        public DataTable GetNews(string keyWords, int typeid, int pageSize, int userid, ref long newsCode)
+        public DataTable GetNews(string keyWords, int typeid, int pageSize, long userid, ref long newsCode)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@NewsCode",SqlDbType.BigInt),
@@ -81,7 +81,7 @@ namespace WinWarDAL
 
         }
 
-        public DataTable GetNewsComments(long newsCode, int pageSize, int userid, ref long id)
+        public DataTable GetNewsComments(long newsCode, int pageSize, long userid, ref long id)
         {
             SqlParameter[] paras = { 
                                        new SqlParameter("@ID",SqlDbType.BigInt),
@@ -110,7 +110,7 @@ namespace WinWarDAL
             return ExecuteNonQuery("update NEWS_MAIN set View_Count=View_Count+1 where NEWS_UNI_CODE=@NEWS_UNI_CODE", paras, CommandType.Text) > 0;
         }
 
-        public bool AddNewsPraiseCount(long newsCode, bool isAdd, int userid)
+        public bool AddNewsPraiseCount(long newsCode, bool isAdd, long userid)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@NewsCode",newsCode),
@@ -120,7 +120,7 @@ namespace WinWarDAL
             return ExecuteNonQuery("P_AddNewsPraiseCount", paras, CommandType.StoredProcedure) > 0;
         }
 
-        public bool AddNewsCollectCount(long newsCode, bool isAdd, int userid)
+        public bool AddNewsCollectCount(long newsCode, bool isAdd, long userid)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@NewsCode",newsCode),
@@ -130,7 +130,7 @@ namespace WinWarDAL
             return ExecuteNonQuery("P_AddNewsCollectCount", paras, CommandType.StoredProcedure) > 0;
         }
 
-        public bool AddNewsComment(string content, long newsCode, int userid, string userName, long replyid, long replyUserID, string replyUserName)
+        public bool AddNewsComment(string content, long newsCode, long userid, string userName, long replyid, long replyUserID, string replyUserName)
         {
             SqlParameter[] paras = { 
                                      new SqlParameter("@NewsCode",newsCode),

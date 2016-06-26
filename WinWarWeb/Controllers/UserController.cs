@@ -11,20 +11,19 @@ namespace WinWarWeb.Controllers
     {
         //
         // GET: /User/
-        long userid = 111111;
         public ActionResult Index()
         {
             if (Session["WinWarUser"] == null){
-                return Redirect("/home/index");
+                return Redirect("/user/login");
             }
 
             ViewBag.Passport = currentPassport;
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
-            ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl));
+            ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl),returnUrl);
             
             return View();
         }
@@ -32,12 +31,11 @@ namespace WinWarWeb.Controllers
         public ActionResult Logout()
         {
             Session["WinWarUser"] = null;
-
             return Redirect("/home/index");
         }
 
         //微信登录
-        public ActionResult WeiXinCallBack(string code)
+        public ActionResult WeiXinCallBack(string code, string state)
         {
             //string token="raYxos81Hp3Qp7zfyiqA97vLawpOULs757jUQ646y3BKqvANNEmODU2XyaI224uxxeaQsF5Y-OqFrxX4FtebBvGtees4tNVbrXW19B-H2MM";
             //string id="oqjcAxOaH4nsl9iaJomIG2f9r7Qk";
@@ -57,7 +55,7 @@ namespace WinWarWeb.Controllers
                     }
 
                     WinWarEntity.Passport user=PassportBusiness.GetPassportByWeiXinID(unionid);
-                    if(string.IsNullOrEmpty(user.UserID))
+                    if(user.UserID==0)
                     {
                         if(string.IsNullOrEmpty(passport.unionid))
                         {
@@ -69,7 +67,14 @@ namespace WinWarWeb.Controllers
                     }
 
                     Session["WinWarUser"]=user;
-                    return Redirect("/User/Index");
+                    if (!string.IsNullOrEmpty(state))
+                    {
+                        return Redirect(state);
+                    }
+                    else
+                    {
+                        return Redirect("/User/Index");
+                    }
                 }
             }
 
@@ -79,9 +84,17 @@ namespace WinWarWeb.Controllers
         #region ajax
         public JsonResult GetNewsFavorites(int pageSize, long lastFavoriteID)
         {
-            var items = NewsBusiness.BaseBusiness.GetNewsFavorites(userid, pageSize, ref lastFavoriteID);
-            jsonResult.Add("items", items);
-            jsonResult.Add("lastFavoriteID", lastFavoriteID);
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
+            }
+            else
+            {
+                var items = NewsBusiness.BaseBusiness.GetNewsFavorites(currentPassport.UserID, pageSize, ref lastFavoriteID);
+                jsonResult.Add("items", items);
+                jsonResult.Add("lastFavoriteID", lastFavoriteID);
+                jsonResult.Add("result", -1);
+            }
 
             return new JsonResult()
             {

@@ -1,6 +1,7 @@
 ﻿@{
     var Item = (WinWarEntity.NewsEntity)ViewBag.Item;
     var NewsMain=Item.Html_Txt;
+    var Passport = (WinWarEntity.Passport)ViewBag.Passport;
     ViewBag.Title = "赢 VAR  " + Item.Title_Main + "详情";
 }
 @section css{
@@ -11,7 +12,7 @@
     <script type="text/javascript">
         $(function () {
             seajs.use(["scripts/home/detail"], function (obj) {
-                obj.init('@Item.News_Uni_Code','@NewsMain','@Item.Is_Collect','@Item.Is_Praise');
+                obj.init('@Item.News_Uni_Code', '@NewsMain', '@Item.Is_Collect', '@Item.Is_Praise', '@Passport.UserID');
             });
         });
     </script>
@@ -24,7 +25,7 @@
             }
         }
     </div>
-    <div class="header-back" onclick="if(history.length>0){ history.go(-1);} else{location.href='/home/index'}">
+    <div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{location.href='/home/index'}">
         <span class="iconfont icon">&#xe60a;
          @*   <img class="icon" src="/modules/images/back.png" />*@
         </span>

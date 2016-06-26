@@ -117,11 +117,11 @@
         }
 
         $(".passport-icon").click(function () {
-            if (ObjectJS.userID != '') {
+            if (ObjectJS.userID != 0) {
                 $(".passport-box").fadeIn();
             }
             else {
-                location.href = "/user/login";
+                location.href = "/user/login?returnUrl="+location.href;
             }
         });
     };

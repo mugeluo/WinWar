@@ -11,9 +11,14 @@ namespace WeiXin.Sdk
 {
     public class Token
     {
-        public static string GetAuthorizeUrl(string redirect_uri){
-            return string.Format("https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type={2}&scope={3}",
+        public static string GetAuthorizeUrl(string redirect_uri,string returnUrl){
+            string url= string.Format("https://open.weixin.qq.com/connect/qrconnect?appid={0}&redirect_uri={1}&response_type={2}&scope={3}",
                 AppConfig.AppKey, redirect_uri, "code", "snsapi_login");
+
+            if (!string.IsNullOrEmpty(returnUrl)) {
+                url += "&state="+returnUrl;
+            }
+            return url;
         }
 
         public static TokenEntity GetAccessToken(string code)

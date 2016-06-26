@@ -20,7 +20,7 @@ namespace WinWarDAL
                                         new SqlParameter("@BindWeiXinID",weiXinID)
                                    };
 
-            return ExecuteNonQuery(" if(not exists(Select * from passport where BindWeiXinID=@BindWeiXinID and status<>9)) insert into passport(UserID,Name,Avatar,BindWeiXinID) values(NEWID(),@Name,@Avatar,@BindWeiXinID) ", paras, CommandType.Text) > 0;
+            return ExecuteNonQuery(" if(not exists(Select * from passport where BindWeiXinID=@BindWeiXinID and status<>9)) insert into passport(Name,Avatar,BindWeiXinID) values(@Name,@Avatar,@BindWeiXinID) ", paras, CommandType.Text) > 0;
         }
 
         public DataTable GetPassportByWeiXinID(string weiXinID)

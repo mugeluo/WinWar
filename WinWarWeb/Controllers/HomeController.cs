@@ -93,7 +93,7 @@ namespace WinWarWeb.Controllers
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
                 NewsCommentEntity model = serializer.Deserialize<NewsCommentEntity>(comment);
 
-                bool flag = NewsBusiness.BaseBusiness.AddNewsComment(model.Content, model.News_Uni_Code, currentPassport.UserID, model.User_Name,
+                bool flag = NewsBusiness.BaseBusiness.AddNewsComment(model.Content, model.News_Uni_Code, currentPassport.UserID, currentPassport.Name,
                     model.Reply_ID, model.Reply_User_ID, model.Reply_User_Name);
                 jsonResult.Add("result", flag ? 1 : 0);
 
@@ -102,6 +102,8 @@ namespace WinWarWeb.Controllers
                     List<NewsCommentEntity> items = new List<NewsCommentEntity>();
                     model.Create_Date = DateTime.Now;
                     model.Reply_Count = 1;
+                    model.User_Name = currentPassport.Name;
+                    model.CreateUser = currentPassport;
                     items.Add(model);
                     jsonResult.Add("items", items);
                 }

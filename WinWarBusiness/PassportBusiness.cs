@@ -27,5 +27,19 @@ namespace WinWarBusiness
 
             return item;
         }
+
+
+        public static Passport GetPassportByID(long userID)
+        {
+            Passport item = new Passport();
+            DataTable dt = PassportDAL.BaseDAL.GetPassportByID(userID);
+
+            if (dt.Rows.Count > 0)
+            {
+                item.FillData(dt.Rows[0]);
+            }
+
+            return item;
+        }
     }
 }

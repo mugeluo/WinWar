@@ -142,7 +142,7 @@ namespace WinWarBusiness
             {
                 NewsCommentEntity model = new NewsCommentEntity();
                 model.FillData(dr);
-
+                model.CreateUser = PassportBusiness.GetPassportByID(model.User_ID);
                 list.Add(model);
             }
             return list;

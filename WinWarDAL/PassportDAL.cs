@@ -31,5 +31,16 @@ namespace WinWarDAL
 
             return GetDataTable("Select * from passport where BindWeiXinID=@WeiXinID and status<>9 ", paras, CommandType.Text);
         }
+
+        public DataTable GetPassportByID(long userID)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@UserID",userID),
+                                   };
+
+            return GetDataTable("Select * from passport where UserID=@UserID and status<>9 ", paras, CommandType.Text);
+        }
+
+
     }
 }

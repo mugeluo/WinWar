@@ -36,6 +36,9 @@ namespace WinWarEntity
         /// 大于0都等于点赞
         /// </summary>
         public long Is_Praise { get; set; }
+
+        public Passport CreateUser { get; set; }
+
         /// <summary>
         /// 填充数据
         /// </summary>

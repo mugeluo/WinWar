@@ -156,7 +156,7 @@
 }
 .news .reply-count {
     display:inline-block;
-    margin-top:2px;
+    margin-top:1px;
 }
 
 .menu {
@@ -270,7 +270,7 @@
 .passport-content .passport-name {
     font-size:24px;
     color:#fff;
-    letter-spacing:5px;
+    letter-spacing:3px;
 }
 .passport-content .passport-avatar img{
     width:100px;

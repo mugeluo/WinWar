@@ -254,15 +254,15 @@
                     }
                 }
 
-                if (Paras.pageIndex == 1) {
-                    var swiper = new Swiper('.news-list .swiper-container', {
-                        direction: 'vertical',
-                        onTouchEnd: function () {
-                            var y = swiper.getWrapperTranslate("y")
-                        }
-                    });
-                }
-                $(".news-list .swiper-container .swiper-slide").css("height", "auto");
+                //if (Paras.pageIndex == 1) {
+                    //var swiper = new Swiper('.news-list .swiper-container', {
+                    //    direction: 'vertical',
+                    //    onTouchEnd: function () {
+                    //        var y = swiper.getWrapperTranslate("y")
+                    //    }
+                    //});
+                //}
+                //$(".news-list .swiper-container .swiper-slide").css("height", "auto");
                 
 
             });

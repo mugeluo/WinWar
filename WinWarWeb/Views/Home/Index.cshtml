@@ -89,7 +89,7 @@
     <div class="clear"></div>
 </div>
 
-<div class="overlay">
+<div class="overlay overlay-search-keywords">
     <div class="overlay-search">
         <span class="iconfont">&#xe605;</span>
         <input type="text" id="keywords" placeholder="请输入关键字..." />
@@ -108,6 +108,7 @@
 @{
     if(Passport.UserID!=0)
     {
+    <div class="overlay hide overlay-passport-content" style="background-color:rgba(0,0,0,0.5);" id="passport-box">
         <div class="passport-box">
             <div class="passport-content">
                 <div class="passport-avatar "><img src="@Passport.Avatar" /></div>
@@ -116,5 +117,6 @@
                 <div class="mTop30"><a href="/User/Logout" style="display:block;">退出</a></div>
             </div>
         </div>
+    </div>
     }
 }

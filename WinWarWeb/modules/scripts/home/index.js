@@ -38,12 +38,12 @@
     };
 
     ObjectJS.bindEvent = function () {
-        $(document).click(function (e) {
-            //隐藏下拉
-            if (!$(e.target).parents().hasClass("passport-icon") && !$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
-                $(".passport-box").fadeOut();
-            }
-        });
+        //$(document).click(function (e) {
+        //    //隐藏下拉
+        //    if (!$(e.target).parents().hasClass("passport-icon") && !$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
+        //        $(".passport-box").fadeOut();
+        //    }
+        //});
 
         //滚动加载 新闻列表
         $(window).bind("scroll", function () {
@@ -59,9 +59,15 @@
             }
         });
 
-        $(".overlay").click(function (e) {
+        $(".overlay-search-keywords").click(function (e) {
             if (!$(e.target).parents().hasClass("overlay-search") && !$(e.target).hasClass("overlay-search")) {
-                $(".overlay").hide();
+                $(".overlay-search-keywords").hide();
+            }
+        });
+
+        $(".overlay-passport-content").click(function (e) {
+            if (!$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
+                $(".overlay-passport-content").hide();
             }
         });
 
@@ -86,14 +92,14 @@
 
         //弹出 输入关键字层
         $(".search").click(function () {
-            $('.overlay').show();
+            $('.overlay-search-keywords').show();
             $("#keywords").focus();
 
         });
 
         //关键字查询
         $("#btn-search").click(function () {
-            $('.overlay').hide();
+            $('.overlay-search-keywords').hide();
 
             Paras.keywords = $("#keywords").val();
             if (Paras.keywords != '') {
@@ -129,7 +135,7 @@
 
         $(".passport-icon").click(function () {
             if (ObjectJS.userID != 0) {
-                $(".passport-box").fadeIn();
+                $("#passport-box").fadeIn();
             }
             else {
                 location.href = "/user/login?returnUrl="+location.href;

@@ -2,23 +2,23 @@
 	for(var i=0, j=$data.length; i < j; i++){
 	var item = $data[i];
 %}
- <li class="news" id="news_{%=item.News_Uni_Code%}" onclick="location.href='/home/detail/{%=item.News_Uni_Code%}'">
+ <li class="news" id="news_{%=item.News_Uni_Code%}" data-id="{%=item.News_Uni_Code%}">
     <table width="100%"   style ="border-collapse: collapse;">
         <tr>
             <td valign="top">
-                <a class="news-title" href="/home/detail/{%=item.News_Uni_Code%}">
+                <span class="news-title" >
                     {%=item.Title_Main%}
                     {%
                         if(item.News_Author!=''){%}
                             <span class="author">by {%=item.News_Author%}</span>
                     {% } %}
-                </a>
+                </span>
                 
             </td>
             {%
             if(item.Pic_URL!=''){%}
              <td width="140">
-                <div class="news-img"><a href="/home/detail"><img src="{%=item.Pic_URL%}" /></a></div>
+                <div class="news-img"><a ><img src="{%=item.Pic_URL%}" /></a></div>
             </td>
            {% } %}
         </tr>

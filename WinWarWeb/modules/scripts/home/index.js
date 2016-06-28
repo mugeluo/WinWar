@@ -260,6 +260,13 @@
                     }
                 }
 
+                $(".news-list .content ul").find(".news").click(function () {
+                    var id=$(this).data("id");
+                    $("#iframe-news-detail").attr("src", "/home/detail/" +id );
+                    $(".news-detail").fadeIn();
+                    $("#news_" + id + " .news-title").addClass("news-read");
+                });
+
                 //if (Paras.pageIndex == 1) {
                     //var swiper = new Swiper('.news-list .swiper-container', {
                     //    direction: 'vertical',

@@ -40,6 +40,13 @@
                     $(".content ul").append(innerhtml);
                     innerhtml.fadeIn(400);
 
+                    $(".content ul").find(".news").click(function () {
+                        var id = $(this).data("id");
+                        location.href = "/home/detail/" + id;
+                        //$("#iframe-news-detail").attr("src", "/home/detail/" + id);
+                        //$(".news-detail").fadeIn();
+                        //$("#news_" + id + " .news-title").addClass("news-read");
+                    });
                 });
             }
 

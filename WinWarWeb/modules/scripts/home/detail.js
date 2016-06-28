@@ -43,7 +43,6 @@
         Comment.News_Uni_Code = id;
         ObjectJS.userID = userID;
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-        //newsMain = decodeURI(newsMain);
         
         $("#newsMain").html(newsMain);
 
@@ -148,6 +147,50 @@
 
             Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
             ObjectJS.addNewsPraiseCount();
+        });
+
+        //header-back
+        $(".header-back").click(function () {
+            if (window.parent) {
+                if ($(window.parent.document).find(".news-detail").length>0) {
+                    $(window.parent.document).find(".news-detail").fadeOut();
+                } else {
+                    if (history.length > 1) {
+                        history.go(-1);
+                    } else {
+                        location.href = "/home/index";
+                    }
+                }
+            } else {
+                if (history.length > 1) {
+                    history.go(-1);
+                } else {
+                    location.href = "/home/index";
+                }
+            }
+            //location.href = "/home/index";
+            //history.go(-1);
+            //window.opener = null;
+            //window.open('', '_self');
+            //window.close();
+           
+            //if (navigator.userAgent.indexOf("MSIE") > 0) {
+            //    if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+            //        window.opener = null;
+            //        window.close();
+            //    }
+            //    else {
+            //        window.open('', '_top');
+            //        window.top.close();
+            //    }
+            //}
+            //else if (navigator.userAgent.indexOf("Firefox") > 0) {
+            //    window.location.href = 'about:blank ';
+            //}
+            //else {
+            //    window.opener = null; window.open('', '_self'); window.close();
+            //}
+
         });
     };
 

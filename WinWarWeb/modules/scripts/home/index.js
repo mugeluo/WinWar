@@ -170,7 +170,9 @@
             else {
                 html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
             }
-            $(".nav .swiper-wrapper").append(html);
+            $(".nav .swiper-wrapper").css({ "-webkit-transform": "translate3d(0px, 0px, 0px)", "transform": "translate3d(0px, 0px, 0px)" }).append(html);
+
+           
         }
 
         NoNewsData = false;
@@ -204,6 +206,8 @@
             slidesPerView: 3,
             spaceBetween: 30
         });
+
+        $(".nav .swiper-wrapper .swiper-slide").css("margin-right", "0")
     }
 
     ObjectJS.getNews = function () {

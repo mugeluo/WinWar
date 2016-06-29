@@ -291,74 +291,7 @@ namespace WinWarWeb.Areas.Manage.Controllers
             };
         }
 
-        public JsonResult GetUserNoTeam()
-        {
-            var list = OrganizationBusiness.GetUsers(CurrentUser.AgentID).Where(m => m.TeamID == "");
-            JsonDictionary.Add("items", list);
-            return new JsonResult()
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
 
-        public JsonResult UpdateUserParentID(string ids, string parentid)
-        {
-            bool bl = false;//
-            string[] list = ids.Split(',');
-            foreach (var userid in list)
-            {
-                if (!string.IsNullOrEmpty(userid))
-                {
-                    if (new OrganizationBusiness().UpdateUserParentID(userid, parentid, CurrentUser.AgentID, CurrentUser.UserID, OperateIP))
-                    {
-                        bl = true;
-                    }
-                }
-            }
-            JsonDictionary.Add("status", bl);
-            return new JsonResult()
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
-        public JsonResult ClearUserParentID(string ids, string parentid)
-        {
-            bool bl = false;//
-            string[] list = ids.Split(',');
-            foreach (var userid in list)
-            {
-                if (!string.IsNullOrEmpty(userid))
-                {
-                    if (new OrganizationBusiness().UpdateUserParentID(userid, parentid, CurrentUser.AgentID, CurrentUser.UserID, OperateIP))
-                    {
-                        bl = true;
-                    }
-                }
-            }
-            JsonDictionary.Add("status", bl);
-            return new JsonResult()
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
-
-
-        public JsonResult ChangeUsersParentID(string userid, string olduserid)
-        {
-
-            bool bl = new OrganizationBusiness().ChangeUsersParentID(userid, olduserid, CurrentUser.AgentID, CurrentUser.UserID, OperateIP);
-
-            JsonDictionary.Add("status", bl);
-            return new JsonResult()
-            {
-                Data = JsonDictionary,
-                JsonRequestBehavior = JsonRequestBehavior.AllowGet
-            };
-        }
 
         public JsonResult DeleteUserByID(string userid)
         {

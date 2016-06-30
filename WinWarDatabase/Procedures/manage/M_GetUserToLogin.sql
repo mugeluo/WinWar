@@ -17,7 +17,7 @@ GO
 CREATE PROCEDURE [dbo].[M_GetUserToLogin]
 @LoginName nvarchar(200),
 @LoginPWD nvarchar(64),
-@Result int output  --1:查询正常；2：用户名不存在；3：用户密码有误
+@Result int output  --1:查询正常；2：用户名不存在；3：用户密码有误;4:用户被注销
 AS
 
 declare @UserID nvarchar(64),@ClientID nvarchar(64),@AgentID nvarchar(64),@RoleID nvarchar(64)
@@ -30,15 +30,21 @@ begin
 
 	if(@UserID is not null)
 	begin
-		set @Result=1
-		--select RoleID into #Roles from UserRole where UserID=@UserID and Status=1
+		select @UserID = UserID,@ClientID=ClientID,@AgentID=AgentID,@RoleID=RoleID from Users 
+		where LoginName=@LoginName and LoginPWD=@LoginPWD and  Status<>9
+		if(@UserID is not null)
+		begin
+			--会员信息
+			select * from Users where UserID=@UserID
 
-		--会员信息
-		select * from Users where UserID=@UserID
+			--权限信息
+			select m.* from Menu m left join RolePermission r on r.MenuCode=m.MenuCode 
+			where (RoleID=@RoleID or IsLimit=0 )
 
-		--权限信息
-		select m.* from Menu m left join RolePermission r on r.MenuCode=m.MenuCode 
-		where (RoleID=@RoleID or IsLimit=0 )
+			set @Result=1
+		end
+		else
+			set @Result=4
 
 	end
 	else

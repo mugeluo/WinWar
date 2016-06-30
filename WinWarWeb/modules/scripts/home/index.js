@@ -207,7 +207,14 @@
             spaceBetween: 30
         });
 
-        $(".nav .swiper-wrapper .swiper-slide").css("margin-right", "0")
+        var $items = $(".nav .swiper-wrapper .swiper-slide");
+        var width = $items.eq(0).width();
+        $items.css({
+            "margin-right":"0","width":(width+20)+"px"
+        });
+        $items.eq(0).css("width", (width + 50) + "px");
+        $items.eq(1).css("width", (width - 40) + "px");
+        $items.eq(2).css("width", (width + 50) + "px");
     }
 
     ObjectJS.getNews = function () {

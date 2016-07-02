@@ -46,12 +46,15 @@ define(function (require, exports, module) {
                 {
                     location.href = "Index";
                 }
-                else if (data.result == 0)
+                else if (data.result == 2) {
+                    $(".registerErr").html("用户名不存在").slideDown();
+                }
+                else if (data.result == 3)
                 {
                    $(".registerErr").html("账号或密码有误").slideDown();
                 }
-                else if (data.result == 9) {
-                    $(".registerErr").html("您的账户已注销,请切换其他账户登录").show();
+                else if (data.result == 4) {
+                    $(".registerErr").html("您的账户已注销,请切换其他账户登录").slideDown();
                 }
             });
         });

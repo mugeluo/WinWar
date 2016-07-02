@@ -11,6 +11,7 @@
         News_Sum: '',
         News_Author: '',
         Real_Source_Name: '',
+        Pic_URL:'',
         Nega_Post_Par: 3,
         Impt_Par: 2,
         News_Type: "",
@@ -21,7 +22,16 @@
     };
     var ObjectJS = {};
     var Editor = null;
-    ObjectJS.init = function (um) {
+    ObjectJS.init = function (um, News_Uni_Code, newsMain) {
+        News.News_Uni_Code = News_Uni_Code;
+        Editor = um;
+        ObjectJS.bindEvent();
+        newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+
+        $("#newsMain").html(newsMain);
+    };
+
+    ObjectJS.initCreate = function (um) {
         ObjectJS.News_Type = 0;
         Editor = um;
         ObjectJS.bindEvent();
@@ -36,7 +46,7 @@
         VerifyObject.isPass();
     };
 
-    ObjectJS.initEdit = function (um, News_Uni_Code, News_Type_1, News_Type_Name1, News_Type, News_Type_Name2, Is_Issue, Nega_Posi_Par, Impt_Par, Html_Txt) {
+    ObjectJS.initEdit = function (um, News_Uni_Code, News_Type_1, News_Type_Name1, News_Type, News_Type_Name2, Nega_Posi_Par, Impt_Par, Html_Txt) {
         News.News_Uni_Code = News_Uni_Code;
         News.News_Type_1 = News_Type_1;
         News.News_Type_Name1 = News_Type_Name1;
@@ -55,9 +65,9 @@
             regText: "data-text"
         });
 
-        $(".Is_Issue .radiobox .ico-radiobox[data-value='" + Is_Issue + "']").addClass("hover");
         $(".Impt_Par .radiobox .ico-radiobox[data-value='" + Impt_Par + "']").addClass("hover");
         $(".Nega_Posi_Par .radiobox .ico-radiobox[data-value='" + Nega_Posi_Par + "']").addClass("hover");
+
         Editor.ready(function () {
             Editor.setContent(Html_Txt);
         });
@@ -66,44 +76,50 @@
 
     ObjectJS.bindEvent = function () {
         var _self = this;
-        require.async("dropdown", function () {
-            Global.post("/Home/GetNewsTypeByParentID", { id: -1 }, function (data) {
-                $("#ParentType").dropdown({
-                    prevText: "一级分类-",
-                    defaultText: News.News_Type_Name1 || data.items[0].News_Type_Name1,
-                    defaultValue: News.News_Type_1 || data.items[0].News_Type_1,
-                    data: data.items,
-                    dataValue: "News_Type_1",
-                    dataText: "News_Type_Name1",
-                    width: "140",
-                    onChange: function (data) {
-                        _self.getChildTypes(data.value, null, null);
+
+        if ($("#ParentType").length>0) {
+            require.async("dropdown", function () {
+                Global.post("/Home/GetNewsTypeByParentID", { id: -1 }, function (data) {
+                    $("#ParentType").dropdown({
+                        prevText: "一级分类-",
+                        defaultText: News.News_Type_Name1 || data.items[0].News_Type_Name1,
+                        defaultValue: News.News_Type_1 || data.items[0].News_Type_1,
+                        data: data.items,
+                        dataValue: "News_Type_1",
+                        dataText: "News_Type_Name1",
+                        width: "140",
+                        onChange: function (data) {
+                            _self.getChildTypes(data.value, null, null);
+                        }
+                    });
+
+                    if (News.News_Type && News.News_Type_Name2) {
+                        _self.getChildTypes(News.News_Type_1, News.News_Type, News.News_Type_Name2);
+                    } else {
+                        _self.getChildTypes(data.items[0].News_Type_1, null, null);
                     }
                 });
+            });
+        }
 
-                if (News.News_Type && News.News_Type_Name2) {
-                    _self.getChildTypes(News.News_Type_1, News.News_Type, News.News_Type_Name2);
-                } else {
-                    _self.getChildTypes(data.items[0].News_Type_1, null, null);
+        if ($("#Pic_URL").length > 0) {
+            ProductIco = Upload.createUpload({
+                element: "#Pic_URL",
+                buttonText: "选择图片",
+                className: "",
+                data: { folder: '', action: 'add', oldPath: "" },
+                success: function (data, status) {
+                    if (data.Items.length > 0) {
+                        var item = data.Items[0];
+                        $("#productImg").attr("src", item);
+                        $("#txt_Pic_URL").val(item);
+                    }
+                    else {
+                        alert("只能上传jpg/png/gif类型的图片，且大小不能超过5M！");
+                    }
                 }
             });
-        });
-
-        ProductIco = Upload.createUpload({
-            element: "#Pic_URL",
-            buttonText: "选择图片",
-            className: "",
-            data: { folder: '', action: 'add', oldPath: "" },
-            success: function (data, status) {
-                if (data.Items.length > 0) {
-                    _self.ProductImage = data.Items[0];
-                    $("#productImg").attr("src", data.Items[0]);
-                }
-                else {
-                    alert("只能上传jpg/png/gif类型的图片，且大小不能超过5M！");
-                }
-            }
-        });
+        }
 
         $(".Nega_Posi_Par .radiobox").click(function () {
             var _this = $(this);
@@ -126,14 +142,15 @@
         });
 
         $("#btn-saveNews").click(function () {
-            if (!VerifyObject.isPass()) {
-                return false;
-            }
             if (ObjectJS.News_Type == 0) {
                 alert("选择新闻二级分类");
                 return;
             }
 
+            if (!VerifyObject.isPass()) {
+                return false;
+            }
+            
             News = {
                 News_Uni_Code:News.News_Uni_Code,
                 Title_Main: $("#Title_Main").val(),
@@ -142,6 +159,7 @@
                 News_Sum: $("#News_Sum").val(),
                 News_Author: $("#News_Author").val(),
                 Real_Source_Name: $("#Real_Source_Name").val(),
+                Pic_URL: $("#txt_Pic_URL").val(),
                 Is_Issue: 0,
                 Nega_Posi_Par: $(".Nega_Posi_Par .radiobox .hover").data("value"),
                 Impt_Par: $(".Impt_Par .radiobox .hover").data("value"),
@@ -150,6 +168,14 @@
             };
 
             ObjectJS.saveNews();
+        });
+
+        $("#btn-publishNews").click(function () {
+            ObjectJS.publishNews(News.News_Uni_Code, 1);
+        });
+
+        $("#btn-cancelPublishNews").click(function () {
+            ObjectJS.publishNews(News.News_Uni_Code, 0);
         });
     };
 
@@ -170,6 +196,8 @@
                     }
                 });
             });
+
+            ObjectJS.News_Type = typeid || data.items[0].News_Type_2;
 
         });
     }
@@ -194,6 +222,18 @@
             }
             else {
                 alert("抱歉,保存失败");
+            }
+        });
+    }
+
+    ObjectJS.publishNews = function (id, isPublish) {
+        Global.post("/manage/news/PublishNews", { id: id, isPublish: isPublish }, function (data) {
+            if (data.result == 1) {
+                alert("保存成功");
+                location.href = "/Manage/News/Index";
+            }
+            else {
+                alert("保存失败");
             }
         });
     }

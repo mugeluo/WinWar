@@ -20,6 +20,9 @@
 }
 <div class="header-box">
     <span class="header-title left" >编辑新闻-@News.Title_Main</span>
+    <a class="back right" href="javascript:if(history.length>1){ history.go(-1);} else{}">
+           <i class="iconfont">&#xe62d;</i> 返回
+    </a>
 </div>
 
 <div class="content-body mTop20">
@@ -77,11 +80,13 @@
             <span><textarea id="Html_Txt" style="width:800px;"></textarea></span>
         </li>
     </ul>
-    <img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
+    <img class="product-img" id="productImg" alt="" src="@(string.IsNullOrEmpty(News.Pic_URL)?"/modules/images/default.png":News.Pic_URL)" />
+    <input type="hidden" id="txt_Pic_URL" value="@News.Pic_URL" />
     <div class="mTop20">
         <div class="btn" id="btn-saveNews">保存</div>
         <a class="btn mLeft10" href="@(Url.RequestContext.HttpContext.Request.UrlReferrer == null ? "/Customer/Customers" : "javascript:if(history.length>1){ history.go(-1);} else{ location.href='/Customer/MyCustomer'}")">
             返回
         </a>
     </div>
+
 </div>

@@ -81,7 +81,7 @@
         //
         $("#li-addComment").click(function () {
             if (ObjectJS.userID == 0) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
 
@@ -99,7 +99,7 @@
         //添加评论
         $("#btn-addComment").click(function () {
             if (ObjectJS.userID == 0) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
 
@@ -124,7 +124,7 @@
         //收藏
         $("#addNewsCollectCount").click(function () {
             if (ObjectJS.userID == 0) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
 
@@ -138,7 +138,7 @@
         //喜欢
         $("#addNewsPraiseCount").click(function () {
             if (ObjectJS.userID == 0) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
 
@@ -248,7 +248,7 @@
 
             }
             else if (data.result == -1) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
             }
@@ -275,7 +275,7 @@
                 }
             }
             else if (data.result == -1) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
             }
@@ -302,7 +302,7 @@
                 }
             }
             else if (data.result == -1) {
-                confirm("您还未登录，立即去登录", function () {
+                confirm("登录后才能操作，立即登录", function () {
                     location.href = "/user/login?returnUrl="+location.href;
                 });
             }

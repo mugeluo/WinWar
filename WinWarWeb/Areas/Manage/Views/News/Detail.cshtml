@@ -1,0 +1,84 @@
+﻿@{
+    var News = (WinWarEntity.NewsEntity)ViewBag.News;
+    ViewBag.Title = "新闻详情"+News.Title_Main;
+}
+@section css{
+    <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
+}
+
+@section scripts{
+    <script src="/Scripts/jquery-1.11.1.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
+    <script type="text/javascript">
+        seajs.use(["manage/scripts/news/detail"], function (obj) {
+            var um = UM.getEditor('Html_Txt');
+
+            obj.init(um, '@News.News_Uni_Code', '@News.Html_Txt');
+        });
+    </script>
+}
+<div class="header-box">
+    <span class="header-title left" >新闻详情</span>
+    <a class="back right" href="javascript:if(history.length>1){ history.go(-1);} else{}">
+           <i class="iconfont">&#xe62d;</i> 返回
+    </a>
+</div>
+
+<div class="content-body mTop20">
+        <ul class="table-add">
+        <li>
+            <span class="column-title">分类：</span> 
+            <span>@(News.NewsType.News_Type_Name1+"-")@News.NewsType.News_Type_Name2</span>
+        </li>
+        <li>
+            <span class="column-title">正标题：</span>
+            <span>@News.Title_Main</span> 
+        </li>
+       <li>
+            <span class="column-title">副标题：</span>
+            <span>@News.Title_Sub</span> 
+        </li>
+        <li>
+            <span class="column-title">引标题 ：</span>
+            <span>@News.Title_App</span> 
+        </li>
+        <li>
+            <span class="column-title">作者：</span>
+            <span>@News.News_Author</span>
+        </li>
+        <li>
+            <span class="column-title">来源：</span> 
+            <span>@News.Real_Source_Name</span>
+        </li>
+        <li class="Impt_Par">
+            <span class="column-title left">重要性：</span> 
+            <span>@(News.Impt_Par==4?"非常重要":News.Impt_Par==3?"重要":News.Impt_Par==2?"一般":"不重要")</span>
+        </li>
+        <li class="Nega_Posi_Par">
+            <span class="column-title left">正负面性：</span>
+            <span>@(News.Nega_Posi_Par==2?"正面":News.Nega_Posi_Par==3?"中性":"负面")</span>
+        </li>
+        <li>
+            <span class="column-title">摘要：</span> 
+            <span>@News.News_Sum</span>
+        </li>
+        <li>
+            <span class="column-title">详情:</span>
+            <div id="newsMain"></div>
+        </li>
+    </ul>
+    <img class="product-img" id="productImg" alt="" src="@(string.IsNullOrEmpty(News.Pic_URL)?"/modules/images/default.png":News.Pic_URL)" />
+    <div class="mTop20">
+        @{
+            if(News.Is_Issue=="0"){
+            <div class="btn" id="btn-publishNews">发布</div>
+            }
+            else{
+                <div class="btn" id="btn-cancelPublishNews">取消发布</div>
+            }
+         }
+        
+    </div>
+
+</div>

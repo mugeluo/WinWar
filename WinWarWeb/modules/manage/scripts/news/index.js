@@ -77,11 +77,15 @@
         });
 
         $("#publishNews").click(function () {
-            ObjectJS.publishNews($(this).data("id"),1);
+            location.href = "/Manage/News/detail/"+$(this).data("id");
         });
 
         $("#cancelPublishNews").click(function () {
-            ObjectJS.publishNews($(this).data("id"),0);
+            location.href = "/Manage/News/detail/"+$(this).data("id");
+        });
+
+        $("#editNews").click(function () {
+            location.href = "/Manage/News/Edit/" + $(this).data("id");
         });
 
     };
@@ -124,12 +128,12 @@
                     //操作
                     innerhtml.find(".dropdown").click(function () {
                         var _this = $(this);
-                        $(".dropdown-ul li").hide();
+                        $(".dropdown-ul li").show();
                         if (_this.data('publish') == 0) {
-                            $("#publishNews").show();
+                            $("#cancelPublishNews").hide();
                         }
                         else {
-                            $("#cancelPublishNews").show();
+                            $("#publishNews").hide();
                         }
                         var position = _this.find(".ico-dropdown").position();
                         $(".dropdown-ul li").data("id", _this.data("id"));

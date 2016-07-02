@@ -227,14 +227,16 @@ namespace WinWarBusiness
         public bool AddNews(NewsEntity news)
         {
             return NewsDAL.BaseDAL.AddNews(news.News_Uni_Code, news.Title_Main, news.Title_Sub, news.Title_App, news.News_Sum,
-                news.News_Author, news.Real_Source_Name, news.Nega_Posi_Par, news.Impt_Par,news.Is_Issue,
+                news.News_Author, news.Real_Source_Name, news.Pic_URL,
+                news.Nega_Posi_Par, news.Impt_Par,news.Is_Issue,
                 news.News_Type, news.Html_Txt);
         }
 
         public bool EditNews(NewsEntity news)
         {
             return NewsDAL.BaseDAL.EditNews(news.News_Uni_Code, news.Title_Main, news.Title_Sub, news.Title_App, news.News_Sum,
-                news.News_Author, news.Real_Source_Name, news.Nega_Posi_Par, news.Impt_Par, news.Is_Issue,
+                news.News_Author, news.Real_Source_Name, news.Pic_URL,
+                news.Nega_Posi_Par, news.Impt_Par, news.Is_Issue,
                 news.News_Type, news.Html_Txt);
         }
 

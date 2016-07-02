@@ -172,7 +172,7 @@ namespace WinWarDAL
         }
 
         public bool AddNews(long id,string title, string titleSub,string titleApp,
-            string newsSum, string author, string source,
+            string newsSum, string author, string source, string picUrl,
             int posiPar,int important,string isIssue,
             int typeid,string content)
         {
@@ -184,6 +184,7 @@ namespace WinWarDAL
                                      new SqlParameter("@NewsSum",newsSum),
                                      new SqlParameter("@Author",author),
                                      new SqlParameter("@Source",source),
+                                     new SqlParameter("@PicUrl",picUrl),
                                      new SqlParameter("@PosiPar",posiPar),
                                      new SqlParameter("@Important",important),
                                      new SqlParameter("@IsIssue",isIssue),
@@ -194,7 +195,7 @@ namespace WinWarDAL
         }
 
         public bool EditNews(long id, string title, string titleSub, string titleApp,
-            string newsSum, string author, string source,
+            string newsSum, string author, string source,string picUrl,
             int posiPar, int important, string isIssue,
             int typeid, string content)
         {
@@ -206,6 +207,7 @@ namespace WinWarDAL
                                      new SqlParameter("@NewsSum",newsSum),
                                      new SqlParameter("@Author",author),
                                      new SqlParameter("@Source",source),
+                                     new SqlParameter("@PicUrl",picUrl),
                                      new SqlParameter("@PosiPar",posiPar),
                                      new SqlParameter("@Important",important),
                                      new SqlParameter("@IsIssue",isIssue),

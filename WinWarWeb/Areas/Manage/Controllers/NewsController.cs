@@ -32,6 +32,14 @@ namespace WinWarWeb.Areas.Manage.Controllers
 
             return View();
         }
+
+        public ActionResult Detail(long id)
+        {
+            var news = NewsBusiness.BaseBusiness.GetNewsDetail(id, 0);
+            ViewBag.News = news;
+
+            return View();
+        }
         #region ajax
 
         public JsonResult GetNews(string keywords, int bigTypeID, int typeID, int publishStatus, int pageSize, int pageIndex)

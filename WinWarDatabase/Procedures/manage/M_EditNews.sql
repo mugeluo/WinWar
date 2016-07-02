@@ -23,6 +23,7 @@ CREATE PROCEDURE [dbo].[M_EditNews]
 	@NewsSum nvarchar(500)='',
 	@Author nvarchar(100)='',
 	@Source nvarchar(100)='',
+	@PicUrl nvarchar(200)='',
 	@PosiPar int=3,
 	@Important int=2,
 	@IsIssue int=0,
@@ -31,7 +32,7 @@ CREATE PROCEDURE [dbo].[M_EditNews]
 AS
 
 
-update NEWS_MAIN set TITLE_MAIN=@Title,TITLE_SUB=@TitleSub,TITLE_APP=@TitleApp,
+update NEWS_MAIN set TITLE_MAIN=@Title,TITLE_SUB=@TitleSub,TITLE_APP=@TitleApp,Pic_URL=@PicUrl,
 NEWS_SUM=@NewsSum,NEWS_AUTHOR=@Author,REAL_SOURCE_NAME=@Source,NEGA_POSI_PAR=@PosiPar,IMPT_PAR=@Important,IS_ISSUE=@IsIssue,NEWS_TYPE=@TypeID
 where NEWS_UNI_CODE=@ID
 

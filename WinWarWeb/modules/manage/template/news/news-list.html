@@ -3,8 +3,7 @@
 	var item = $data[i];
 %}
 <tr class="">
-    <!--<td class="tLeft">{%=item.News_Uni_Code%}</td>-->
-    <td><a href="Edit/{%=item.News_Uni_Code%}">{%=item.Title_Main%}</a></td>
+    <td><a href="detail/{%=item.News_Uni_Code%}">{%=item.Title_Main%}</a></td>
     <td>{%=item.NewsType?(item.NewsType.News_Type_Name1 +"-"+item.NewsType.News_Type_Name2):"--"%}</td>
     <td class="center">{%=item.News_Author%}</td>
     <td>{%=item.Real_Source_Name%}</td>

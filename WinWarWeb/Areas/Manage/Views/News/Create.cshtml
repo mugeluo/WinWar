@@ -13,12 +13,15 @@
         seajs.use(["manage/scripts/news/detail"], function (obj) {
             var um = UM.getEditor('Html_Txt');
 
-            obj.init(um);
+            obj.initCreate(um);
         });
     </script>
 }
 <div class="header-box">
     <span class="header-title left" >新建新闻</span>
+     <a class="back right" href="javascript:if(history.length>1){ history.go(-1);} else{}">
+           <i class="iconfont">&#xe62d;</i> 返回
+    </a>
 </div>
 
 <div class="content-body mTop20">
@@ -75,23 +78,14 @@
             <span class="column-title">详情：</span>
             <span><textarea id="Html_Txt" style="width:800px;"></textarea></span>
         </li>
-      @*  <li>
-            <span class="column-title">涉及行业：</span>
-            <span><input type="text" maxlength="50" id="INDU_UNI_CODE" style="width:300px;"  class="input" /></span> 
-        </li>
-        <li>
-            <span class="column-title">涉及公司 ：</span>
-            <span><input type="text" maxlength="50" id="COM_UNI_CODE" style="width:300px;"  class="input" /></span> 
-        </li>
-             <li>
-            <span class="column-title">涉及产品 ：</span>
-            <span><input type="text" maxlength="50" id="PROD_UNI_CODE" style="width:300px;" class="input" /></span> 
-        </li>*@
     </ul>
+    <img class="product-img" id="productImg" alt="" src="/modules/images/default.png" />
+    <input type="hidden" id="txt_Pic_URL" />
     <div class="mTop20">
         <div class="btn" id="btn-saveNews">保存</div>
         <a class="btn mLeft10" href="@(Url.RequestContext.HttpContext.Request.UrlReferrer == null ? "/Customer/Customers" : "javascript:if(history.length>1){ history.go(-1);} else{ location.href='/Customer/MyCustomer'}")">
             返回
         </a>
     </div>
+
 </div>

@@ -38,19 +38,9 @@ namespace WinWarWeb.Areas.Manage.Controllers
             WinWarEntity.Users model = WinWarBusiness.OrganizationBusiness.GetUserByUserName(userName, pwd, out outResult, operateip);
             if (model != null)
             {
-                if (model.Status.Value == 1)
-                {
-                    Session["ClientManager"] = model;
-                    result = 1;
-                }
-                else
-                {
-                    if (model.Status.Value == 9)
-                    {
-                        result = 9;
-                    }
-                }
+                Session["ClientManager"] = model;
             }
+            result = outResult;
             resultObj.Add("result", result);
 
             return new JsonResult

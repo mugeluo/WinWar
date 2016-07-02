@@ -20,19 +20,21 @@ CREATE PROCEDURE [dbo].[M_GetUserToLogin]
 @Result int output  --1:查询正常；2：用户名不存在；3：用户密码有误;4:用户被注销
 AS
 
-declare @UserID nvarchar(64),@ClientID nvarchar(64),@AgentID nvarchar(64),@RoleID nvarchar(64)
 
+declare @UserID nvarchar(64),@ClientID nvarchar(64),@AgentID nvarchar(64),@RoleID nvarchar(64)
+set @UserID=''
 IF  EXISTS(select UserID from Users where LoginName=@LoginName and Status<>9)
 begin
 
 	select @UserID = UserID,@ClientID=ClientID,@AgentID=AgentID,@RoleID=RoleID from Users 
 	where LoginName=@LoginName and LoginPWD=@LoginPWD
 
-	if(@UserID is not null)
+	if(@UserID<>'')
 	begin
+		set @UserID=''
 		select @UserID = UserID,@ClientID=ClientID,@AgentID=AgentID,@RoleID=RoleID from Users 
 		where LoginName=@LoginName and LoginPWD=@LoginPWD and  Status<>9
-		if(@UserID is not null)
+		if(@UserID<>'')
 		begin
 			--会员信息
 			select * from Users where UserID=@UserID

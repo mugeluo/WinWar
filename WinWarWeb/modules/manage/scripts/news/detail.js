@@ -95,13 +95,13 @@
             className: "",
             data: { folder: '', action: 'add', oldPath: "" },
             success: function (data, status) {
-                //if (data.Items.length > 0) {
-                //    _self.ProductImage = data.Items[0];
-                //    $("#productImg").attr("src", data.Items[0]);
-                //}
-                //else {
-                //    alert("只能上传jpg/png/gif类型的图片，且大小不能超过5M！");
-                //}
+                if (data.Items.length > 0) {
+                    _self.ProductImage = data.Items[0];
+                    $("#productImg").attr("src", data.Items[0]);
+                }
+                else {
+                    alert("只能上传jpg/png/gif类型的图片，且大小不能超过5M！");
+                }
             }
         });
 

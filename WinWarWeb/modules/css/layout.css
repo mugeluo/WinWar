@@ -414,5 +414,6 @@ nav .action-box .point { width:6px; height:6px; border-radius:3px; background-co
     color:#3D9EE1;
     font-size:38px;
 }
+.product-img { position:absolute; top:140px; right:50px; width:150px; }
 
 

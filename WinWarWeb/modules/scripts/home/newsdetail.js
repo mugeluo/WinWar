@@ -31,6 +31,9 @@
             else {
                 $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
             }
+
+            $(".overlay-add-reply").css("height", ($(document).scrollTop()
++ $(window).height()) + "px");
         });
         
         //
@@ -49,6 +52,8 @@
                 return;
             }
 
+            $(".overlay-add-reply").css("height",( $(document).scrollTop()
++ $(window).height() ) + "px");
             $('.overlay-add-reply').show();
         });
 
@@ -130,6 +135,8 @@
     }
 
     ObjectJS.initData = function (id, isCollect, isPraise, userID, scrollTop) {
+        $('body,html').animate({ scrollTop: 0 }, 50);
+
         //
         var ReadNewsCache = window.localStorage.getItem("ReadNewsCache");
         if (ReadNewsCache == null || ReadNewsCache == '') {

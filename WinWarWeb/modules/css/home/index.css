@@ -85,6 +85,7 @@
 }
 .news-list {
     position:relative;
+    padding-bottom:120px;
 }
 .news-list .swiper-container {
         width: 100%;
@@ -111,7 +112,7 @@
     }
 
 .content {
-    margin:0px 10px 120px 10px;
+    margin:0px 10px;
 }
 
 .content .news{

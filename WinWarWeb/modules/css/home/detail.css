@@ -177,9 +177,11 @@
 }
 
 .overlay-add-reply {
-    top :0px;
-    left:0px; 
-    position:fixed; 
+    top :0;
+    left:0; 
+    right:0;
+    bottom:0;
+    position:absolute; 
     z-index :3000; 
     display:none; 
     background: rgba(0, 0, 0, 0.7);
@@ -188,10 +190,9 @@
     height:100%;
 }
 .detail-reply-box {
-    position:fixed;
+    position:absolute;
     bottom:0px;
     width:100%;
-    
     background-color:#fff;
 }
 .detail-reply-msg {
@@ -199,7 +200,8 @@
     margin-right:50px;
     padding-top:20px;
 }
-.reply-msg {
+
+.detail-reply-msg .reply-msg {
     width:100%;
     border:none;
     margin-right:50px;
@@ -210,7 +212,7 @@
     font-size:16px;
 }
 .detail-reply-btn {
-     position:fixed;
+    position:absolute;
     bottom:40px;
     right:10px;
     color:#4a98e7;

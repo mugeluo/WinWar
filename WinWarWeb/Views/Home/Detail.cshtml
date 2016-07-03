@@ -21,16 +21,12 @@
     <div class="header-newsimg">
         @{
             if (!string.IsNullOrEmpty(Item.Pic_URL)){
-            <img src="/modules/images/news.jpg" />
+            <img src="@Item.Pic_URL" />
             }
         }
     </div>
-    @*<div class="header-back" onclick="if(history.length>1){ history.go(-1);} else{location.href='/home/index'}">
-        <span class="iconfont icon">&#xe60a;
-        </span>
-    </div>*@
   @*  <div class="header-back" onclick="location.href='/home/index'">*@
-        <div class="header-back">
+     <div class="header-back">
         <span class="iconfont icon">&#xe60a;
         </span>
     </div>
@@ -42,9 +38,6 @@
 
 <div class="detail-content">
     <div class="news-author">
-      @*  <div class="author-img left">
-             <img src="/modules/images/news.jpg" />
-        </div>*@
         <div class="author-detail left">
             <div class="author-name">@(string.IsNullOrEmpty(Item.News_Author)?"--":Item.News_Author)</div>
             <div class="author-time">@Item.Pub_Time.ToString("yyyy-MM-dd hh:mm:ss")</div>
@@ -55,9 +48,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="detail-box" id="newsMain">
-    </div>
-   
+    <div class="detail-box" id="newsMain"></div>
 </div>
 
 <div class="detail-replys">
@@ -123,7 +114,7 @@
     <div class="clear"></div>
 </div>
 
-<div class="overlay">
+<div class="overlay overlay-add-reply">
     <div class="detail-reply-box">
         <div class="detail-reply-msg">
             <textarea class="reply-msg" placeholder="发表评论  (500字)" id="comment-msg" onpropertychange="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';" oninput="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';"></textarea>

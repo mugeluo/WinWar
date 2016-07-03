@@ -16,7 +16,6 @@ namespace WinWarWeb.Controllers
         {
             if (currentPassport.UserID == 0)
             {
-
                 var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
                 return Redirect(authorizeUrl);
             }
@@ -25,6 +24,7 @@ namespace WinWarWeb.Controllers
                 ViewBag.ID = id ?? "6";
                 ViewBag.Passport = currentPassport;
             }
+
             return View();
         }
 
@@ -42,7 +42,10 @@ namespace WinWarWeb.Controllers
             return View();
         }
 
-
+        public ActionResult NewsDetail()
+        {
+            return View();
+        }
         #region ajax
         public JsonResult GetNewsTypeByParentID(int id) {
             var items = NewsBusiness.BaseBusiness.GetNewsTypeByParentID(id);
@@ -59,6 +62,19 @@ namespace WinWarWeb.Controllers
             var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, currentPassport.UserID, ref lastNewsCode);
             jsonResult.Add("items", items);
             jsonResult.Add("lastNewsCode", lastNewsCode);
+
+            return new JsonResult()
+            {
+                Data = jsonResult,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public ActionResult GetNewsDetail(long id)
+        {
+            var item = NewsBusiness.BaseBusiness.GetNewsDetail(id, currentPassport.UserID);
+            jsonResult.Add("item",item);
+            jsonResult.Add("passport",currentPassport);
 
             return new JsonResult()
             {

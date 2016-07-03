@@ -1,6 +1,7 @@
 ﻿define(function (require, exports, module) {
     var Global = require("global");
     var DoT = require("dot");
+    var NewsDetail = require("scripts/home/newsdetail");
 
     var Paras = {
         keywords:'',
@@ -20,8 +21,7 @@
         ReadNewsCache = window.localStorage.getItem("ReadNewsCache");
         if (ReadNewsCache != null && ReadNewsCache != '') {
             ReadNewsCache = ReadNewsCache.split('|');
-        }
-        else {
+        }else {
             ReadNewsCache = [];
         }
 
@@ -34,7 +34,7 @@
             ObjectJS.getNewsTypeByParentID();
         }
 
-        
+        NewsDetail.bindEvent();
     };
 
     ObjectJS.bindEvent = function () {
@@ -237,9 +237,7 @@
                 }
                 ObjectJS.bindNews(data);
             });
-        }
-        else
-        {
+        }else{
             ObjectJS.bindNews(data);
         }
     }
@@ -261,7 +259,7 @@
                 innerhtml.fadeIn(400);
 
                 if (NoNewsData) {
-                    $(".load-more").show();
+                    $(".content .load-more").show();
                 }
 
                 for (var i = 0; i < items.length; i++) {
@@ -271,10 +269,13 @@
                     }
                 }
 
-                $(".news-list .content ul").find(".news").click(function () {
-                    var id=$(this).data("id");
-                    $("#iframe-news-detail").attr("src", "/home/detail/" +id );
-                    $(".news-detail").fadeIn();
+                $(".news-list .content ul").find(".news").unbind().click(function () {
+                    var id = $(this).data("id");
+                    var scrollTop=$(document).scrollTop();
+                    $("#news-list-box").hide();
+
+                    NewsDetail.getNewsDetail(id, scrollTop);
+                    $("#news-detail-box").fadeIn();
                     $("#news_" + id + " .news-title").addClass("news-read");
                 });
 
@@ -287,11 +288,7 @@
                     //});
                 //}
                 //$(".news-list .swiper-container .swiper-slide").css("height", "auto");
-                
-
             });
-
-            
         }
         else {
             if (Paras.pageIndex == 1) {
@@ -299,11 +296,10 @@
             }
             else {
                 if (NoNewsData) {
-                    $(".load-more").show();
+                    $(".content .load-more").show();
                 }
             }
         }
-
     }
 
     module.exports = ObjectJS;

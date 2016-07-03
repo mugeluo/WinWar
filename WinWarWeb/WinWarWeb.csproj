@@ -337,6 +337,7 @@
     <Content Include="modules\plug\doT.js" />
     <Content Include="modules\plug\verify.js" />
     <Content Include="modules\scripts\home\detail.js" />
+    <Content Include="modules\scripts\home\newsdetail.js" />
     <Content Include="modules\scripts\layout.js" />
     <Content Include="modules\scripts\user\index.js" />
     <Content Include="modules\template\home\news-list.html" />
@@ -449,7 +450,10 @@
     <Content Include="modules\plug\swiper\maps\swiper.jquery.umd.min.js.map" />
     <Content Include="modules\plug\swiper\maps\swiper.min.js.map" />
     <Content Include="Views\User\WeiXinCallBack.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\NewsDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

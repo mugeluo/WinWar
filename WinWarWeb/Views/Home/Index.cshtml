@@ -4,9 +4,10 @@
 }
 @section css{
     <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
+    <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
     <link href="/modules/css/home/index.css" rel="stylesheet" />
+    <link href="/modules/css/home/detail.css" rel="stylesheet" />
 }
-
 @section scripts{
     <script src="/modules/plug/swiper/swiper.min.js"></script>
     <script type="text/javascript">
@@ -15,12 +16,14 @@
         });
     </script>
 }
+<div id="news-list-box">
 <div class="nav">
     <div class="swiper-container">
         <div class="swiper-wrapper"></div>
     </div>
      <div class="passport-icon"><img class="icon" data-icon="information" src="/modules/images/me_centre.png" /></div>
 </div>
+
 <div class="search">
     <div class="search-box">
         <span class="iconfont">&#xe605;</span>
@@ -89,6 +92,12 @@
     <div class="clear"></div>
 </div>
 
+</div>
+
+<div class="hide"  id="news-detail-box">
+   @{Html.RenderPartial("NewsDetail");}
+</div>
+
 <div class="overlay overlay-search-keywords">
     <div class="overlay-search">
         <span class="iconfont">&#xe605;</span>
@@ -122,6 +131,3 @@
 }
 
 
-<div class="overlay news-detail" id="news-detail-box">
-    <iframe id="iframe-news-detail" src="" scrolling="auto" width="100%" height="100%"></iframe>
-</div>

@@ -1,0 +1,87 @@
+﻿
+<div class="detail-header">
+    <div class="header-newsimg"></div>
+    <div class="header-back">
+        <span class="iconfont icon">&#xe60a;</span>
+    </div>
+    <div class="header-content">
+        <div class="source"></div>
+        <div class="title"></div>
+    </div>
+</div>
+
+<div class="detail-content">
+    <div class="news-author">
+        <div class="author-detail left">
+            <div class="author-name"></div>
+            <div class="author-time"></div>
+        </div>
+        <div class="author-read right">
+            <span class="iconfont" title="阅读数"><img class="icon" src="/modules/images/browse.png" /></span>
+            <span class="read"></span>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="detail-box" id="newsMain">
+@*        <div class="edui-container">
+        <div class="edui-editor-body">
+            <div class="description  edui-body-container" >
+
+             </div>
+        </div>
+        </div>*@
+    </div>
+</div>
+
+<div class="detail-replys">
+    <div class="reply-header">
+        <div class="reply-title">评论</div>
+    </div>
+    <div class="reply-list">
+        <ul></ul>
+        <div class="clear"></div>
+        <div class="data-loading hide"></div>
+        <div class="load-more hide">加载更多评论</div>
+    </div>
+</div>
+
+<div class="menu">
+    <ul class="menu-list">
+        <li id="li-addComment"> 
+             <div class="iconfont">
+                <img class="icon" data-icon="comment" src="/modules/images/comment.png" />
+            </div>
+            写评论
+        </li>
+        <li id="addNewsCollectCount">
+            <div class="iconfont">
+                <img class="icon" data-icon="collect" src="/modules/images/collect.png" />
+            </div>
+            <span>收藏</span>
+        </li>
+        <li id="addNewsPraiseCount">
+            <div class="iconfont">
+                <img class="icon" data-icon="like" src="/modules/images/like.png" />
+            </div>
+            <span class="Praise_Count">0</span><span class="mLeft5 praise-title">赞</span>              
+        </li>
+        <li>
+             <div class="iconfont">
+                <img class="icon" style="max-width:22px; max-height:22px;" data-icon="reply" src="/modules/images/reply.png" />
+            </div>
+            <span id="Comment_Count"></span>评论
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+
+<div class="overlay-add-reply">
+    <div class="detail-reply-box">
+        <div class="detail-reply-msg">
+            <textarea class="reply-msg" placeholder="发表评论  (500字)" id="comment-msg" onpropertychange="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';" oninput="this.style.height=this.value.split('\n').length*20 + 'px';this.style.height=this.scrollHeight + 'px';"></textarea>
+        </div>
+         <div class="detail-reply-btn" id="btn-addComment">
+             发送
+        </div>
+    </div>
+</div>

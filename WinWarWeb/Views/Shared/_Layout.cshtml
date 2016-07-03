@@ -1,13 +1,16 @@
 ﻿<!DOCTYPE html>
-<html>
+<html style="height:100%;">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <meta name="format-detection" content="telephone=no">    <meta name="apple-mobile-web-app-capable" content="yes" />
     <title>@ViewBag.Title</title>
-    <link href="/modules/css/base.css" rel="stylesheet" />
-    <link href="/modules/css/layout.css" rel="stylesheet" />
-    <link href="/modules/css/iconfont/iconfont.css" rel="stylesheet" />
+    @{
+        var v = "2016-7-3";   
+     }
+    <link href="/modules/css/base.css?v=@v" rel="stylesheet" />
+    <link href="/modules/css/layout.css?v=@v" rel="stylesheet" />
+    <link href="/modules/css/iconfont/iconfont.css?v=@v" rel="stylesheet" />
     @RenderSection("css", false)
 </head>
 <body>
@@ -16,10 +19,9 @@
     <div class="back-top" title="返回顶部">
         <span class="iconfont">&#xe643;</span>
     </div>
-    <script src="/Scripts/jquery-1.11.1.js"></script>
-    @*<script src="/Scripts/zepto.js"></script>*@
-   <script type="text/javascript" src="/Scripts/sea.js"></script>
-    <script type="text/javascript" src="/Scripts/sea-config.js?v=20160525"></script>
+    <script src="/Scripts/jquery-1.11.1.js?v=@v"></script>
+   <script type="text/javascript" src="/Scripts/sea.js?v=@v"></script>
+    <script type="text/javascript" src="/Scripts/sea-config.js?v=@v"></script>
     <script type="text/javascript">
         $(function () {
             seajs.use(["/modules/scripts/layout"], function (layout) {

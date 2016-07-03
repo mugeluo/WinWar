@@ -7,14 +7,9 @@
 }
 
 @section scripts{
-    <script src="/Scripts/jquery-1.11.1.js"></script>
-    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
-    <script src="/modules/plug/umeditor/umeditor.min.js"></script>
     <script type="text/javascript">
         seajs.use(["manage/scripts/news/detail"], function (obj) {
-            var um = UM.getEditor('Html_Txt');
-
-            obj.init(um, '@News.News_Uni_Code', '@News.Html_Txt');
+            obj.init('@News.News_Uni_Code', '@News.Html_Txt');
         });
     </script>
 }

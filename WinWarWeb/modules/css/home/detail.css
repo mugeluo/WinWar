@@ -88,24 +88,23 @@
 }
 .detail-box {
     margin-top:20px;
+    line-height:25px;
+    word-wrap:break-word; 
 }
+.detail-box span{
+    display:inline-block;
+    vertical-align:top;
+    font-size:16px;
+}
+
 .detail-box p{
     line-height:30px;
     font-size:16px;
 }
-.detail-box span {
-    float: left;
-    width: 50px;
-    height: 40px;
-    text-align: center;
-    line-height: 50px;
-    font-size: 42px;
-}
 
 .detail-replys {
-    padding:20px 10px;
+    padding:20px 10px 90px 10px;
     background-color:#f2f4f8;
-    margin-bottom:70px;
 }
 .reply-header {
     margin-top:5px;
@@ -165,7 +164,7 @@
     position:fixed;
     bottom:0px;
     left:0px;
-    z-index:1000;
+    z-index:3000;
     line-height:50px;
     height:50px;
     background-color:#fff;
@@ -177,11 +176,11 @@
     
 }
 
-.overlay {
+.overlay-add-reply {
     top :0px;
     left:0px; 
     position:fixed; 
-    z-index :2000; 
+    z-index :3000; 
     display:none; 
     background: rgba(0, 0, 0, 0.7);
     /*filter:Alpha(Opacity=80); -moz-opacity :0.8;opacity:0.8;*/ 

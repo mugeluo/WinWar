@@ -22,9 +22,8 @@
     };
     var ObjectJS = {};
     var Editor = null;
-    ObjectJS.init = function (um, News_Uni_Code, newsMain) {
+    ObjectJS.init = function (News_Uni_Code, newsMain) {
         News.News_Uni_Code = News_Uni_Code;
-        Editor = um;
         ObjectJS.bindEvent();
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 

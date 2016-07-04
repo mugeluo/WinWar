@@ -32,8 +32,11 @@
                 $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
             }
 
-            $(".overlay-add-reply").css("height", ($(document).scrollTop()
-+ $(window).height()) + "px");
+            if ($(".overlay-add-reply").is(":visible")) {
+                $(".overlay-add-reply").css("height", ($(document).scrollTop()
+    + $(window).height()) + "px");
+            }
+
         });
         
         //
@@ -57,6 +60,13 @@
             $('.overlay-add-reply').show();
         });
 
+//        $("#comment-msg").focus(function () {
+//            $(".overlay-add-reply").css("height", ($(document).scrollTop()
+//+ $(window).height()) + "px");
+
+//            alert(333);
+//        });
+
         //加载更多新闻讨论
         $(".load-more").click(function () {
             ObjectJS.getNewsComments();
@@ -73,10 +83,9 @@
 
             Comment.Content = $("#comment-msg").val();
             if (Comment.Content == '') {
-                $('.overlay').hide();
-                return false;
-            }
-            else {
+                $('.overlay-add-reply').hide();
+                return;
+            }else {
                 if (Comment.Content.length > 500) {
                     alert("内容太多了");
                     return;

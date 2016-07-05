@@ -54,6 +54,7 @@
                         Paras.pageIndex++;
                         ObjectJS.getNews();
                     }, 500);
+
                 }
             }
         });

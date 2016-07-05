@@ -31,12 +31,6 @@
             else {
                 $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
             }
-
-            if ($(".overlay-add-reply").is(":visible")) {
-                $(".overlay-add-reply").css("height", ($(document).scrollTop()
-    + $(window).height()) + "px");
-            }
-
         });
         
         //
@@ -55,17 +49,10 @@
                 return;
             }
 
-            $(".overlay-add-reply").css("height",( $(document).scrollTop()
-+ $(window).height() ) + "px");
+            $(".overlay-add-reply").css("height", $("#news-detail-box").height() + "px");
+            $(document).scrollTop($("#news-detail-box").height() - $(window).height());
             $('.overlay-add-reply').show();
         });
-
-//        $("#comment-msg").focus(function () {
-//            $(".overlay-add-reply").css("height", ($(document).scrollTop()
-//+ $(window).height()) + "px");
-
-//            alert(333);
-//        });
 
         //加载更多新闻讨论
         $(".load-more").click(function () {

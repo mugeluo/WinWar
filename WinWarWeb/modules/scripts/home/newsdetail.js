@@ -21,9 +21,9 @@
 
     var ObjectJS = {};
 
-    ObjectJS.bindEvent = function () {
+    ObjectJS.bindEvent = function (option) {
         ObjectJS.scrollTop = 0;
-        //
+        //返回 滚动悬浮
         $(window).scroll(function () {
             if ($(window).scrollTop() > 70) {
                 $(".header-back").css({"background-color":"#fff","border-bottom":"1px solid #ddd"}).find(".icon").css("color","#666");
@@ -32,41 +32,53 @@
                 $(".header-back").css({ "background": "none", "border-bottom": "none" }).find(".icon").css("color", "#fff");
             }
         });
-        
-        //
+
+        //返回
+        $(".header-back").click(function () {
+            if (option) {
+                if (history.length > 1) {
+                    history.go(-1);
+                } else {
+                    location.href = "/home/index";
+                }
+            } else {
+                $("#news-detail-box").hide();
+                $("#news-list-box").fadeIn();
+                $('body,html').animate({ scrollTop: ObjectJS.scrollTop }, 100);
+            }
+        });
+
+        //弹出添加讨论遮罩层
+        $("#li-addComment").click(function () {
+            //if (ObjectJS.userID == 0) {
+            //    confirm("登录后才能操作，立即登录", function () {
+            //        location.href = "/user/login?returnUrl=" + location.href;
+            //    });
+            //    return;
+            //}
+            if (!ObjectJS.validateLogin()) {
+                return;
+            }
+            $(".overlay-add-reply").css("height", $("#news-detail-box").height() + "px");
+            $(document).scrollTop($("#news-detail-box").height() - $(window).height());
+            $('.overlay-add-reply').show();
+        });
+
+        //添加讨论遮罩层点击
         $(".overlay-add-reply").click(function (e) {
             if (!$(e.target).parents().hasClass("detail-reply-msg") && !$(e.target).hasClass("detail-reply-msg")) {
                 $(".overlay-add-reply").hide();
             }
         });
 
-        //
-        $("#li-addComment").click(function () {
-            if (ObjectJS.userID == 0) {
-                confirm("登录后才能操作，立即登录", function () {
-                    location.href = "/user/login?returnUrl="+location.href;
-                });
-                return;
-            }
-
-            $(".overlay-add-reply").css("height", $("#news-detail-box").height() + "px");
-            $(document).scrollTop($("#news-detail-box").height() - $(window).height());
-            $('.overlay-add-reply').show();
-        });
-
         //加载更多新闻讨论
-        $(".load-more").click(function () {
+        $(".detail-replys .load-more").click(function () {
             ObjectJS.getNewsComments();
         });
 
         //添加评论
         $("#btn-addComment").click(function () {
-            if (ObjectJS.userID == 0) {
-                confirm("登录后才能操作，立即登录", function () {
-                    location.href = "/user/login?returnUrl="+location.href;
-                });
-                return;
-            }
+            
 
             Comment.Content = $("#comment-msg").val();
             if (Comment.Content == '') {
@@ -108,13 +120,6 @@
 
             Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
             ObjectJS.addNewsPraiseCount();
-        });
-
-        //header-back
-        $(".header-back").click(function () {
-            $("#news-detail-box").hide();
-            $("#news-list-box").fadeIn();
-            $('body,html').animate({ scrollTop: ObjectJS.scrollTop }, 100);
         });
     };
 
@@ -313,5 +318,16 @@
         });
     }
 
+    ObjectJS.validateLogin = function () {
+        if (ObjectJS.userID == 0) {
+            confirm("登录后才能操作，立即登录", function () {
+                location.href = "/user/login?returnUrl=" + location.href;
+            });
+
+            return false;
+        }
+
+        return true;
+    }
     module.exports = ObjectJS;
 });

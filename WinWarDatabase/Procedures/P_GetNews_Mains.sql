@@ -55,7 +55,7 @@ begin
 end
 
 
- set @CommandSQL+=' order by News_Uni_Code desc'
+ set @CommandSQL+=' order by PUB_TIME desc'
 
  insert into @Temp exec (@CommandSQL)
 

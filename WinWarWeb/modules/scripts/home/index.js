@@ -38,14 +38,7 @@
     };
 
     ObjectJS.bindEvent = function () {
-        //$(document).click(function (e) {
-        //    //隐藏下拉
-        //    if (!$(e.target).parents().hasClass("passport-icon") && !$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
-        //        $(".passport-box").fadeOut();
-        //    }
-        //});
-
-        //滚动加载 新闻列表
+        //滚动加载新闻列表
         $(window).bind("scroll", function () {
             if (!NoNewsData) {
                 var bottom = $(document).height() - document.documentElement.scrollTop - document.body.scrollTop - $(window).height();
@@ -59,19 +52,71 @@
             }
         });
 
-        $(".overlay-search-keywords").click(function (e) {
-            if (!$(e.target).parents().hasClass("overlay-search") && !$(e.target).hasClass("overlay-search")) {
-                $(".overlay-search-keywords").hide();
+        //弹出个人遮罩层
+        $(".passport-icon").click(function () {
+            if (ObjectJS.userID != 0) {
+                $("#passport-box").fadeIn();
+            }
+            else {
+                location.href = "/user/login?returnUrl=" + location.href;
             }
         });
 
+        //个人遮罩层点击
         $(".overlay-passport-content").click(function (e) {
             if (!$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
                 $(".overlay-passport-content").hide();
             }
         });
 
-        //菜单切换
+        
+
+        //弹出关键字遮罩层
+        $(".search").click(function () {
+            $('.overlay-search-keywords').show();
+            $("#keywords").focus();
+
+        });
+
+        //关键字遮罩层点击
+        $(".overlay-search-keywords").click(function (e) {
+            if (!$(e.target).parents().hasClass("overlay-search") && !$(e.target).hasClass("overlay-search")) {
+                $(".overlay-search-keywords").hide();
+            }
+        });
+
+        //关键字查询
+        $("#btn-search").click(function () {
+            $('.overlay-search-keywords').hide();
+
+            Paras.keywords = $("#keywords").val();
+            if (Paras.keywords != '') {
+                $("#keywords").val('');
+                $(".overlay-keywords").show();
+                $("#keywords-show").val(Paras.keywords);
+
+                NoNewsData = false;
+                $(".content .load-more").hide();
+                Paras.pageIndex = 1;
+                Paras.lastNewsCode = 0;
+                ObjectJS.getNews();
+            }
+        });
+
+        //取消关键字查询
+        $("#btn-cancel").click(function () {
+            $('.overlay-keywords').hide();
+            $("#keywords-show").val('');
+
+            NoNewsData = false;
+            $(".content .load-more").hide();
+            Paras.keywords = '';
+            Paras.pageIndex = 1;
+            Paras.lastNewsCode = 0;
+            ObjectJS.getNews();
+        });
+
+        //一级菜单切换
         $(".menu-list .item").click(function () {
             var _this=$(this);
             if (!_this.hasClass("active")) {
@@ -90,59 +135,14 @@
             }
         });
 
-        //弹出 输入关键字层
-        $(".search").click(function () {
-            $('.overlay-search-keywords').show();
-            $("#keywords").focus();
-
-        });
-
-        //关键字查询
-        $("#btn-search").click(function () {
-            $('.overlay-search-keywords').hide();
-
-            Paras.keywords = $("#keywords").val();
-            if (Paras.keywords != '') {
-                $("#keywords").val('');
-                $(".overlay-keywords").show();
-                $("#keywords-show").val(Paras.keywords);
-
-                NoNewsData = false;
-                $(".load-more").hide();
-                Paras.pageIndex = 1;
-                Paras.lastNewsCode = 0;
-                ObjectJS.getNews();
-            }
-        });
-
-        //取消关键字查询
-        $("#btn-cancel").click(function () {
-            $('.overlay-keywords').hide();
-            $("#keywords-show").val('');
-
-            NoNewsData = false;
-            $(".load-more").hide();
-            Paras.keywords = '';
-            Paras.pageIndex = 1;
-            Paras.lastNewsCode = 0;
-            ObjectJS.getNews();
-        });
-
-        //数据初始化
+        
+        //一级菜单初始化
         if (Paras.parentTypeID != 6) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
-
-        $(".passport-icon").click(function () {
-            if (ObjectJS.userID != 0) {
-                $("#passport-box").fadeIn();
-            }
-            else {
-                location.href = "/user/login?returnUrl="+location.href;
-            }
-        });
     };
 
+    //获取二级菜单列表
     ObjectJS.getNewsTypeByParentID = function () {
         var data = NavsCache[Paras.parentTypeID];
         if (data == null) {
@@ -156,7 +156,7 @@
             ObjectJS.bindNewsTypeByParentID(data);
         }
     };
-
+    //绑定二级菜单
     ObjectJS.bindNewsTypeByParentID = function (data) {
         $(".nav .swiper-wrapper").html('');
 
@@ -176,15 +176,15 @@
         }
 
         NoNewsData = false;
-        $(".load-more").hide();
-        Paras.pageIndex == 1;
+        $(".content .load-more").hide();
+        Paras.pageIndex = 1;
         Paras.lastNewsCode = 0;
 
         ObjectJS.bindNewsNavClick();
         ObjectJS.bindNewsNavSlide();
         ObjectJS.getNews();
     }
-
+    //二级菜单点击
     ObjectJS.bindNewsNavClick = function () {
         $(".nav .swiper-wrapper .swiper-slide").unbind().click(function () {
             var _this = $(this);
@@ -192,7 +192,7 @@
                 _this.addClass("select").siblings().removeClass("select");
 
                 NoNewsData = false;
-                $(".load-more").hide();
+                $(".content .load-more").hide();
                 Paras.typeID = _this.data("id");
                 Paras.pageIndex =1;
                 Paras.lastNewsCode = 0;
@@ -200,7 +200,7 @@
             }
         });
     }
-
+    //二级菜单左右滑动
     ObjectJS.bindNewsNavSlide = function () {
         var swiper = new Swiper('.nav .swiper-container', {
             slidesPerView: 3,
@@ -217,19 +217,22 @@
         $items.eq(2).css("width", (width + 50) + "px");
     }
 
+    //获取新闻列表
     ObjectJS.getNews = function () {
         $(".content .data-loading").show();
 
         var data = null;
         if (Paras.pageIndex == 1) {
-            data = NewsCache[Paras.parentTypeID + Paras.typeID+Paras.keywords];
+            data = NewsCache[Paras.parentTypeID +"_"+ Paras.typeID+"_" + Paras.keywords];
+            $(".news-list .content ul").html('');
         }
 
         if (data == null)
         {
             Global.post("/Home/GetNews", Paras, function (data) {
+                
                 if (Paras.pageIndex == 1) {
-                    NewsCache[Paras.parentTypeID + Paras.typeID + Paras.keywords] = data;
+                    NewsCache[Paras.parentTypeID+"_" + Paras.typeID +"_"+ Paras.keywords] = data;
                 }
 
                 if (Paras.pageSize > data.items.length) {
@@ -242,6 +245,7 @@
         }
     }
 
+    //绑定新闻列表
     ObjectJS.bindNews = function (data) {
         if (Paras.pageIndex == 1) {
             $(".news-list .content ul").html('');
@@ -293,6 +297,7 @@
         else {
             if (Paras.pageIndex == 1) {
                 $(".content ul").html('<li class="no-data">暂无新闻</li>');
+                NoNewsData = true;
             }
             else {
                 if (NoNewsData) {

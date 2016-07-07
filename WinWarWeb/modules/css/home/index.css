@@ -122,10 +122,14 @@
     border-bottom:1px solid #F5F5F5;
     display:none;
 }
-.news .news-img img{
-    max-width:140px;
-    max-height:100px;
+.news .news-img {
+    float:right;
 }
+.news .news-img img{
+    width:140px;
+    height:100px;
+}
+
 .news  div, .news  span {
     color:#c9cdd1;
     font-size:14px;

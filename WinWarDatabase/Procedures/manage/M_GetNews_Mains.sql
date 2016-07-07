@@ -35,7 +35,7 @@ declare @tableName nvarchar(4000),
 	
 	set @tableName='NEWS_MAIN'
 	set @columns='*'
-	set @key='a'
+	set @key='News_Uni_Code'
 	set @orderColumn='PUB_TIME desc'
 	set @condition=' 1=1 '
 

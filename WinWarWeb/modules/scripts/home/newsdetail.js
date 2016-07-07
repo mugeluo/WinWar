@@ -23,6 +23,10 @@
 
     ObjectJS.bindEvent = function (option) {
         ObjectJS.scrollTop = 0;
+        ObjectJS.option = 1;
+        if (option) {
+            ObjectJS.option = 2;
+        }
         //返回 滚动悬浮
         $(window).scroll(function () {
             if ($(window).scrollTop() > 70) {
@@ -35,7 +39,7 @@
 
         //返回
         $(".header-back").click(function () {
-            if (option) {
+            if (ObjectJS.option ==2) {
                 if (history.length > 1) {
                     history.go(-1);
                 } else {
@@ -50,12 +54,6 @@
 
         //弹出添加讨论遮罩层
         $("#li-addComment").click(function () {
-            //if (ObjectJS.userID == 0) {
-            //    confirm("登录后才能操作，立即登录", function () {
-            //        location.href = "/user/login?returnUrl=" + location.href;
-            //    });
-            //    return;
-            //}
             if (!ObjectJS.validateLogin()) {
                 return;
             }
@@ -78,7 +76,9 @@
 
         //添加评论
         $("#btn-addComment").click(function () {
-            
+            if (!ObjectJS.validateLogin()) {
+                return;
+            }
 
             Comment.Content = $("#comment-msg").val();
             if (Comment.Content == '') {
@@ -96,11 +96,7 @@
 
         //收藏
         $("#addNewsCollectCount").click(function () {
-            if (ObjectJS.userID == 0) {
-                confirm("登录后才能操作，立即登录", function () {
-                    location.href = "/user/login?returnUrl="+location.href;
-                });
-
+            if (!ObjectJS.validateLogin()) {
                 return;
             }
 
@@ -110,11 +106,7 @@
 
         //喜欢
         $("#addNewsPraiseCount").click(function () {
-            if (ObjectJS.userID == 0) {
-                confirm("登录后才能操作，立即登录", function () {
-                    location.href = "/user/login?returnUrl="+location.href;
-                });
-
+            if (!ObjectJS.validateLogin()) {
                 return;
             }
 

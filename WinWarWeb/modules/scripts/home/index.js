@@ -5,18 +5,17 @@
 
     var Paras = {
         keywords:'',
-        pageIndex: 1,
-        pageSize:15,
         parentTypeID: 6,
         typeID: 0,
-        lastNewsCode:0
+        lastNewsCode: 0,
+        pageIndex: 1,
+        pageSize: 15
     };
     var NavsCache = [];//新闻导航缓存
     var NewsCache = [];//新闻列表缓存
     var ReadNewsCache = [];//已读新闻列表缓存
-    var NoNewsData = false;
+    var NoNewsData = false;//没有新闻数据
     var ObjectJS = {};
-
     ObjectJS.init = function (parentTypeID, userID) {
         ReadNewsCache = window.localStorage.getItem("ReadNewsCache");
         if (ReadNewsCache != null && ReadNewsCache != '') {
@@ -73,8 +72,6 @@
             }
         });
 
-        
-
         //弹出关键字遮罩层
         $(".search").click(function () {
             $('.overlay-search-keywords').show();
@@ -99,8 +96,8 @@
                 $(".overlay-keywords").show();
                 $("#keywords-show").val(Paras.keywords);
 
+                $(".content .no-more").hide();
                 NoNewsData = false;
-                $(".content .load-more").hide();
                 Paras.pageIndex = 1;
                 Paras.lastNewsCode = 0;
                 ObjectJS.getNews();
@@ -112,8 +109,8 @@
             $('.overlay-keywords').hide();
             $("#keywords-show").val('');
 
+            $(".content .no-more").hide();
             NoNewsData = false;
-            $(".content .load-more").hide();
             Paras.keywords = '';
             Paras.pageIndex = 1;
             Paras.lastNewsCode = 0;
@@ -155,11 +152,11 @@
 
                 ObjectJS.bindNewsTypeByParentID(data);
             });
-        }
-        else {
+        }else {
             ObjectJS.bindNewsTypeByParentID(data);
         }
     };
+
     //绑定二级菜单
     ObjectJS.bindNewsTypeByParentID = function (data) {
         $(".nav .swiper-wrapper").html('');
@@ -170,17 +167,14 @@
             if (i == 0) {
                 html += '<div class="swiper-slide select" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
                 Paras.typeID = item.News_Type_2;
-            }
-            else {
+            }else {
                 html += '<div class="swiper-slide" data-id="' + item.News_Type_2 + '"><div class="name">' + item.News_Type_Name2 + '</div><div class="circle"></div></div>';
             }
             $(".nav .swiper-wrapper").css({ "-webkit-transform": "translate3d(0px, 0px, 0px)", "transform": "translate3d(0px, 0px, 0px)" }).append(html);
-
-           
         }
 
+        $(".content .no-more").hide();
         NoNewsData = false;
-        $(".content .load-more").hide();
         Paras.pageIndex = 1;
         Paras.lastNewsCode = 0;
 
@@ -196,7 +190,7 @@
                 _this.addClass("select").siblings().removeClass("select");
 
                 NoNewsData = false;
-                $(".content .load-more").hide();
+                $(".content .no-more").hide();
                 Paras.typeID = _this.data("id");
                 Paras.pageIndex =1;
                 Paras.lastNewsCode = 0;
@@ -267,7 +261,7 @@
                 innerhtml.fadeIn(400);
 
                 if (NoNewsData) {
-                    $(".content .load-more").show();
+                    $(".content .no-more").show();
                 }
 
                 for (var i = 0; i < items.length; i++) {
@@ -288,24 +282,28 @@
                 });
 
                 //if (Paras.pageIndex == 1) {
-                    //var swiper = new Swiper('.news-list .swiper-container', {
-                    //    direction: 'vertical',
-                    //    onTouchEnd: function () {
-                    //        var y = swiper.getWrapperTranslate("y")
-                    //    }
-                    //});
+                //    var swiper = new Swiper('.news-list .swiper-container', {
+                //        direction: 'vertical',
+                //        onTouchMove: function () {
+                //            var y = swiper.getWrapperTranslate("y");
+                //            if (y > 20) {
+                //                $(".data-load-new").show();
+                //            }
+                //        },
+                //        onTouchEnd: function () {
+                //            $(".data-load-new").hide();
+                //        }
+                //    });
                 //}
                 //$(".news-list .swiper-container .swiper-slide").css("height", "auto");
             });
-        }
-        else {
+        } else {
             if (Paras.pageIndex == 1) {
                 $(".content ul").html('<li class="no-data">暂无新闻</li>');
                 NoNewsData = true;
-            }
-            else {
+            }else {
                 if (NoNewsData) {
-                    $(".content .load-more").show();
+                    $(".content .no-more").show();
                 }
             }
         }

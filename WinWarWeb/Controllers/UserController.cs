@@ -9,8 +9,6 @@ namespace WinWarWeb.Controllers
 {
     public class UserController : BaseController
     {
-        //
-        // GET: /User/
         public ActionResult Index()
         {
             if (Session["WinWarUser"] == null){
@@ -23,22 +21,12 @@ namespace WinWarWeb.Controllers
 
         public ActionResult Login(string returnUrl)
         {
-            //ViewBag.AuthorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl),returnUrl);
             var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), returnUrl, YXERP.Common.Common.IsMobileDevice());
             return Redirect(authorizeUrl);
         }
 
-        public ActionResult Logout()
-        {
-            Session["WinWarUser"] = null;
-            return Redirect("/home/index");
-        }
-
-        //微信登录
         public ActionResult WeiXinCallBack(string code, string state)
         {
-            //string token="raYxos81Hp3Qp7zfyiqA97vLawpOULs757jUQ646y3BKqvANNEmODU2XyaI224uxxeaQsF5Y-OqFrxX4FtebBvGtees4tNVbrXW19B-H2MM";
-            //string id="oqjcAxOaH4nsl9iaJomIG2f9r7Qk";
             if (!string.IsNullOrEmpty(code))
             {
                 var token = WeiXin.Sdk.Token.GetAccessToken(code);
@@ -75,6 +63,13 @@ namespace WinWarWeb.Controllers
             }
 
             return Redirect("/Home/Index");
+        }
+
+        public ActionResult Logout()
+        {
+            Session["WinWarUser"] = null;
+
+            return Redirect("/home/index");
         }
 
         #region ajax

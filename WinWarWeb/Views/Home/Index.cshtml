@@ -4,7 +4,6 @@
 }
 @section css{
     <link href="/modules/plug/swiper/css/swiper.min.css" rel="stylesheet" />
-    <link href="/modules/plug/umeditor/themes/default/css/umeditor.min.css" rel="stylesheet" />
     <link href="/modules/css/home/index.css" rel="stylesheet" />
     <link href="/modules/css/home/detail.css" rel="stylesheet" />
 }
@@ -24,35 +23,50 @@
      <div class="passport-icon"><img class="icon" data-icon="information" src="/modules/images/me_centre.png" /></div>
 </div>
 
-<div class="search">
-    <div class="search-box">
-        <span class="iconfont">&#xe605;</span>
-        <span class="search-name">搜索</span>
-    </div>
-</div>
-
-<div class="news-list">
-@*  <div class="data-load">
+<div class="data-load-new hide">
+    <div class="load-new-msg">
       <div class="left">
         <img style="width:30px;height:30px;" src="/modules/images/ico-loading.gif" />
       </div>
       <div class="left mLeft10" style="color:#666;font-size:14px;line-height:30px;">加载最新</div>
       <div class="clear"></div>
-  </div>*@
+    </div>
+ </div>
 
-@* <div class="swiper-container">
+@*<div class="search">
+    <div class="search-box">
+        <span class="iconfont">&#xe605;</span>
+        <span class="search-title">搜索</span>
+    </div>
+</div>*@
+
+<div class="news-list">
+    <div class="swiper-container">
         <div class="swiper-wrapper">
-            <div class="swiper-slide">*@
+            <div class="swiper-slide">
+                <div class="search">
+                    <div class="search-box">
+                        <span class="iconfont">&#xe605;</span>
+                        <span class="search-title">搜索</span>
+                    </div>
+                </div>
                 <div class="content">
                     <ul></ul>
                     <div class="clear"></div>
                     <div class="data-loading hide"></div>
-                   <div class="load-more hide">已经是最后一条</div>
+                   <div class="no-more hide">已经是最后一条</div>
                 </div>
             </div>
-@*        </div>
-    </div>
-</div>*@
+        </div>
+</div>
+
+@*    <div class="content">
+        <ul></ul>
+        <div class="clear"></div>
+        <div class="data-loading hide"></div>
+        <div class="no-more hide">已经是最后一条</div>
+    </div>*@
+</div>
 
 <div class="menu">
     <ul class="menu-list">

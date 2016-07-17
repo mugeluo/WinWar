@@ -9,32 +9,15 @@ namespace WinWarWeb.Controllers
 {
     public class PlugController : BaseController
     {
-        //
-        // GET: /Plug/
-
-        /// <summary>
-        /// 上传图片
-        /// </summary>
-        /// <returns></returns>
         public JsonResult UploadFile()
         {
-            string oldPath = "",
-                   folder = "/Content/UploadFiles/",
-                   action = "";
-            if (Request.Form.AllKeys.Contains("oldPath"))
-            {
-                oldPath = Request.Form["oldPath"];
-            }
+            string folder = "/Content/UploadFiles/";
             if (Request.Form.AllKeys.Contains("folder") && !string.IsNullOrEmpty(Request.Form["folder"]))
             {
                 folder = Request.Form["folder"];
             }
             string uploadPath = HttpContext.Server.MapPath(folder);
 
-            if (Request.Form.AllKeys.Contains("action"))
-            {
-                action = Request.Form["action"];
-            }
             if (!Directory.Exists(uploadPath))
             {
                 Directory.CreateDirectory(uploadPath);
@@ -65,31 +48,20 @@ namespace WinWarWeb.Controllers
                 {
                     continue;
                 }
-                if (!string.IsNullOrEmpty(oldPath) && oldPath != "/modules/images/default.png" && new FileInfo(HttpContext.Server.MapPath(oldPath)).Exists)
-                {
-                    file.SaveAs(HttpContext.Server.MapPath(oldPath));
-                    list.Add(oldPath);
 
-                }
-                else
-                {
-                    string[] arr = file.FileName.Split('.');
-                    string fileName = DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + "." + arr[arr.Length - 1];
-                    string filePath = uploadPath + fileName;
-                    file.SaveAs(filePath);
-                    list.Add(folder + fileName);
-                }
+                string fileName = DateTime.Now.ToString("yyyyMMddHHmmssms") + new Random().Next(1000, 9999).ToString() + "." + Path.GetExtension(file.FileName);
+                string filePath = uploadPath + fileName;
+                file.SaveAs(filePath);
+                list.Add(folder + fileName);
             }
-
             jsonResult.Add("Items", list);
+
             return new JsonResult()
             {
                 Data = jsonResult,
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
-
-
 
     }
 }

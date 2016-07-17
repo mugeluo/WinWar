@@ -394,6 +394,13 @@ nav .action-box .point { width:6px; height:6px; border-radius:3px; background-co
     color:#666;
     cursor:pointer;
 }
+.no-more {
+    line-height:40px;
+    text-align:center;
+    font-size:14px;
+    color:#666;
+    cursor:pointer;
+}
 .no-data {
     line-height:60px;
     text-align:center;

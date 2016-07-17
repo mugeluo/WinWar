@@ -10,8 +10,6 @@ namespace WinWarWeb.Controllers
 {
     public class HomeController : BaseController
     {
-        //
-        // GET: /Home/
         public ActionResult Index(string  id)
         {
             //if (currentPassport.UserID == 0)
@@ -46,6 +44,7 @@ namespace WinWarWeb.Controllers
         {
             return View();
         }
+
         #region ajax
         public JsonResult GetNewsTypeByParentID(int id) {
             var items = NewsBusiness.BaseBusiness.GetNewsTypeByParentID(id);
@@ -89,7 +88,6 @@ namespace WinWarWeb.Controllers
             jsonResult.Add("items", items);
             jsonResult.Add("lastCommentID", lastCommentID);
             jsonResult.Add("result", 1);
-
 
             return new JsonResult()
             {

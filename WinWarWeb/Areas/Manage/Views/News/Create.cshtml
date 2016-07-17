@@ -7,11 +7,11 @@
 
 @section scripts{
     <script src="/Scripts/jquery-1.11.1.js"></script>
-    <script src="/modules/plug/umeditor/ueditor.config.js"></script>
+    <script src="/modules/plug/umeditor/umeditor.config.js"></script>
     <script src="/modules/plug/umeditor/umeditor.min.js"></script>
     <script type="text/javascript">
         seajs.use(["manage/scripts/news/detail"], function (obj) {
-            var um = UE.getEditor('Html_Txt');
+            var um = UM.getEditor('Html_Txt');
 
             obj.initCreate(um);
         });

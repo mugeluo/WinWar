@@ -40,9 +40,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -149,7 +149,7 @@
     <Compile Include="modules\plug\umeditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="modules\plug\umeditor\net\App_Code\PathFormater.cs" />
     <Compile Include="modules\plug\umeditor\net\App_Code\UploadHandler.cs" />
-    <Compile Include="modules\plug\umeditor\net\Uploader.cs" />
+    <Content Include="modules\plug\umeditor\net\Uploader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -567,6 +567,8 @@
     <Content Include="modules\plug\umeditor\ueditor.config.js" />
     <Content Include="modules\plug\umeditor\ueditor.parse.js" />
     <Content Include="modules\plug\umeditor\ueditor.parse.min.js" />
+    <Content Include="modules\plug\umeditor\umeditor.config.js" />
+    <Content Include="modules\plug\umeditor\umeditor.js" />
     <Content Include="modules\plug\umeditor\umeditor.min.js" />
     <Content Include="modules\plug\upload\jquery.form.js" />
     <Content Include="modules\plug\upload\upload.js" />
@@ -591,10 +593,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DLL\" />
     <Folder Include="modules\plug\umeditor\net\Bin\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />

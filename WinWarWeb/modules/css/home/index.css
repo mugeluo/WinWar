@@ -212,7 +212,7 @@
     font-size:14px;
     background-color:#eee;
 }
-.overlay-search-keywords .overlay-btn {
+.overlay-search-keywords .overlay-btn,.overlay-keywords .overlay-btn{
     position:absolute;
     top:24px;
     right:10px;

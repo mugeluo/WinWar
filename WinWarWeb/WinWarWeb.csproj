@@ -564,6 +564,7 @@
     <Content Include="modules\plug\umeditor\third-party\zeroclipboard\ZeroClipboard.js" />
     <Content Include="modules\plug\umeditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
     <Content Include="modules\plug\umeditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="modules\plug\umeditor\ueditor.all.js" />
     <Content Include="modules\plug\umeditor\ueditor.config.js" />
     <Content Include="modules\plug\umeditor\ueditor.parse.js" />
     <Content Include="modules\plug\umeditor\ueditor.parse.min.js" />
@@ -706,6 +707,7 @@
     <Content Include="modules\plug\umeditor\third-party\video-js\font\vjs.eot" />
     <Content Include="modules\plug\umeditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="modules\plug\umeditor\third-party\video-js\font\vjs.woff" />
+    <None Include="Properties\PublishProfiles\winwar.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

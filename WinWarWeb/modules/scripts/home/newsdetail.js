@@ -164,7 +164,7 @@
 
         var newsMain = decodeURI(Item.Html_Txt);//.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
         $("#newsMain").html(newsMain);
-        if (Item.Pic_URL!='') {
+        if (Item.Pic_URL != '') {
             $(".header-newsimg").html('<img src="' + Item.Pic_URL + '" />');
 
             var $newsimg = $(".header-newsimg img");
@@ -175,6 +175,12 @@
                 else {
                     $newsimg.css("width", $(window).width());
                 }
+            }
+        }
+        else {
+            var $newsimg = $(".header-newsimg img");
+            if ($newsimg.length > 0) {
+                $newsimg.remove();
             }
         }
 

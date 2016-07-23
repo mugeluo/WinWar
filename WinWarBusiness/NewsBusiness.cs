@@ -163,6 +163,18 @@ namespace WinWarBusiness
         }
 
         /// <summary>
+        /// 点赞评论
+        /// </summary>
+        /// <param name="newsCode">新闻编码</param>
+        /// <param name="isAdd">true 点赞；false 取消点赞</param>
+        /// <param name="userid">用户ID</param>
+        /// <returns></returns>
+        public bool AddNewsCommentPraiseCount(long id, bool isAdd, long userid)
+        {
+            return NewsDAL.BaseDAL.AddNewsCommentPraiseCount(id, isAdd, userid);
+        }
+
+        /// <summary>
         /// 点赞新闻
         /// </summary>
         /// <param name="newsCode">新闻编码</param>

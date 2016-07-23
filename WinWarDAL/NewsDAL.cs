@@ -120,6 +120,16 @@ namespace WinWarDAL
             return ExecuteNonQuery("P_AddNewsPraiseCount", paras, CommandType.StoredProcedure) > 0;
         }
 
+        public bool AddNewsCommentPraiseCount(long id, bool isAdd, long userid)
+        {
+            SqlParameter[] paras = { 
+                                     new SqlParameter("@ID",id),
+                                     new SqlParameter("@IsAdd",isAdd ? 1 : 0),
+                                     new SqlParameter("@UserID",userid)
+                                   };
+            return ExecuteNonQuery("P_AddNewsCommentPraiseCount", paras, CommandType.StoredProcedure) > 0;
+        }
+
         public bool AddNewsCollectCount(long newsCode, bool isAdd, long userid)
         {
             SqlParameter[] paras = { 

@@ -1,4 +1,4 @@
-﻿Use [WinWar]
+﻿Use [WWXW]
 GO
 IF EXISTS (SELECT * FROM sysobjects WHERE type = 'P' AND name = 'P_GetNewsComments')
 BEGIN
@@ -35,6 +35,8 @@ declare @Temp table(ID bigint,[User_ID] bigint,[User_Name] nvarchar(200),Content
 
  insert into @Temp exec (@CommandSQL)
 
- select * from @Temp
+select t.*,isnull(f.ID,0) Is_Praise from @Temp t left join  Comment_Favorite f on t.ID=f.Comment_ID and f.[User_ID]=@UserID
+ 
+select * from @Temp
 select @ID=min(ID) from @Temp
 

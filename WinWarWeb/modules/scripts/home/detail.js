@@ -6,7 +6,7 @@
     ObjectJS.init = function (id, newsMain, isCollect, isPraise, userID) {
         NewsDetail.initData(id, isCollect, isPraise, userID, 0);
 
-        newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
         $("#newsMain").html(newsMain);
 
         var $newsimg = $(".header-newsimg img");

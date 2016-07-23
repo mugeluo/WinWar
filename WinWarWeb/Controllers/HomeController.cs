@@ -167,6 +167,24 @@ namespace WinWarWeb.Controllers
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }
+        public JsonResult AddNewsCommentPraiseCount(long id, int isAdd)
+        {
+            if (Session["WinWarUser"] == null)
+            {
+                jsonResult.Add("result", -1);
+            }
+            else
+            {
+                bool flag = NewsBusiness.BaseBusiness.AddNewsCommentPraiseCount(id, isAdd == 1 ? true : false, currentPassport.UserID);
+                jsonResult.Add("result", flag ? 1 : 0);
+            }
+
+            return new JsonResult()
+            {
+                Data = jsonResult,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
         #endregion
     }
 }

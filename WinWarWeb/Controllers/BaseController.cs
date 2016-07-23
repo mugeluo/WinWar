@@ -15,6 +15,8 @@ namespace WinWarWeb.Controllers
             {
                 if (Session["WinWarUser"] == null)
                 {
+                    //Session["WinWarUser"] = new Passport() { UserID = 5 };
+                    //return new Passport() { UserID = 5 };
                     return new Passport();
                 }
                 else {

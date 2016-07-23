@@ -11,10 +11,10 @@
             <div class="reply-name">{%=item.User_Name%}</div>
             <div class="reply-time">{%=item.Create_Date.toDate("MM-dd hh:mm")%}</div>
         </div>
-      <!--  <div class="reply-add right">
-            <span class="iconfont" title="讨论数"><img class="icon" src="/modules/images/reply_min.png" /></span>
-            <span class="mLeft5 reply-count">{%=item.Reply_Count%}</span>
-        </div>-->
+        <div class="praise-add right hand" data-id="{%=item.ID%}" data-status="{%=item.Is_Praise%}">
+            <span class="iconfont" title="点赞数"><img style="max-width:19px;max-height:19px; margin-top:2px;" class="icon" src="{%=item.Is_Praise>0?'/modules/images/like_min_color.png':'/modules/images/like_min.png'%}" /></span>
+            <span class="mLeft5 praise-count">{%=item.Praise_Count%}</span>
+        </div>
         <div class="clear"></div>
     </div>
     <div class="reply-content">{%=item.Content%}</div>

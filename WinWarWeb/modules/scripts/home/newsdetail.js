@@ -162,7 +162,7 @@
         $(".news-author .author-time").html(Item.Pub_Time.toDate("yyyy-MM-dd hh:mm:ss"));
         $(".author-read .read").html(Item.View_Count);
 
-        var newsMain = decodeURI(Item.Html_Txt);//.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        var newsMain = Item.Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');;//decodeURI
         $("#newsMain").html(newsMain);
         if (Item.Pic_URL != '') {
             $(".header-newsimg").html('<img src="' + Item.Pic_URL + '" />');

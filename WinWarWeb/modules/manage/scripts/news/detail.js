@@ -25,9 +25,8 @@
     ObjectJS.init = function (News_Uni_Code, newsMain) {
         News.News_Uni_Code = News_Uni_Code;
         ObjectJS.bindEvent();
-        //newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
-
-        $("#newsMain").html(decodeURI(newsMain));
+        newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+        $("#newsMain").html(newsMain);
     };
 
     ObjectJS.initCreate = function (um) {
@@ -52,7 +51,7 @@
         News.News_Type = News_Type;
         News.News_Type_Name2 = News_Type_Name2;
         ObjectJS.News_Type = News_Type;
-        //Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+        Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');;
         
         Editor = um;
         ObjectJS.bindEvent();
@@ -68,7 +67,7 @@
         $(".Nega_Posi_Par .radiobox .ico-radiobox[data-value='" + Nega_Posi_Par + "']").addClass("hover");
 
         Editor.ready(function () {
-            Editor.setContent(decodeURI(Html_Txt));
+            Editor.setContent(Html_Txt);//decodeURI(Html_Txt)
         });
         
     };
@@ -163,7 +162,7 @@
                 Nega_Posi_Par: $(".Nega_Posi_Par .radiobox .hover").data("value"),
                 Impt_Par: $(".Impt_Par .radiobox .hover").data("value"),
                 News_Type: ObjectJS.News_Type,
-                Html_Txt: encodeURI(Editor.getContent())
+                Html_Txt: Editor.getContent()//encodeURI(Editor.getContent())
             };
 
             ObjectJS.saveNews();

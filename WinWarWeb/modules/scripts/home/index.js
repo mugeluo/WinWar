@@ -55,7 +55,7 @@
         $(".passport-icon").click(function () {
             if (ObjectJS.userID != 0) {
                 $("#passport-box").fadeIn();
-                $(".passport-box").animate({width:"250px"},500);
+                $(".passport-box").animate({width:"250px"},200);
             }
             else {
                 location.href = "/user/login?returnUrl=" + location.href;
@@ -65,7 +65,7 @@
         //个人遮罩层点击
         $(".overlay-passport-content").click(function (e) {
             if (!$(e.target).parents().hasClass("passport-box") && !$(e.target).hasClass("passport-box")) {
-                $(".passport-box").animate({ width: "0px" }, 500, function () {
+                $(".passport-box").animate({ width: "0px" }, 200, function () {
                     $(".overlay-passport-content").hide();
                 });
                 

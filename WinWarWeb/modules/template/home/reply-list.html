@@ -12,7 +12,7 @@
             <div class="reply-time">{%=item.Create_Date.toDate("MM-dd hh:mm")%}</div>
         </div>
         <div class="praise-add right hand" data-id="{%=item.ID%}" data-status="{%=item.Is_Praise%}">
-            <span class="iconfont" title="点赞数"><img style="max-width:19px;max-height:19px; margin-top:2px;" class="icon" src="{%=item.Is_Praise>0?'/modules/images/like_min_color.png':'/modules/images/like_min.png'%}" /></span>
+            <span class="iconfont" title="点赞数"><img style="max-width:19px;max-height:19px;" class="icon" src="{%=item.Is_Praise>0?'/modules/images/like_min_color.png':'/modules/images/like_min.png'%}" /></span>
             <span class="mLeft5 praise-count">{%=item.Praise_Count%}</span>
         </div>
         <div class="clear"></div>

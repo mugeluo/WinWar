@@ -323,6 +323,7 @@
             $(".content .data-loading").hide();
             var items = data.items;
             if (items.length > 0) {
+                $(".content ul .no-data").remove();
                 Paras.maxNewsCode = items[0].News_Uni_Code;
                 var dataCache = NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords];
                 if (dataCache == null) {
@@ -352,6 +353,7 @@
                     $(".news-list .swiper-container .swiper-slide").css("height", "auto");
                 });
             }
+
         });
 
     }

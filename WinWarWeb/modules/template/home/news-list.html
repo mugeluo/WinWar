@@ -8,10 +8,6 @@
             <td valign="top">
                 <span class="news-title">
                     {%=item.Title_Main%}
-                    {%
-                        if(item.News_Author!=''){%}
-                            <span class="author">by {%=item.News_Author%}</span>
-                    {% } %}
                 </span>
                 
             </td>
@@ -27,7 +23,11 @@
                 <div class="mTop15">
                    <div class="left">
                         <span>{%=item.Real_Source_Name%}</span>
-                        <span class="mLeft10">{%=item.Pub_Time.toDate("MM-dd hh:mm")%}</span>
+                       {%
+                        if(item.News_Author!=''){%}
+                            <span class="author mLeft10">{%=item.News_Author%} :</span>
+                        {% } %}
+                        <span class="">{%=item.Pub_Time.toDate("MM-dd hh:mm")%}</span>
                     </div>
                     <div class="right">
                         <span class="iconfont" title="点赞数"><img style="max-width:19px;max-height:19px;" class="icon" src="/modules/images/like_min.png" /></span>

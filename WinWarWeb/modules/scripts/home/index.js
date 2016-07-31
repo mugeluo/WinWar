@@ -7,6 +7,7 @@
         keywords:'',
         parentTypeID: 6,
         typeID: 0,
+        maxNewsCode:0,
         lastNewsCode: 0,
         pageIndex: 1,
         pageSize: 15
@@ -182,6 +183,7 @@
         ObjectJS.bindNewsNavSlide();
         ObjectJS.getNews();
     }
+
     //二级菜单点击
     ObjectJS.bindNewsNavClick = function () {
         $(".nav .swiper-wrapper .swiper-slide").unbind().click(function () {
@@ -198,6 +200,7 @@
             }
         });
     }
+
     //二级菜单左右滑动
     ObjectJS.bindNewsNavSlide = function () {
         var swiper = new Swiper('.nav .swiper-container', {
@@ -230,7 +233,7 @@
             Global.post("/Home/GetNews", Paras, function (data) {
                 
                 if (Paras.pageIndex == 1) {
-                    NewsCache[Paras.parentTypeID+"_" + Paras.typeID +"_"+ Paras.keywords] = data;
+                    NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords] = data;
                 }
 
                 if (Paras.pageSize > data.items.length) {
@@ -245,11 +248,14 @@
 
     //绑定新闻列表
     ObjectJS.bindNews = function (data) {
+        var items = data.items;
         if (Paras.pageIndex == 1) {
             $(".news-list .content ul").html('');
+            Paras.maxNewsCode = 0;
+            if (items.length > 0) {
+                Paras.maxNewsCode = items[0].News_Uni_Code;
+            }
         }
-
-        var items = data.items;
         Paras.lastNewsCode = data.lastNewsCode;
         $(".content .data-loading").hide();
    
@@ -281,21 +287,22 @@
                     $("#news_" + id + " .news-title").addClass("news-read");
                 });
 
-                //if (Paras.pageIndex == 1) {
-                //    var swiper = new Swiper('.news-list .swiper-container', {
-                //        direction: 'vertical',
-                //        onTouchMove: function () {
-                //            var y = swiper.getWrapperTranslate("y");
-                //            if (y > 20) {
-                //                $(".data-load-new").show();
-                //            }
-                //        },
-                //        onTouchEnd: function () {
-                //            $(".data-load-new").hide();
-                //        }
-                //    });
-                //}
-                //$(".news-list .swiper-container .swiper-slide").css("height", "auto");
+                if (Paras.pageIndex == 1) {
+                    var swiper = new Swiper('.news-list .swiper-container', {
+                        direction: 'vertical',
+                        onTouchMove: function () {
+                            var y = swiper.getWrapperTranslate("y");
+                            if (y > 30) {
+                                $(".data-load-new").show();
+                            }
+                        },
+                        onTouchEnd: function () {
+                            $(".data-load-new").hide();
+                            ObjectJS.getNewNews_Mains();
+                        }
+                    });
+                }
+                $(".news-list .swiper-container .swiper-slide").css("height", "auto");
             });
         } else {
             if (Paras.pageIndex == 1) {
@@ -307,6 +314,45 @@
                 }
             }
         }
+    }
+
+    ObjectJS.getNewNews_Mains = function () {
+        $(".content .data-loading").show();
+
+        Global.post("/Home/GetNewNews_Mains", Paras, function (data) {
+            $(".content .data-loading").hide();
+            var items = data.items;
+            if (items.length > 0) {
+                var dataCache = NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords];
+                if (dataCache == null) {
+                    NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords] = data;
+                }
+                else {
+                    dataCache.items = data.items;
+                    NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords] = dataCache;
+                }
+                Paras.maxNewsCode = items[0].News_Uni_Code;
+
+                DoT.exec("template/home/news-list.html", function (template) {
+                    var innerhtml = template(items);
+                    innerhtml = $(innerhtml);
+                    $(".news-list .content ul").prepend(innerhtml);
+                    innerhtml.fadeIn(400);
+
+                    $(".news-list .content ul").find(".news").unbind().click(function () {
+                        var id = $(this).data("id");
+                        var scrollTop = $(document).scrollTop();
+                        $("#news-list-box").hide();
+
+                        NewsDetail.getNewsDetail(id, scrollTop);
+                        $("#news-detail-box").fadeIn();
+                        $("#news_" + id + " .news-title").addClass("news-read");
+                    });
+                    $(".news-list .swiper-container .swiper-slide").css("height", "auto");
+                });
+            }
+        });
+
     }
 
     module.exports = ObjectJS;

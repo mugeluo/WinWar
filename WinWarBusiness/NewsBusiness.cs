@@ -41,7 +41,6 @@ namespace WinWarBusiness
 
         #endregion
 
-
         #region 查询
 
         public NewsTypeEntity GetNewsTypeByCode(int code)
@@ -85,6 +84,21 @@ namespace WinWarBusiness
             List<NewsEntity> list = new List<NewsEntity>();
 
             DataTable dt = NewsDAL.BaseDAL.GetNews(keyWords, typeid, pageSize, userid, ref newsCode);
+            foreach (DataRow dr in dt.Rows)
+            {
+                NewsEntity model = new NewsEntity();
+                model.FillData(dr);
+
+                list.Add(model);
+            }
+
+            return list;
+        }
+
+        public List<NewsEntity> GetNewNews_Mains(int typeid, int pageSize, long maxNewsCode, long userid)
+        {
+            List<NewsEntity> list = new List<NewsEntity>();
+            DataTable dt = NewsDAL.BaseDAL.GetNewNews_Mains(typeid, pageSize, maxNewsCode, userid);
             foreach (DataRow dr in dt.Rows)
             {
                 NewsEntity model = new NewsEntity();

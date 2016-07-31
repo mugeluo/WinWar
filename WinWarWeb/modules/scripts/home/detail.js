@@ -8,7 +8,7 @@
 
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
         $("#newsMain").html(newsMain);
-
+        NewsDetail.setNewsMainHtml();
         var $newsimg = $(".header-newsimg img");
         if ($newsimg.length == 1) {
             if ($newsimg.width() > $newsimg.height()) {

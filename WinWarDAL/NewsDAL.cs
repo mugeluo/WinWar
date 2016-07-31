@@ -48,6 +48,21 @@ namespace WinWarDAL
 
         }
 
+        public DataTable GetNewNews_Mains(int typeid, int pageSize, long maxNewsCode, long userid)
+        {
+            SqlParameter[] paras = { 
+                                       new SqlParameter("@MaxNewsCode",maxNewsCode),
+                                       new SqlParameter("@PageSize",pageSize),
+                                       new SqlParameter("@TypeID",typeid),
+                                       new SqlParameter("@UserID",userid)
+                                       
+                                   };
+            DataTable dt = GetDataTable("P_GetNewNews_Mains", paras, CommandType.StoredProcedure);
+
+            return dt;
+
+        }
+
         public DataTable GetNewsFavorites(long userid, int pageSize, ref long favoriteid)
         {
             SqlParameter[] paras = { 

@@ -12,16 +12,18 @@ namespace WinWarWeb.Controllers
     {
         public ActionResult Index(string  id)
         {
-            if (currentPassport.UserID == 0)
-            {
-                var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
-                return Redirect(authorizeUrl);
-            }
-            else
-            {
-                ViewBag.ID = id ?? "6";
-                ViewBag.Passport = currentPassport;
-            }
+            //if (currentPassport.UserID == 0)
+            //{
+            //    var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
+            //    return Redirect(authorizeUrl);
+            //}
+            //else
+            //{
+            //    ViewBag.ID = id ?? "6";
+            //    ViewBag.Passport = currentPassport;
+            //}
+            ViewBag.ID = id ?? "6";
+            ViewBag.Passport = currentPassport;
 
             return View();
         }
@@ -61,6 +63,18 @@ namespace WinWarWeb.Controllers
             var items = NewsBusiness.BaseBusiness.GetNews(keywords, typeID, pageSize, currentPassport.UserID, ref lastNewsCode);
             jsonResult.Add("items", items);
             jsonResult.Add("lastNewsCode", lastNewsCode);
+
+            return new JsonResult()
+            {
+                Data = jsonResult,
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult GetNewNews_Mains(long maxNewsCode, int typeID, int pageSize)
+        {
+            var items = NewsBusiness.BaseBusiness.GetNewNews_Mains(typeID, pageSize, maxNewsCode, currentPassport.UserID);
+            jsonResult.Add("items", items);
 
             return new JsonResult()
             {

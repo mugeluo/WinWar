@@ -1,4 +1,4 @@
-﻿Use [WinWar]
+﻿Use [WWXW_DEV]
 GO
 IF EXISTS (SELECT * FROM sysobjects WHERE type = 'P' AND name = 'P_GetNews_Mains')
 BEGIN
@@ -55,7 +55,7 @@ begin
 end
 
 
- set @CommandSQL+=' order by PUB_TIME desc'
+ set @CommandSQL+=' order by News_Uni_Code desc'
 
  insert into @Temp exec (@CommandSQL)
 

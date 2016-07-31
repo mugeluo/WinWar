@@ -164,6 +164,7 @@
 
         var newsMain = Item.Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');;//decodeURI
         $("#newsMain").html(newsMain);
+        ObjectJS.setNewsMainHtml();
         if (Item.Pic_URL != '') {
             $(".header-newsimg").html('<img src="' + Item.Pic_URL + '" />');
 
@@ -194,6 +195,16 @@
         }
         $(".Praise_Count").html(Item.Praise_Count);
         $("#Comment_Count").html(Item.Comment_Count);
+    }
+
+    ObjectJS.setNewsMainHtml = function () {
+        var $objs = $("#newsMain table,#newsMain img");
+        $objs.each(function () {
+            var _self = $(this);
+            if (_self.width() > $(window).width()) {
+                _self.css("width", $(window).width());
+            }
+        });
     }
 
     ObjectJS.getNewsComments = function () {

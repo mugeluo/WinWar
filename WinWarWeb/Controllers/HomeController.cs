@@ -12,18 +12,18 @@ namespace WinWarWeb.Controllers
     {
         public ActionResult Index(string  id)
         {
-            //if (currentPassport.UserID == 0)
-            //{
-            //    var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
-            //    return Redirect(authorizeUrl);
-            //}
-            //else
-            //{
-            //    ViewBag.ID = id ?? "6";
-            //    ViewBag.Passport = currentPassport;
-            //}
-            ViewBag.ID = id ?? "6";
-            ViewBag.Passport = currentPassport;
+            if (currentPassport.UserID == 0)
+            {
+                var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
+                return Redirect(authorizeUrl);
+            }
+            else
+            {
+                ViewBag.ID = id ?? "6";
+                ViewBag.Passport = currentPassport;
+            }
+            //ViewBag.ID = id ?? "6";
+            //ViewBag.Passport = currentPassport;
 
             return View();
         }

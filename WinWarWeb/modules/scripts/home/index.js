@@ -323,15 +323,16 @@
             $(".content .data-loading").hide();
             var items = data.items;
             if (items.length > 0) {
+                Paras.maxNewsCode = items[0].News_Uni_Code;
                 var dataCache = NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords];
                 if (dataCache == null) {
+                    data.lastNewsCode = items[items.length - 1].News_Uni_Code;
                     NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords] = data;
                 }
                 else {
                     dataCache.items = data.items;
                     NewsCache[Paras.parentTypeID + "_" + Paras.typeID + "_" + Paras.keywords] = dataCache;
                 }
-                Paras.maxNewsCode = items[0].News_Uni_Code;
 
                 DoT.exec("template/home/news-list.html", function (template) {
                     var innerhtml = template(items);

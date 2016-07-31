@@ -285,6 +285,13 @@
                     NewsDetail.getNewsDetail(id, scrollTop);
                     $("#news-detail-box").fadeIn();
                     $("#news_" + id + " .news-title").addClass("news-read");
+                    var statetitle = "未坞互动";
+                    var stateurl = "/home/detail/" + id;
+                    var state = {
+                        title: statetitle,
+                        url: stateurl
+                    };
+                    history.pushState(state, statetitle, stateurl);
                 });
 
                 if (Paras.pageIndex == 1) {
@@ -349,6 +356,13 @@
                         NewsDetail.getNewsDetail(id, scrollTop);
                         $("#news-detail-box").fadeIn();
                         $("#news_" + id + " .news-title").addClass("news-read");
+                        var statetitle = "未坞互动";
+                        var stateurl = "/home/detail/" + id;
+                        var state = {
+                            title: statetitle,
+                            url: stateurl
+                        };
+                        history.pushState(state, statetitle, stateurl);
                     });
                     $(".news-list .swiper-container .swiper-slide").css("height", "auto");
                 });

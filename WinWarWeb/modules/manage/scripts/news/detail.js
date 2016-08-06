@@ -54,7 +54,7 @@
         News.News_Type_Name2 = News_Type_Name2;
         ObjectJS.News_Type = News_Type;
         Html_Txt = Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');;
-        
+        Html_Txt = Html_Txt.replace(/&amp;/g, ' &');
         Editor = um;
         ObjectJS.bindEvent();
 

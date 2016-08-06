@@ -128,6 +128,7 @@ namespace WinWarWeb.Controllers
                 if (flag)
                 {
                     List<NewsCommentEntity> items = new List<NewsCommentEntity>();
+                    
                     model.Create_Date = DateTime.Now;
                     model.Reply_Count = 1;
                     model.User_Name = currentPassport.Name;

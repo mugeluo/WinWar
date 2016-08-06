@@ -238,37 +238,10 @@
                 DoT.exec("template/home/reply-list.html", function (template) {
                     var innerhtml = template(items);
                     innerhtml = $(innerhtml);
-
                     $(".reply-list ul").append(innerhtml);
                     innerhtml.fadeIn(400);
-                    innerhtml.find(".praise-add").click(function () {
-                        var _this = $(this);
-                        Global.post("/Home/AddNewsCommentPraiseCount", {
-                            id: _this.data("id"),
-                            isAdd: _this.data("status") > 0? 0 : 1
-                        }, function (data) {
-                            if (data.result == 1) {
-                                if (_this.data("status") == "0") {
-                                    _this.data("status", "1");
-                                    alert("点赞成功");
-                                    _this.find("img").attr("src", "/modules/images/like_min_color.png");
-                                    _this.find(".praise-count").html(parseInt(_this.find(".praise-count").html()) + 1);
-                                }
-                                else {
-                                    _this.data("status", "0");
-                                    alert("取消点赞");
-                                    _this.find("img").attr("src", "/modules/images/like_min.png");
-                                    _this.find(".praise-count").html(parseInt(_this.find(".praise-count").html()) - 1);
-                                }
-                            }
-                            else if (data.result == -1) {
-                                confirm("登录后才能操作，立即登录", function () {
-                                    location.href = "/user/login?returnUrl=" + location.href;
-                                });
-                            }
 
-                        });
-                    });
+                    ObjectJS.bindCommentOperate(innerhtml);
                 });
             }
 
@@ -301,13 +274,13 @@
 
                     $(".reply-list ul").prepend(innerhtml);
                     innerhtml.fadeIn(400);
-
+                    ObjectJS.bindCommentOperate(innerhtml);
                 });
 
                 $("#comment-msg").val('');
                 Comment.Content = '';
                 $("#Comment_Count").html(parseInt( $("#Comment_Count").html())+1 );
-                $('.overlay').hide();
+                $('.overlay-add-reply').hide();
 
             }
             else if (data.result == -1) {
@@ -375,6 +348,37 @@
         }
 
         return true;
+    }
+
+    ObjectJS.bindCommentOperate = function (innerhtml) {
+        innerhtml.find(".praise-add").click(function () {
+            var _this = $(this);
+            Global.post("/Home/AddNewsCommentPraiseCount", {
+                id: _this.data("id"),
+                isAdd: _this.data("status") > 0 ? 0 : 1
+            }, function (data) {
+                if (data.result == 1) {
+                    if (_this.data("status") == "0") {
+                        _this.data("status", "1");
+                        alert("点赞成功");
+                        _this.find("img").attr("src", "/modules/images/like_min_color.png");
+                        _this.find(".praise-count").html(parseInt(_this.find(".praise-count").html()) + 1);
+                    }
+                    else {
+                        _this.data("status", "0");
+                        alert("取消点赞");
+                        _this.find("img").attr("src", "/modules/images/like_min.png");
+                        _this.find(".praise-count").html(parseInt(_this.find(".praise-count").html()) - 1);
+                    }
+                }
+                else if (data.result == -1) {
+                    confirm("登录后才能操作，立即登录", function () {
+                        location.href = "/user/login?returnUrl=" + location.href;
+                    });
+                }
+
+            });
+        });
     }
 
     module.exports = ObjectJS;

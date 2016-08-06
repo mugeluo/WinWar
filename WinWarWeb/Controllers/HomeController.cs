@@ -12,18 +12,18 @@ namespace WinWarWeb.Controllers
     {
         public ActionResult Index(string  id)
         {
-            if (currentPassport.UserID == 0)
-            {
-                var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
-                return Redirect(authorizeUrl);
-            }
-            else
-            {
-                ViewBag.ID = id ?? "6";
-                ViewBag.Passport = currentPassport;
-            }
-            //ViewBag.ID = id ?? "6";
-            //ViewBag.Passport = currentPassport;
+            //if (currentPassport.UserID == 0)
+            //{
+            //    var authorizeUrl = WeiXin.Sdk.Token.GetAuthorizeUrl(Server.UrlEncode(WeiXin.Sdk.AppConfig.CallBackUrl), string.Empty, YXERP.Common.Common.IsMobileDevice());
+            //    return Redirect(authorizeUrl);
+            //}
+            //else
+            //{
+            //    ViewBag.ID = id ?? "6";
+            //    ViewBag.Passport = currentPassport;
+            //}
+            ViewBag.ID = id ?? "6";
+            ViewBag.Passport = currentPassport;
 
             return View();
         }
@@ -144,7 +144,7 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult AddNewsCollectCount(long id, int isAdd)
+        public JsonResult AddNewsCollectCount(long id, int isCollect)
         {
             if (Session["WinWarUser"] == null)
             {
@@ -152,7 +152,7 @@ namespace WinWarWeb.Controllers
             }
             else
             {
-                bool flag = NewsBusiness.BaseBusiness.AddNewsCollectCount(id, isAdd==1?true:false, currentPassport.UserID);
+                bool flag = NewsBusiness.BaseBusiness.AddNewsCollectCount(id, isCollect == 1 ? true : false, currentPassport.UserID);
                 jsonResult.Add("result", flag ? 1 : 0);  
             }
 
@@ -163,7 +163,7 @@ namespace WinWarWeb.Controllers
             };
         }
 
-        public JsonResult AddNewsPraiseCount(long id, int isAdd)
+        public JsonResult AddNewsPraiseCount(long id, int isPraise)
         {
             if (Session["WinWarUser"] == null)
             {
@@ -171,7 +171,7 @@ namespace WinWarWeb.Controllers
             }
             else
             {
-                bool flag = NewsBusiness.BaseBusiness.AddNewsPraiseCount(id, isAdd == 1 ? true : false, currentPassport.UserID);
+                bool flag = NewsBusiness.BaseBusiness.AddNewsPraiseCount(id, isPraise == 1 ? true : false, currentPassport.UserID);
                 jsonResult.Add("result", flag ? 1 : 0);
             }
 

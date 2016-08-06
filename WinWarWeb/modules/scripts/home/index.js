@@ -137,11 +137,39 @@
             }
         });
 
-        
         //一级菜单初始化
         if (Paras.parentTypeID != 6) {
             $(".menu-list .item[data-id='" + Paras.parentTypeID + "']").click();
         }
+
+        var pullRefresh = $('.news-list').pPullRefresh({
+            $el: $('.news-list'),
+            $loadingEl: $('.loading-warp'),
+            sendData: null,
+            url: '',
+            callbacks: {
+                pullStart: function () {
+                    $(".data-load-new").show();
+                    ObjectJS.getNewNews_Mains();
+                },
+                start: function () {
+                    //$statu.text('数据刷新中···');
+                    $(".data-load-new").show();
+                },
+                success: function (response) {
+                    //$statu.text('数据刷新成功！');
+                    //$(".data-load-new").hide();
+                },
+                end: function () {
+                    //$statu.text('下拉刷新结束');
+                    $(".data-load-new").hide();
+                },
+                error: function () {
+                    //$statu.text('找不到请求地址,数据刷新失败');
+                }
+            }
+        });
+
     };
 
     //获取二级菜单列表
@@ -294,22 +322,22 @@
                     history.pushState(state, statetitle, stateurl);
                 });
 
-                if (Paras.pageIndex == 1) {
-                    var swiper = new Swiper('.news-list .swiper-container', {
-                        direction: 'vertical',
-                        onTouchMove: function () {
-                            var y = swiper.getWrapperTranslate("y");
-                            if (y > 30) {
-                                $(".data-load-new").show();
-                            }
-                        },
-                        onTouchEnd: function () {
-                            $(".data-load-new").hide();
-                            ObjectJS.getNewNews_Mains();
-                        }
-                    });
-                }
-                $(".news-list .swiper-container .swiper-slide").css("height", "auto");
+                //if (Paras.pageIndex == 1) {
+                //    var swiper = new Swiper('.news-list .swiper-container', {
+                //        direction: 'vertical',
+                //        onTouchMove: function () {
+                //            var y = swiper.getWrapperTranslate("y");
+                //            if (y > 30) {
+                //                $(".data-load-new").show();
+                //            }
+                //        },
+                //        onTouchEnd: function () {
+                //            $(".data-load-new").hide();
+                //            ObjectJS.getNewNews_Mains();
+                //        }
+                //    });
+                //}
+                //$(".news-list .swiper-container .swiper-slide").css("height", "auto");
             });
         } else {
             if (Paras.pageIndex == 1) {

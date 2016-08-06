@@ -49,6 +49,13 @@
                 $("#news-detail-box").hide();
                 $("#news-list-box").fadeIn();
                 $('body,html').animate({ scrollTop: ObjectJS.scrollTop }, 100);
+                var statetitle = "未坞互动";
+                var stateurl = "/home/index";
+                var state = {
+                    title: statetitle,
+                    url: stateurl
+                };
+                history.pushState(state, statetitle, stateurl);
             }
         });
 
@@ -100,7 +107,7 @@
                 return;
             }
 
-            Paras.isAdd = Paras.isCollect == 1 ? 0 : 1;
+            Paras.isCollect = Paras.isCollect == 1 ? 0 : 1;
             ObjectJS.addNewsCollectCount();
         });
 
@@ -110,7 +117,7 @@
                 return;
             }
 
-            Paras.isAdd = Paras.isPraise == 1 ? 0 : 1;
+            Paras.isPraise = Paras.isPraise == 1 ? 0 : 1;
             ObjectJS.addNewsPraiseCount();
         });
     };
@@ -162,28 +169,29 @@
         $(".news-author .author-time").html(Item.Pub_Time.toDate("yyyy-MM-dd hh:mm:ss"));
         $(".author-read .read").html(Item.View_Count);
 
-        var newsMain = Item.Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');;//decodeURI
+        var newsMain = Item.Html_Txt.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');//decodeURI
+        newsMain = newsMain.replace(/&amp;/g, ' &');
         $("#newsMain").html(newsMain);
         ObjectJS.setNewsMainHtml();
-        if (Item.Pic_URL != '') {
-            $(".header-newsimg").html('<img src="' + Item.Pic_URL + '" />');
+        //if (Item.Pic_URL != '') {
+        //    $(".header-newsimg").html('<img src="' + Item.Pic_URL + '" />');
 
-            var $newsimg = $(".header-newsimg img");
-            if ($newsimg.length == 1) {
-                if ($newsimg.width() > $newsimg.height()) {
-                    $newsimg.css("height", $(window).width());
-                }
-                else {
-                    $newsimg.css("width", $(window).width());
-                }
-            }
-        }
-        else {
-            var $newsimg = $(".header-newsimg img");
-            if ($newsimg.length > 0) {
-                $newsimg.remove();
-            }
-        }
+        //    var $newsimg = $(".header-newsimg img");
+        //    if ($newsimg.length == 1) {
+        //        if ($newsimg.width() > $newsimg.height()) {
+        //            $newsimg.css("height", $(window).width());
+        //        }
+        //        else {
+        //            $newsimg.css("width", $(window).width());
+        //        }
+        //    }
+        //}
+        //else {
+        //    var $newsimg = $(".header-newsimg img");
+        //    if ($newsimg.length > 0) {
+        //        $newsimg.remove();
+        //    }
+        //}
 
         if (Item.Is_Collect==1) {
             $("#addNewsCollectCount").find("img").attr("src", "/modules/images/collect_color.png");
@@ -198,13 +206,24 @@
     }
 
     ObjectJS.setNewsMainHtml = function () {
-        var $objs = $("#newsMain table,#newsMain img");
-        $objs.each(function () {
-            var _self = $(this);
-            if (_self.width() > $(window).width()) {
-                _self.css("width", $(window).width());
-            }
-        });
+        //var $objs = $("#newsMain img");
+        //$objs.each(function () {
+        //    var _self = $(this);
+        //    var img = new Image();
+        //    img.src = _self.attr("src");
+        //    var w = img.width;
+        //    if (w > $(window).width()) {
+        //        _self.css("width",""+ $(window).width() +"px");
+        //    }
+        //});
+
+        //var $objs2 = $("#newsMain table");
+        //$objs2.each(function () {
+        //    var _self = $(this);
+        //    if (_self.width() > $(window).width()) {
+        //        _self.css("width", "" + $(window).width() + "px");
+        //    }
+        //});
     }
 
     ObjectJS.getNewsComments = function () {
@@ -303,17 +322,13 @@
     ObjectJS.addNewsCollectCount = function () {
         Global.post("/Home/AddNewsCollectCount", Paras, function (data) {
             if (data.result == 1) {
-                if (Paras.isAdd == 1) {
+                if (Paras.isCollect == 1) {
                     alert("收藏成功");
-                    Paras.isCollect = 1;
-
                     $("#addNewsCollectCount").find("img").attr("src", "/modules/images/collect_color.png");
                     $("#addNewsCollectCount").find("span").html("取消收藏");
                 }
                 else {
                     alert("取消收藏");
-                    Paras.isCollect = 0;
-
                     $("#addNewsCollectCount").find("img").attr("src", "/modules/images/collect.png");
                     $("#addNewsCollectCount").find("span").html("收藏");
                 }
@@ -330,17 +345,13 @@
     ObjectJS.addNewsPraiseCount = function () {
         Global.post("/Home/AddNewsPraiseCount", Paras, function (data) {
             if (data.result == 1) {
-                if (Paras.isAdd==1) {
+                if (Paras.isPraise==1) {
                     alert("点赞成功");
-                    Paras.isPraise = 1;
-
                     $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like_color.png");
                     $(".Praise_Count").html(parseInt($(".Praise_Count").html()) +1);
                 }
                 else {
                     alert("取消点赞");
-                    Paras.isPraise = 0;
-
                     $("#addNewsPraiseCount").find("img").attr("src", "/modules/images/like.png");
                     $(".Praise_Count").html(parseInt($(".Praise_Count").html()) -1);
                 }
@@ -365,5 +376,6 @@
 
         return true;
     }
+
     module.exports = ObjectJS;
 });

@@ -47,7 +47,6 @@
     text-overflow:ellipsis ;
     white-space:nowrap ;
     overflow:hidden ;
-
 }
 
 .header-content .title {
@@ -102,6 +101,13 @@
     font-size:16px;
 }
 
+.detail-box table td,.detail-box table th{
+    padding: 5px 10px;
+    border: 1px solid #DDD;
+}
+.detail-box img,.detail-box table {
+    max-width:100%;
+}
 .detail-replys {
     padding:20px 10px 90px 10px;
     background-color:#f2f4f8;

@@ -149,6 +149,8 @@
     <Compile Include="modules\plug\umeditor\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="modules\plug\umeditor\net\App_Code\PathFormater.cs" />
     <Compile Include="modules\plug\umeditor\net\App_Code\UploadHandler.cs" />
+    <Content Include="modules\plug\p-pull-refresh\p-pull-refresh.js" />
+    <Content Include="modules\plug\p-pull-refresh\touche.js" />
     <Content Include="modules\plug\umeditor\net\Uploader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

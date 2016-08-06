@@ -25,7 +25,9 @@
     ObjectJS.init = function (News_Uni_Code, newsMain) {
         News.News_Uni_Code = News_Uni_Code;
         ObjectJS.bindEvent();
+
         newsMain = newsMain.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"');
+        newsMain = newsMain.replace(/&amp;/g, ' &');
         $("#newsMain").html(newsMain);
     };
 

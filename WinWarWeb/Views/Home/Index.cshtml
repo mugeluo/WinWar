@@ -9,9 +9,11 @@
 }
 @section scripts{
     <script src="/modules/plug/swiper/swiper.min.js"></script>
+    @*<script src="/modules/plug/p-pull-refresh/touche.js"></script>*@
+    <script src="/modules/plug/p-pull-refresh/p-pull-refresh.js"></script>
     <script type="text/javascript">
         seajs.use(["scripts/home/index"], function (obj) {
-            obj.init('@ViewBag.ID','@Passport.UserID');
+            obj.init('@ViewBag.ID', '@Passport.UserID');
         });
     </script>
 }
@@ -28,37 +30,33 @@
       <div class="left">
         <img style="width:30px;height:30px;" src="/modules/images/ico-loading.gif" />
       </div>
-      <div class="left mLeft10" style="color:#666;font-size:14px;line-height:30px;">加载最新</div>
+      <div class="left mLeft10" style="color:#666;font-size:14px;line-height:30px;">加载最新数据...</div>
       <div class="clear"></div>
     </div>
  </div>
 
-@*<div class="search">
-    <div class="search-box">
-        <span class="iconfont">&#xe605;</span>
-        <span class="search-title">搜索</span>
-    </div>
-</div>*@
+<div class="news-list" id="container">
+    <div class="loading-warp">
+@*		            <div class="box">
+			<div>
+				<img src="res/loading.gif" />
+				<span class="text">下拉开始刷新</span>
+			</div>
+		</div>*@
+	</div>
 
-<div class="news-list">
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <div class="search">
-                    <div class="search-box">
-                        <span class="iconfont">&#xe605;</span>
-                        <span class="search-title">搜索</span>
-                    </div>
-                </div>
-                <div class="content">
-                    <ul></ul>
-                    <div class="clear"></div>
-                    <div class="data-loading hide"></div>
-                   <div class="no-more hide">已经是最后一条</div>
-                </div>
-            </div>
+    <div class="search">
+        <div class="search-box">
+            <span class="iconfont">&#xe605;</span>
+            <span class="search-title">搜索</span>
         </div>
-   </div>
+    </div>
+    <div class="content">
+        <ul></ul>
+        <div class="clear"></div>
+        <div class="data-loading hide"></div>
+        <div class="no-more hide">已经是最后一条</div>
+    </div>
 </div>
 
 <div class="menu">
